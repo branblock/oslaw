@@ -1,4 +1,31 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-6">
+      <img src="http://icons.iconarchive.com/icons/icons8/ios7/128/Business-Collaboration-icon.png">
+      <h1>Experience the benefits of collaborative lawyering.</h1>
+      <p>Oslaw allows you to get real-world input on your legal documents.<br />It's 100% free and easy to use.</p>
+    </div>
+    <div class="col-md-6">
+      <div class="home-form-div">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <%= f.text_field :first_name, autofocus: true, placeholder: "First name" %>
+          <%= f.text_field :last_name, placeholder: "Last name" %><br />
+          <%= f.text_field :username, placeholder: "Username (for logging in)" %><br />
+          <%= f.email_field :email, placeholder: "Email" %><br />
+          <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %><br />
+          <small style="padding-left: 15px"><strong>By signing up, you agree to our <a href="#">terms and conditions</a>.</strong></small><br />
+          <%= f.submit "Sign up for free", class: "btn btn-success" %>
+        <% end %>
+          <small>Have an account? <%= link_to "Sign in", new_session_path(resource_name) %></small>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
-  <h1>Welcome#index</h1>
-  <p>Find me in app/views/welcome/index.html.erb</p>
-<div>
+  <h2>How it works.</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam imperdiet lobortis metus, et mollis dolor ornare a. Donec sodales, enim a pellentesque dapibus, neque eros elementum magna, sed vehicula nulla mi non neque. Donec lectus diam, scelerisque a tellus vel, sagittis porttitor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent eleifend blandit porttitor. Sed in pellentesque tortor, id semper elit. In quis molestie orci. Maecenas ac finibus lorem. Integer turpis neque, laoreet sit amet lobortis egestas, eleifend sed metus.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam imperdiet lobortis metus, et mollis dolor ornare a. Donec sodales, enim a pellentesque dapibus, neque eros elementum magna, sed vehicula nulla mi non neque. Donec lectus diam, scelerisque a tellus vel, sagittis porttitor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent eleifend blandit porttitor. Sed in pellentesque tortor, id semper elit. In quis molestie orci. Maecenas ac finibus lorem. Integer turpis neque, laoreet sit amet lobortis egestas, eleifend sed metus.</p>
+</div>

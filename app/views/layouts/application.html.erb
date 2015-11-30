@@ -31,25 +31,25 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-share" aria-hidden="true" style="font-size: 20px; color: #ff6200"></span>OSLAW</a>
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-share" aria-hidden="true" style="font-size: 18px; color: #ff6200"></span>OSLAW</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Link</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <% if user_signed_in? %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %> <%= current_user.last_name %> <%= image_tag avatar_url(current_user), class: "gravatar" %><b class="caret"></b></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><%= link_to 'Go to Your Home Page', edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li><%= link_to 'Add a New Post', edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
           </ul>
+        <% else %>
+          <span><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-success' %> <%= link_to "Sign In", new_user_session_path, class: 'btn btn-default' %></span>
+        <% end %>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -58,25 +58,31 @@
 
 <!-- BEGIN PAGE CONTENT -->
 <div class="container">
+  <!-- FLASH MESSAGES -->
+  <% if flash[:notice] %>
+       <div class="alert alert-success">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <%= flash[:notice] %>
+       </div>
+     <% elsif flash[:error] %>
+       <div class="alert alert-danger">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <%= flash[:error] %>
+       </div>
+     <% elsif flash[:alert] %>
+       <div class="alert alert-warning">
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+         <%= flash[:alert] %>
+       </div>
+  <% end %>
 </div>
 
 <!-- FOOOTER -->
 <footer class="footer">
   <div class="container">
-    <div class="col-md-3">
-      <p class="text-muted">Place footer content here.</p>
-    </div>
-    <div class="col-md-3">
-      <p class="text-muted">Place footer content here.</p>
-    </div>
-    <div class="col-md-3">
-      <p class="text-muted">Place footer content here.</p>
-    </div>
-    <div class="col-md-3">
-      <p class="text-muted">Place footer content here.</p>
-    </div>
-    <div class="col-md-12" style="border-top: 1px solid #888; padding-top: 5px;">
-      <small>Copyright © 2015 Oslaw</small><p class="pull-right"><i class="fa fa-facebook"></i> | <i class="fa fa-twitter"></i> | <i class="fa fa-google-plus"></i></p>
+    <small>Copyright © 2015 Oslaw</small>
+    <div class="pull-right">
+      <small><%= link_to "Terms and Conditions", "#" %> | <%= link_to "Contact Us", "#" %></small>
     </div>
   </div>
 </footer>
