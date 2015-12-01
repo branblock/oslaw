@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="col-md-4" style="margin-top: 20px; padding-left: 0">
+    <div class="panel panel-default">
+      <div class="panel-heading">Post Options</div>
+      <div class="panel-body">
+        <%= link_to "Edit this post", edit_post_path(@post) %><br />
+        <%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Are you sure you want to delete '#{@post.title}'? This cannot be undone."} %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8" style="padding-left: 0">
+    <h3><%= @post.title %></h3>
+    <p><%= @post.body %></p>
+  </div>
+</div>
