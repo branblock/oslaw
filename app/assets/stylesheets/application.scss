@@ -63,8 +63,14 @@ a:focus {
   margin-bottom: 0;
 }
 
-.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-  color: #27a0d5;
+.navbar-nav {
+  background-color: #fff;
+  color: #333;
+  font-size: 12px;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
+  color: #27a0d5 !important;
   font-size: 22px;
   font-weight: bold;
 }
@@ -92,9 +98,6 @@ a:focus {
   color: #333;
 }
 
-/* NAVIGATION RIGHT
--------------------------------------------------- */
-
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: #fff;
   color: #333;
@@ -105,11 +108,11 @@ a:focus {
   border: 1px solid #e5e5e5;
   box-shadow: none;
   color: #333;
-  text-align: right;
 }
 .navbar-default .dropdown-menu > li a {
   background-color: #fff;
   color: #333;
+  font-size: 12px;
 }
 
 .navbar-default .dropdown-menu > li a:hover {
@@ -122,8 +125,12 @@ a:focus {
   margin-top: 10px;
 }
 
-.gravatar {
+.navbar-default .gravatar {
   border-radius: 3px;
+}
+
+.navbar-default img {
+  vertical-align: bottom;
 }
 
 /* WELCOME PAGE
