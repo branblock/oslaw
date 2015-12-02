@@ -1,17 +1,17 @@
 <div class="container">
-  <div class="panel panel-default" style="max-width: 400px; margin-left: auto; margin-right: auto; margin-top: 60px;">
-    <div class="panel-heading">Reset your password</div>
-      <div class="panel-body">
-        <div class="new-form-div">
+  <div class="row">
+    <div class="col-md-4 center-block">
+      <p style="border-bottom: 1px solid #e3e3e3; font-size: 18px; margin-top: 60px; text-align: center">Reset password</p>
+        <div class="form-div">
           <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
             <%= devise_error_messages! %>
             <div class="field">
               <%= f.label :username %><br />
               <%= f.text_field :username, autofocus: true %>
             </div>
-            <%= f.submit "Send me reset password instructions", class: "btn btn-success" %>
+            <%= f.submit "Send instructions", class: "btn btn-success" %>
           <% end %>
-        <%= link_to "Back", :back %>
+        <p><%= link_to "← Back", :back %></p>
       </div>
     </div>
   </div>

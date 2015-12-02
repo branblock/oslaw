@@ -1,0 +1,27 @@
+<div class="container">
+  <h3 style="margin-top: 40px;">Manage Users</h3>
+  <% @users.each do |user| %>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Manage</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td><%= user.id %></td>
+              <td><%= user.first_name %> <%= user.last_name %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td><%= "Add delete user link" %></td>
+          </tr>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>

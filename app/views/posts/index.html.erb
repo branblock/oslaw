@@ -1,12 +1,10 @@
 <div class="container">
-  <h3>All Posts</h3>
-    <% @posts.each do |post| %>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <%= link_to post.title, post %>
-        </h4>
-      </div>
-    </div>
-  <% end %>
+  <div class="col-md-6" style="padding-left: 0">
+    <h3 style="margin-top: 60px">Posts</h3>
+    <% if @posts.present? %>
+      <%= render 'form' %>
+    <% else %>
+      <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+    <% end %>
+  </div>
 </div>

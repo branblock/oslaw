@@ -2,6 +2,12 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.order('created_at DESC')
+    end
   end
 
   def show
@@ -13,9 +19,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    @post = Post.new(post_params)
 
     if @post.save
       flash[:notice] = "Post has been saved."
@@ -32,15 +36,13 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
 
-    if @post.save
+    if @post.update_attributes(post_params)
       flash[:notice] = "Post has been updated."
-      redirect_to [@post]
+      redirect_to posts_path
     else
       flash[:error] = "There was an error updating the post. Please try again."
-      render :new
+      render :edit
     end
   end
 
@@ -54,5 +56,10 @@ class PostsController < ApplicationController
       flash[:error] = "There was an error deleting the post."
       render :show
     end
+  end
+
+  private
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end

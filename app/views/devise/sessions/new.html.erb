@@ -1,26 +1,26 @@
 <div class="container">
-  <div class="panel panel-default" style="max-width: 400px; margin-left: auto; margin-right: auto; margin-top: 60px;">
-    <div class="panel-heading">Sign in</div>
-      <div class="panel-body">
-        <div class="new-form-div">
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="row">
+    <div class="col-md-4 center-block">
+    <p style="border-bottom: 1px solid #e3e3e3; font-size: 18px; margin-top: 60px; text-align: center">Welcome back to Oslaw.<br />Sign in to access your account.</p>
+      <div class="form-div">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :email_or_username %><br />
+            <%= f.text_field :login, autofocus: true %></p>
+          </div>
+          <div class="field">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+          <% if devise_mapping.rememberable? -%>
             <div class="field">
-              <%= f.label :login %><br />
-              <%= f.text_field :login, autofocus: true, placeholder: "Email or username" %></p>
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
             </div>
-            <div class="field">
-              <%= f.label :password %><br />
-              <%= f.password_field :password, autocomplete: "off" %>
-            </div>
-            <% if devise_mapping.rememberable? -%>
-              <div class="field">
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
-              </div>
-            <% end -%>
+          <% end -%>
           <%= f.submit "Sign in", class: "btn btn-success" %>
         <% end %>
-        <small><%= link_to "Forgot your password?", new_password_path(resource_name) %></small>
+        <p><%= link_to "Forgot your password?", new_password_path(resource_name) %></p>
       </div>
     </div>
   </div>
