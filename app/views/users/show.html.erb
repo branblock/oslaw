@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="col-md-4" style="padding-left: 0">
+    <div style="margin-top: 40px">
+      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+      <p><%= image_tag avatar_url(current_user), class: "gravatar" %></p>
+    </div>
+    <div>
+      <p><%= link_to "Edit your profile", edit_user_registration_path %><br />
+      <%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "Are you sure? You will no longer be able to access Oslaw." }, method: :delete %></p>
+      <p><strong><u>Info</strong></u><br />
+      Jurisdiction:<br />
+      Date joined:<br />
+      Website:<br /></p>
+      <p><strong><u>Social</strong></u><br />
+      LinkedIn:<br />
+      Twitter:<br />
+      Facebook:<br />
+      <p><strong><u>Oslaw Stats</strong></u><br/>
+      Posts:<br />
+      Comments:<br />
+      Favorited posts:<br />
+      Upvotes:</p>
+    </div>
+  </div>
+  <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
+    <div class="panel panel-default">
+      <div class="panel-heading">Search Posts</div>
+        <div class="panel-body" style="font-size: 11px">
+        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: " Enter terms" %><br />
+          <%= submit_tag "Search", class: "btn btn-default btn-sm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
+    <p>Column 3</p>
+  </div>
+</div>

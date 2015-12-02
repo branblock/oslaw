@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-md-4" style="margin-top: 20px; padding-left: 0">
+  <div class="col-md-4" style="margin-top: 60px; padding-left: 0">
     <div class="panel panel-default">
       <div class="panel-heading">Post Guidelines</div>
       <div class="panel-body">
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="col-md-8" style="padding-left: 0">
-    <h3>Edit Post</h3>
-    <%= render partial: 'form', locals: { post: @post } %>
+    <h3 style="margin-top: 60px">Edit Post</h3>
+    <%= render partial: 'create_form', locals: { post: @post } %>
   </div>
 </div>

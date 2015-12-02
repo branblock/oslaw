@@ -1,9 +1,9 @@
 <div class="jumbotron">
   <div class="container">
     <div class="col-md-6">
-      <img src="http://icons.iconarchive.com/icons/icons8/ios7/128/Business-Collaboration-icon.png">
-      <h1>Experience the benefits of collaborative lawyering.</h1>
-      <p>Oslaw allows you to get real-world input on your legal documents.<br />It's 100% free and easy to use.</p>
+      <i class="fa fa-balance-scale fa-5x"></i>
+      <h2>Experience the benefits of collaborative lawyering.</h2>
+      <p>Join Oslaw and get <span style="text-decoration: underline">real-world input</span> on your legal documents.<br />It's easy and free to use.<br />Start collaborating today <span class="glyphicon glyphicon-arrow-right" aria-hidden="true" style="font-size: 18px"></span></p>
     </div>
     <div class="col-md-6">
       <div class="home-form-div">
@@ -13,9 +13,9 @@
           <%= f.text_field :last_name, placeholder: "Last name" %><br />
           <%= f.text_field :username, placeholder: "Username (for logging in)" %><br />
           <%= f.email_field :email, placeholder: "Email" %><br />
-          <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %><br />
+          <%= f.password_field :password, autocomplete: "off", placeholder: "Password (at least 8 characters)" %><br />
           <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %><br />
-          <small style="padding-left: 15px"><strong>By signing up, you agree to our <a href="#">terms and conditions</a>.</strong></small><br />
+          <p style="font-size: 12px; margin-bottom: 0; padding-left: 20px">By signing up, you agree to Oslaw's<br /><a href="#">terms and conditions</a>.</p>
           <%= f.submit "Sign up for free", class: "btn btn-success" %>
         <% end %>
           <small>Have an account? <%= link_to "Sign in", new_session_path(resource_name) %></small>
