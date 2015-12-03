@@ -1,0 +1,8 @@
+<p><strong>Add a Comment</strong></p>
+<%= form_for [post, comment] do |f| %>
+  <div class="form-group">
+    <%= f.label :body, class: 'sr-only' %>
+    <%= f.text_field :body, class: 'form-control', placeholder: "Enter comment" %>
+  </div>
+    <%= f.submit "Save Comment", class: 'btn btn-success' %>
+<% end %>

@@ -84,7 +84,6 @@ a:active, a:focus {
 .alert {
   border-radius: 0;
   margin-bottom: 0;
-  margin-top: 20px;
   padding-top: 20px;
 }
 
@@ -124,8 +123,8 @@ a:active, a:focus {
   border: none;
   border-radius: 0;
   margin-bottom: 0;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .navbar-nav {
@@ -208,7 +207,8 @@ a:active, a:focus {
 .home-form-div input[type="text"],
 .home-form-div input[type="email"],
 .home-form-div input[type="password"] {
-  border: 1px solid #00171F;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
   font-size: 14px;
   height: auto;
   margin-bottom: 15px;

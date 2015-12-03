@@ -2,7 +2,7 @@
   <div class="col-md-6" style="padding-left: 0">
     <h3 style="margin-top: 60px">Posts</h3>
     <% if @posts.present? %>
-      <%= render 'form' %>
+      <%= render 'posts_index' %>
     <% else %>
       <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
     <% end %>
