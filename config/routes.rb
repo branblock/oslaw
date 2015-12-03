@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  resources :posts, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+
   devise_for :users
     resources :users, :only => [:index, :show]
 

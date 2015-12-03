@@ -1,0 +1,2 @@
+<small><%= link_to '<i class="fa fa-trash"></i>'.html_safe, [comment.post, comment], method: :delete %> <%= current_user.first_name %> <%= current_user.last_name %> commented <%= time_ago_in_words(comment.created_at) %> ago:</small>
+<blockquote><%= comment.body %></blockquote>

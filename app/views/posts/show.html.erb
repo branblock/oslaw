@@ -1,15 +1,38 @@
 <div class="container">
-  <div class="col-md-4" style="margin-top: 60px; padding-left: 0">
-    <div class="panel panel-default">
-      <div class="panel-heading">Post Options</div>
-      <div class="panel-body">
-        <%= link_to "Edit this post", edit_post_path(@post) %><br />
-        <%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Are you sure you want to delete '#{@post.title}'? This cannot be undone."} %>
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 60px">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="font-size: 16px"><strong><%= @post.title %></strong></div>
+        <div class="panel-body">
+          Created by:<br />
+          Created on:<br />
+          Last updated:<br />
+          Master document:
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-8" style="padding-left: 0">
-    <h3 style="margin-top: 60px"><%= @post.title %></h3>
-    <p><%= @post.body %></p>
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <%= @post.body %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>Post Options</strong></div>
+        <div class="panel-body">
+          <%= link_to "Edit this post", edit_post_path(@post) %><br />
+          <%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Are you sure you want to delete '#{@post.title}'? This cannot be undone."} %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <p><strong><u>Comments by the Oslaw Commmunity</strong></u></p>
+      <%= render @post.comments %>
+      <% if current_user %>
+        <%= render "comments/form", comment: Comment.new, post: @post %>
+      <% end %>
+    </div>
   </div>
 </div>
