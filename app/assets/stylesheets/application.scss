@@ -238,7 +238,8 @@ a:active, a:focus {
 .form-div input[type="text"],
 .form-div input[type="email"],
 .form-div input[type="password"] {
-  border: 1px solid #00171F;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
   font-size: 14px;
   height: auto;
   margin-bottom: 5px;
