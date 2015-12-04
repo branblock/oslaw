@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-ruby '2.2.3'
 
 group :production do
   gem 'pg'
@@ -16,6 +15,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers'
   gem 'factory_girl'
+  gem 'faker'
 end
 
 # Use Bootstrap for CSS
@@ -32,3 +32,5 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Use Devise for authentication
 gem 'devise'
+# User Pundit for authorization
+gem 'pundit'

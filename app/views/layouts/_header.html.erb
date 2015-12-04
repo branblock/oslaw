@@ -15,8 +15,12 @@
 	  <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <li><%= link_to '<i class="fa fa-file-text"></i> Posts Index'.html_safe, posts_path, :class => 'navbar-link' %></li>
-        <li><%= link_to '<i class="fa fa-home"></i> Your Home Page'.html_safe, current_user, :class => 'navbar-link' %></li>
-        <li><%= link_to '<i class="fa fa-sign-out"></i>Log Out'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
+        <% if current_user.admin? %>
+          <li><%= link_to '<i class="fa fa-home"></i> Your Home Page'.html_safe, users_path, :class => 'navbar-link' %></li>
+        <% else %>
+          <li><%= link_to '<i class="fa fa-home"></i> Your Home Page'.html_safe, current_user, :class => 'navbar-link' %></li>
+        <% end %>
+        <li><%= link_to '<i class="fa fa-sign-out"></i>Sign Out'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
       <% else %>
         <li><%= link_to '<i class="fa fa-info-circle"></i> About Oslaw'.html_safe, "#", class: 'navbar-link' %></li>
         <li><%= link_to '<i class="fa fa-cogs"></i> How It Works'.html_safe, "#", class: 'navbar-link' %></li>

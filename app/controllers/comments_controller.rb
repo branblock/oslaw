@@ -2,9 +2,10 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    comment = @post.comments.new(comment_params)
+    @comment = @post.comments.new(comment_params)
+    @comment.user = current_user
 
-    if comment.save
+    if @comment.save
       flash[:notice] = "Comment was added."
       redirect_to [@post]
     else
@@ -15,9 +16,10 @@ class CommentsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:post_id])
-    comment = @post.comments.find(params[:id])
+    @comment = @post.comments.find(params[:id])
+    authorize @comment
 
-    if comment.destroy
+    if @comment.destroy
       flash[:notice] = "Comment was deleted."
       redirect_to [@post]
     else
