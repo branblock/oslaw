@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :posts
+  has_many :comments
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
@@ -39,5 +42,20 @@ class User < ActiveRecord::Base
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
     end
+  end
+
+  # Roles
+  after_initialize :set_role
+
+  def set_role
+    self.role  ||= 'standard'
+  end
+
+  def standard?
+    role == 'standard'
+  end
+
+  def admin?
+    role == 'admin'
   end
 end

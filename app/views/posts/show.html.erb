@@ -2,12 +2,21 @@
   <div class="row">
     <div class="col-md-12" style="margin-top: 60px">
       <div class="panel panel-default">
-        <div class="panel-heading" style="font-size: 16px"><strong><%= @post.title %></strong></div>
+        <div class="panel-heading" style="font-size: 16px">
+          <strong><%= @post.title %></strong>
+          <% if policy(@post).update? %>
+            <small> (<%= link_to "Edit this post", edit_post_path(@post) %>)</small>
+          <% end %>
+          <% if policy(@post).destroy? %>
+            <small> (<%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>)</small>
+          <% end %>
+        </div>
         <div class="panel-body">
           Created by:<br />
-          Created on:<br />
+          Created: <%= localize(@post.created_at, :format => :post_default) %><br />
           Last updated:<br />
-          Master document:
+          Master document title:<br />
+          Master document version:<br />
         </div>
       </div>
     </div>
@@ -22,8 +31,7 @@
       <div class="panel panel-default">
         <div class="panel-heading"><strong>Post Options</strong></div>
         <div class="panel-body">
-          <%= link_to "Edit this post", edit_post_path(@post) %><br />
-          <%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Are you sure you want to delete '#{@post.title}'? This cannot be undone."} %>
+          <p>Text will go here</p>
         </div>
       </div>
     </div>

@@ -142,7 +142,7 @@ a:active, a:focus {
   text-transform: uppercase;
 }
 
-.navbar-default .navbar-nav >li > a:hover {
+.navbar-default .navbar-nav > li > a:hover {
   color: #00171F;
   background: transparent;
   text-decoration: none;
@@ -256,6 +256,14 @@ a:active, a:focus {
   margin-top: 10px;
 }
 
+/* COMMENTS
+--------------------------------------------------*/
+
+blockquote {
+  color: #00171F;
+  font-size: 14px;
+}
+
 /* FOOTER
 -------------------------------------------------- */
 
@@ -271,7 +279,7 @@ body {
 }
 
 footer {
-  background: #00171F;
+  background: #003459;
   bottom: 0;
   color: #fff;
   font-size: 12px;

@@ -21,3 +21,9 @@
 
 en:
   hello: "Hello world"
+
+en:
+  time:
+    formats:
+      post_default: '%m/%d/%Y'
+      comment_default: '%m/%d/%Y at %I:%M %p'
