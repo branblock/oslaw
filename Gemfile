@@ -12,10 +12,13 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'shoulda-matchers'
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'simplecov', :require => false
 end
 
 # Use Bootstrap for CSS

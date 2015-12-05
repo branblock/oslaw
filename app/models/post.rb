@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   validates :body, length: { minimum: 25 }, presence: true
   validates :user, presence: true
 
+  # refactor to avoid SQL queries
   def self.search(search)
     where("title || body LIKE ?", "%#{search}%")
   end

@@ -8,7 +8,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    (user.present? && record.user == user) || user.admin?
+    user.present? && (record.user == user || user.admin?)
   end
 
   def show?
