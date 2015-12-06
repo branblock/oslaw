@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let(:post) { Post.create!(title: "New Post Title", body: "New Post Body") }
-  let (:comment) { Comment.create!(body: "Comment Body", post: post) }
+  let(:post) { create(:post) }
+  let(:user) { create(:user) }
+  let(:comment) { create(:comment, post: post, user: user) }
+
+  it { should belong_to(:post) }
+  it { should belong_to(:user) }
+  it { should validate_presence_of(:body) }
+  it { should validate_length_of(:body).is_at_least(5) }
 
   describe "attributes" do
     it "should respond to body" do
