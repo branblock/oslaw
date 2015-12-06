@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+20.times { FactoryGirl.create(:user) }
+1.times { FactoryGirl.create(:admin) }
+1.times { FactoryGirl.create(:standard) }
+50.times { FactoryGirl.create(:post, :with_comments) }
+# 100.times { FactoryGirl.create(:comment) }
+
+puts "Finished"
+puts "#{User.count} users created"
+puts "#{Post.count} posts created"
+puts "#{Comment.count} comments created"

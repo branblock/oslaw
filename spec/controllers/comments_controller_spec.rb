@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe CommentsController, type: :controller do
+RSpec.describe CommentsController, type: :controller, focus: true do
   let(:my_post) { create(:post) }
   let(:my_comment) { create(:comment, post: my_post) }
-  let(:admin) { create(:user, factory: :admin_user) }
 
   describe "POST create" do
     context "with valid attributes" do
@@ -29,16 +28,20 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-  describe "DELETE destroy" do
-    it "deletes the comment" do
-      delete :destroy, post_id: my_post.id, id: my_comment.id
-      count = Comment.where({id: my_comment.id}).count
-      expect(count).to eq 0
-    end
+  context "for an admin user" do
+    let(:user) { build(:user, role: 'admin') }
 
-    it "redirects to the show view" do
-      delete :destroy, post_id: my_post.id, id: my_comment.id
-      expect(response).to redirect_to [my_post]
+    describe "DELETE destroy" do
+      it "deletes the comment" do
+        delete :destroy, post_id: my_post.id, id: my_comment.id
+        count = Comment.where({id: my_comment.id}).count
+        expect(count).to eq 0
+      end
+
+      it "redirects to the show view" do
+        delete :destroy, post_id: my_post.id, id: my_comment.id
+        expect(response).to redirect_to [my_post]
+      end
     end
   end
 end

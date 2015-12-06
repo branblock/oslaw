@@ -16,9 +16,13 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+# Simplecov gem (used for testing)
 require 'simplecov'
 SimpleCov.start
 
+# Pundit gem (used for authorization)
+require "pundit/rspec"
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
