@@ -91,8 +91,8 @@ RSpec.describe CategoriesController, type: :controller do
 
     describe "PUT update" do
       it "updates category with expected attributes" do
-        new_name = { Faker::Lorem.words(rand(2..5)).join(' ') }
-        new_description = { Faker::Lorem.sentence }
+        new_name = "New Name"
+        new_description = "New Description"
 
         put :update, id: my_category.id, category: {name: new_name, description: new_description}
 
@@ -103,8 +103,8 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it "redirects to the updated category" do
-        new_name = { Faker::Lorem.words(rand(2..5)).join(' ') }
-        new_description = { Faker::Lorem.sentence }
+        new_name = "New Name"
+        new_description = "New Description"
 
         put :update, id: my_category.id, category: {name: new_name, description: new_description}
         expect(response).to redirect_to my_category

@@ -1,45 +1,74 @@
 <div class="container">
   <div class="row">
+
+    <!-- POST TITLE -->
     <div class="col-md-12" style="margin-top: 60px">
+      <p><span style="font-size: 18px; text-decoration: underline"><strong><%= @post.title %></strong></span> • [upvote] • [favorite] </p>
+      <p><strong>upvotes:</strong> [# of upvotes] • <strong>favorited:</strong> [# of times favorited] • <strong>views:</strong> [# of views]
+        <% if policy(@post).update? %>
+           <br /><%= link_to "edit this post", edit_post_path(@post) %>
+        <% end %>
+        <% if policy(@post).destroy? %>
+           • <%= link_to "delete this post", @post, method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>
+        <% end %> </p>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading" style="font-size: 16px">
-          <strong><%= @post.title %></strong>
+        <div class="panel-heading" style="font-weight: bold">
+          Description
         </div>
+          <div class="panel-body">
+            <%= @post.body %></br>
+          </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="font-weight: bold">Categories</div>
         <div class="panel-body">
-          Created by: <%= link_to "#{@post.user.username}", user_path(@post.user) %> <br />
-          Created: <%= localize(@post.created_at, :format => :default) %><br />
-          Last updated:<br />
-          Category:<br />
-          Master document title:<br />
-          Master document version:<br />
-          <% if policy(@post).update? %>
-            <%= link_to "Edit this post", edit_post_path(@post) %>
-          <% end %>
-          <% if policy(@post).destroy? %>
-            <br /><%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>
-          <% end %>
+          List all categories here.
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+
+    <!-- DOCUMENTS -->
+    <!-- Main Document -->
+    <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-body">
-            <%= @post.body %>
+        <div class="panel-heading" style="font-weight: bold">Main Document</div>
+          <div class="panel-body">
+            <strong>Author:</strong> <%= link_to "#{@post.user.username}", user_path(@post.user) %><br />
+            <strong>Title:</strong> [doc title]</br>
+            <strong>Documents:</strong> [Word] • [PDF] • [HTML] (<%= link_to "Terms of Use", "#" %>)</br>
+            <strong>Date created:</strong> [date created]<br />
+            <strong>No. of revisions:</strong> [# of revisions]<br />
+            <strong>Last revision:</strong> [date last updated]<br />
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+
+    <!-- Related Documents -->
+    <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading"><strong>Post Options</strong></div>
-        <div class="panel-body">
-          <p>Text will go here</p>
-        </div>
+        <div class="panel-heading" style="font-weight: bold">Related Documents</div>
+          <div class="panel-body">
+            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
+            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
+            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
+            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
+          </div>
       </div>
     </div>
+
+    <!-- COMMENTS -->
     <div class="col-md-12">
       <p><strong><u>Comments by the Oslaw Commmunity</strong></u></p>
       <% if @post.comments.empty? %>
-        <p><%= "There are no comments. Be the first to comment." %></p>
+        <p><%= "There are no comments. Be the first to contribute to this post." %></p>
       <% else %>
         <%= render @post.comments %>
       <% end %>

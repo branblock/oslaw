@@ -6,12 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# 20.times { FactoryGirl.create(:user) }
-1.times { FactoryGirl.create(:admin) }
-1.times { FactoryGirl.create(:standard) }
-10.times { FactoryGirl.create(:category, :with_posts) }
-50.times { FactoryGirl.create(:post, :with_comments) }
-# 100.times { FactoryGirl.create(:comment) }
+# FactoryGirl.create(:user)
+FactoryGirl.create(:admin)
+FactoryGirl.create(:category)
+FactoryGirl.create(:post)
+FactoryGirl.create(:comment)
 
 puts "Finished"
 puts "#{User.count} users created"
