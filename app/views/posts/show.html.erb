@@ -6,7 +6,7 @@
           <strong><%= @post.title %></strong>
         </div>
         <div class="panel-body">
-          Created by:<br />
+          Created by: <%= link_to "#{@post.user.username}", user_path(@post.user) %> <br />
           Created: <%= localize(@post.created_at, :format => :default) %><br />
           Last updated:<br />
           Category:<br />

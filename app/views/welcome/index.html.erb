@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <i class="fa fa-balance-scale fa-5x"></i>
       <h2>Experience the benefits of collaborative lawyering.</h2>
-      <p>Get <em>real-world input</em> on your legal documents. It's easy and free to use.<br />Join Oslaw and start collaborating now.</p>
+      <p>Get <em>real-world</em> input on your legal documents. It's easy and free to use.<br />Join Oslaw and start collaborating now.</p>
     </div>
     <div class="col-md-6">
       <div class="home-form-div">
@@ -15,7 +15,7 @@
           <%= f.email_field :email, placeholder: "Email" %><br />
           <%= f.password_field :password, autocomplete: "off", placeholder: "Password (at least 8 characters)" %><br />
           <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %><br />
-          <p style="font-size: 12px; margin-bottom: 0; padding-left: 20px">By signing up, you agree to Oslaw's<br /><a href="#">terms and conditions</a>.</p>
+          <p style="font-size: 12px; margin-bottom: 0">By signing up, you agree to Oslaw's <a href="#">terms and conditions</a>.</p>
           <%= f.submit "Sign up for free", class: "btn btn-success" %>
         <% end %>
           <small>Have an account? <%= link_to "Sign in", new_session_path(resource_name) %></small>

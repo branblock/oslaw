@@ -58,11 +58,12 @@ FactoryGirl.define do
     title { Faker::Lorem.words(rand(2..10)).join(' ') }
     body { Faker::Lorem.paragraphs(rand(6..12)).join('\n') }
     association :user, factory: :user, strategy: :build
+    association :category, factory: :category, strategy: :build
 
     trait :with_comments do
       after(:create) do |post, evaluator|
         # FactoryGirl.create_list(factory, number_of_items, factory_attrs)
-        FactoryGirl.create_list(:comment, 10, post: post)
+        FactoryGirl.create_list(:comment, 5, post: post)
       end
     end
   end

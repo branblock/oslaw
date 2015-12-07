@@ -1,4 +1,4 @@
-<p><%= comment.user.username %> commented on <%= localize(comment.created_at, :format => :comment_default) %>
+<p><%= link_to "#{comment.user.username}", user_path(comment.user) %> commented on <%= localize(comment.created_at, :format => :comment_default) %>
 <% if policy(comment).destroy? %>
   (<%= link_to "Delete comment", [comment.post, comment], method: :delete %>)
 <% end %></p>
