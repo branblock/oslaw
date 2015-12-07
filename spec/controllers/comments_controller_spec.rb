@@ -29,7 +29,7 @@ RSpec.describe CommentsController, type: :controller, focus: true do
   end
 
   context "for an admin user" do
-    let(:user) { build(:user, role: 'admin') }
+    let(:user) { create(:user, role: 'admin') }
 
     describe "DELETE destroy" do
       it "deletes the comment" do

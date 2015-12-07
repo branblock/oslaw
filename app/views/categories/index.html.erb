@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="col-md-8" style="padding-left: 0">
+    <h3 style="margin-top: 60px">Categories</h3>
+    <% @categories.each do |category| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to category.name, category %>
+          </h4>
+          <p><%= category.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4" style="padding-left: 0">
+    <% if policy(@category).create? %>
+      <%= render 'new' %>
+    <% end %>
+  </div>
+</div>

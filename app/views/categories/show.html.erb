@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 60px">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="font-size: 16px">
+          <strong> <%= @category.name %></strong>
+        </div>
+        <div class="panel-body">
+          Created by: <%= @category.user.username %><br />
+          Created: <%= localize(@category.created_at, :format => :default) %><br />
+          Number of posts: <%= @category.posts.count %><br />
+          <% if policy(@category).update? %>
+            <%= link_to "Edit this category", edit_category_path(@category) %><br />
+            <%= link_to "Delete this category", @category, method: :delete, data: {confirm: "Please confirm the deletion of '#{@category.name}'."} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-md-12">
+      <% @category.posts.each do |post| %>
+        <div class="media">
+          <div class="media-body">
+            <p class="media-heading"><%= link_to post.title, post %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

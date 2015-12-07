@@ -1,14 +1,21 @@
 <div class="container">
-  <div class="col-md-4" style="margin-top: 60px; padding-left: 0">
+  <h3 style="border-bottom: 1px solid #e3e3e3; margin-top: 60px">Edit Post</h3>
+  <div class="col-md-4" style="padding-left: 0">
     <div class="panel panel-default">
       <div class="panel-heading">Post Guidelines</div>
       <div class="panel-body">
         Panel content
       </div>
     </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Post Options</div>
+      <div class="panel-body">
+        <p>"Document control will go here"</p>
+        <%= render partial: 'categories/categories', locals: {category: @category} %>
+      </div>
+    </div>
   </div>
-  <div class="col-md-8" style="padding-left: 0">
-    <h3 style="margin-top: 60px">Edit Post</h3>
+  <div class="col-md-8" style="padding: 0">
     <%= render partial: 'create_post', locals: { post: @post } %>
   </div>
 </div>
