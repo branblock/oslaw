@@ -36,6 +36,22 @@ FactoryGirl.define do
   end
 end
 
+
+# Category Factories
+FactoryGirl.define do
+  factory :category do
+    name { Faker::Lorem.words(rand(2..5)).join(' ') }
+    description { Faker::Lorem.sentence }
+    association :user, factory: :admin, strategy: :build
+
+    trait :with_posts do
+      after(:create) do |category, evaluator|
+        FactoryGirl.create_list(:post, 5, category: category)
+      end
+    end
+  end
+end
+
 # Post Factories
 FactoryGirl.define do
   factory :post do

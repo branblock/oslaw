@@ -4,19 +4,20 @@
       <div class="panel panel-default">
         <div class="panel-heading" style="font-size: 16px">
           <strong><%= @post.title %></strong>
-          <% if policy(@post).update? %>
-            <small> (<%= link_to "Edit this post", edit_post_path(@post) %>)</small>
-          <% end %>
-          <% if policy(@post).destroy? %>
-            <small> (<%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>)</small>
-          <% end %>
         </div>
         <div class="panel-body">
           Created by:<br />
-          Created: <%= localize(@post.created_at, :format => :post_default) %><br />
+          Created: <%= localize(@post.created_at, :format => :default) %><br />
           Last updated:<br />
+          Category:<br />
           Master document title:<br />
           Master document version:<br />
+          <% if policy(@post).update? %>
+            <%= link_to "Edit this post", edit_post_path(@post) %>
+          <% end %>
+          <% if policy(@post).destroy? %>
+            <br /><%= link_to "Delete this post", @post, method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -37,7 +38,11 @@
     </div>
     <div class="col-md-12">
       <p><strong><u>Comments by the Oslaw Commmunity</strong></u></p>
-      <%= render @post.comments %>
+      <% if @post.comments.empty? %>
+        <p><%= "There are no comments. Be the first to comment." %></p>
+      <% else %>
+        <%= render @post.comments %>
+      <% end %>
       <% if current_user %>
         <%= render "comments/form", comment: Comment.new, post: @post %>
       <% end %>

@@ -1,5 +1,5 @@
 <p><%= comment.user.username %> commented on <%= localize(comment.created_at, :format => :comment_default) %>
 <% if policy(comment).destroy? %>
-  <%= link_to '<i class="fa fa-trash"></i>'.html_safe, [comment.post, comment], method: :delete %>
+  (<%= link_to "Delete comment", [comment.post, comment], method: :delete %>)
 <% end %></p>
 <blockquote><%= comment.body %></blockquote>
