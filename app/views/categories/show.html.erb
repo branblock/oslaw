@@ -6,7 +6,7 @@
           <strong> <%= @category.name %></strong>
         </div>
         <div class="panel-body">
-          Created by: <%= @category.user.username %><br />
+          Created by: <%= link_to "#{@category_user.username}", user_path(@category_user) %><br />
           Created: <%= localize(@category.created_at, :format => :default) %><br />
           Number of posts: <%= @category.posts.count %><br />
           <% if policy(@category).update? %>
@@ -18,12 +18,17 @@
     </div>
   </div>
     <div class="col-md-12">
-      <% @category.posts.each do |post| %>
-        <div class="media">
-          <div class="media-body">
-            <p class="media-heading"><%= link_to post.title, post %></p>
+      <p><strong><u>Posts by the Oslaw Commmunity</strong></u></p>
+      <% if @category.posts.empty? %>
+        <p><%= "There are no posts associated with this category." %></p>
+      <% else %>
+        <% @category.posts.each do |post| %>
+          <div class="media">
+            <div class="media-body">
+              <p class="media-heading"><%= link_to post.title, post %></p>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

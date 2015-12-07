@@ -32,7 +32,7 @@
               <%= f.label :password_confirmation %><br />
               <%= f.password_field :password_confirmation, autocomplete: "off" %>
             </div>
-            <strong>By signing up, you agree to Oslaw's<br /><a href="#">terms and conditions</a>.</strong><br />
+            By signing up, you agree to Oslaw's <a href="#">terms and conditions</a>.<br />
             <%= f.submit "Create Your Account", class: "btn btn-success" %>
           <% end %>
         <p>Have an account? <%= link_to "Sign in →", new_session_path(resource_name) %><br /><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %></p>
