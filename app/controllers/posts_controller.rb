@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ready_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -12,7 +13,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
@@ -34,11 +34,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @categories = Category.all
   end
 
   def update
-    @post = Post.find(params[:id])
+    @categories = Category.find(params[:category_id])
 
     if @post.update_attributes(post_params)
       flash[:notice] = "Post has been updated."
@@ -64,5 +64,9 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def ready_post
+    @post = Post.find(params[:id])
   end
 end

@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :ready_category, only: [:show, :edit, :update, :destroy]
 
   def index
     @categories = Category.all
@@ -7,9 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
     @user = User.find(params[:id])
-    @category_user = @user
   end
 
   def new
@@ -30,12 +29,9 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
-
     if @category.update_attributes(category_params)
       flash[:notice] = "Category has been updated."
       redirect_to categories_path
@@ -46,8 +42,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
-
     if @category.destroy
       flash[:notice] = "Category has been deleted."
       redirect_to categories_path
@@ -60,5 +54,9 @@ class CategoriesController < ApplicationController
   private
   def category_params
     params.require(:category).permit(:name, :description)
+  end
+
+  def ready_category
+    @category = Category.find(params[:id])
   end
 end

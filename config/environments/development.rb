@@ -42,4 +42,15 @@ Rails.application.configure do
   # Devise configuration for action mailer.
   # Should be added to production when site is live.
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Mailtrap configuration (https://mailtrap.io/inboxes)
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :user_name => '523228bef5cb4617c',
+  :password => '0c532755ad16d8',
+  :address => 'mailtrap.io',
+  :domain => 'mailtrap.io',
+  :port => '2525',
+  :authentication => :cram_md5
+}
 end

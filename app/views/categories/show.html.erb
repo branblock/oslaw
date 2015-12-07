@@ -6,7 +6,7 @@
           <strong> <%= @category.name %></strong>
         </div>
         <div class="panel-body">
-          Created by: <%= link_to "#{@category_user.username}", user_path(@category_user) %><br />
+          Created by: <%= link_to "#{@user.username}", user_path(@user) %><br />
           Created: <%= localize(@category.created_at, :format => :default) %><br />
           Number of posts: <%= @category.posts.count %><br />
           <% if policy(@category).update? %>

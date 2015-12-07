@@ -13,8 +13,8 @@
     <% end %>
   </div>
   <div class="col-md-4" style="padding-left: 0">
-    <% if policy(@category).create? %>
-      <%= render 'new' %>
+    <% if current_user.admin? %>
+      <%= render "new", locals: { category: @category } %>
     <% end %>
   </div>
 </div>

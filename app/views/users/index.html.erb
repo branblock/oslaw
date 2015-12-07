@@ -16,9 +16,13 @@
           <tr>
             <td><%= user.id %></td>
             <td><%= user.first_name %> <%= user.last_name %></td>
-            <td><%= user.username %></td>
+            <td><%= link_to "#{user.username}", user_path(user) %></td>
             <td><%= user.email %></td>
-            <td><%= "Add delete user link" %></td>
+            <td>
+              <% if policy(user).destroy? %>
+                <%= link_to "delete this user", user, method: :delete, data: {confirm: "Please confirm the deletion of '#{user.username}'."} %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
