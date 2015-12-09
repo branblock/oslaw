@@ -16,11 +16,71 @@
 
 </head>
   <body>
-    <%= render 'layouts/header' %>
-    <%= render 'layouts/messages' %>
-    <div class="container">
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://localhost:3000/"><span class="glyphicon glyphicon-share" aria-hidden="true" style="font-size: 20px"></span>Oslaw</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+    	  <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li><%= link_to '<i class="fa fa-columns"></i> All Categories'.html_safe, categories_path, :class => 'navbar-link' %></li>
+            <% if current_user.admin? %>
+              <li><%= link_to '<i class="fa fa-home"></i> Your Home Page'.html_safe, users_path, :class => 'navbar-link' %></li>
+            <% else %>
+              <li><%= link_to '<i class="fa fa-home"></i> Your Home Page'.html_safe, user_path(current_user), :class => 'navbar-link' %></li>
+            <% end %>
+            <li><%= link_to '<i class="fa fa-sign-out"></i>Sign Out'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
+          <% else %>
+            <li><%= link_to '<i class="fa fa-info-circle"></i> About Oslaw'.html_safe, "#", class: 'navbar-link' %></li>
+            <li><%= link_to '<i class="fa fa-cogs"></i> How It Works'.html_safe, "#", class: 'navbar-link' %></li>
+            <li><%= link_to '<i class="fa fa-user-plus"></i> Sign Up'.html_safe, new_user_registration_path, class: 'navbar-link' %></li>
+            <li><%= link_to '<i class="fa fa-sign-in"></i> Sign In'.html_safe, new_user_session_path, class: 'navbar-link' %></li>
+          <% end %>
+        </ul>
+        </div>
+      </div>
     </div>
+
+    <div class="flash">
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash.now[:notice] %>
+        </div>
+      <% elsif flash.now[:alert] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash.now[:alert] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+    </div>
+
     <%= yield %>
-    <%= render 'layouts/footer' %>
+
+    <footer class="footer">
+      <p>
+        Copyright © 2015 Oslaw. All Rights Reserved.<br />
+        Oslaw is an online service that provides legal forms and legal information.<br />
+        Oslaw is not a law firm and is not a substitute for legal advice.<br />
+        Use of Oslaw is subject to our <%= link_to "Terms and Conditions", "#" %>.<br />
+        <span><%= link_to "Contact Oslaw", "#" %> | <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a> <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a> <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a></span>
+      </p>
+    </footer>
+
   </body>
 </html>

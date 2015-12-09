@@ -1,16 +1,17 @@
 class CommentsController < ApplicationController
-
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
+    @new_comment = Comment.new
 
-    if @comment.save
-      flash[:notice] = "Comment was added."
-      redirect_to [@post.category, @post]
-    else
-      flash[:error] = "Comment was not added. Please try again."
-      redirect_to [@post.category, @post]
+    unless @comment.save
+      flash.now[:alert] = "Comment was not added. Please try again."
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
@@ -18,12 +19,13 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
 
-    if @comment.destroy
-      flash[:notice] = "Comment was deleted."
-      redirect_to [@post.category, @post]
-    else
-      flash[:error] = "Comment was not deleted. Please try again."
-      redirect_to [@post.category, @post]
+    unless @comment.destroy
+      flash.now[:alert] = "Comment was not deleted. Please try again."
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
