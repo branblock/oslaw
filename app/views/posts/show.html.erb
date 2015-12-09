@@ -1,80 +1,96 @@
 <div class="container">
-  <div class="row">
 
-    <!-- POST TITLE -->
-    <div class="col-md-12" style="margin-top: 60px">
-      <p><span style="font-size: 18px; text-decoration: underline"><strong><%= @post.title %></strong></span> • [upvote] • [favorite] </p>
-      <p><strong>upvotes:</strong> [# of upvotes] • <strong>favorited:</strong> [# of times favorited] • <strong>views:</strong> [# of views]
-        <% if policy(@post).update? %>
-           <br /><%= link_to "edit this post", edit_post_path(@post) %>
-        <% end %>
-        <% if policy(@post).destroy? %>
-           • <%= link_to "delete this post", @post, method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>
-        <% end %> </p>
-    </div>
+  <!-- POST TITLE -->
+  <p style="margin-top: 40px"><span style="font-size: 18px; font-weight: bold"><%= @post.title %></span>
+    <% if policy(@post).update? %>
+      <br />(<%= link_to "edit this post", edit_category_post_path(@post.category, @post) %>)
+    <% end %>
+    <% if policy(@post).destroy? %>
+       (<%= link_to "delete this post", [@post.category, @post], method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>)
+    <% end %>
+  </p>
 
-    <!-- DESCRIPTION -->
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="font-weight: bold">
-          Description
-        </div>
-          <div class="panel-body">
-            <%= @post.body %></br>
-          </div>
-      </div>
-    </div>
-
-    <!-- CATEGORIES -->
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="font-weight: bold">Categories</div>
-        <div class="panel-body">
-          List all categories here.
-        </div>
-      </div>
-    </div>
-
-    <!-- DOCUMENTS -->
-    <!-- Main Document -->
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="font-weight: bold">Main Document</div>
-          <div class="panel-body">
-            <strong>Author:</strong> <%= link_to "#{@post.user.username}", user_path(@post.user) %><br />
-            <strong>Title:</strong> [doc title]</br>
-            <strong>Documents:</strong> [Word] • [PDF] • [HTML] (<%= link_to "Terms of Use", "#" %>)</br>
-            <strong>Date created:</strong> [date created]<br />
-            <strong>No. of revisions:</strong> [# of revisions]<br />
-            <strong>Last revision:</strong> [date last updated]<br />
-        </div>
-      </div>
-    </div>
-
-    <!-- Related Documents -->
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="font-weight: bold">Related Documents</div>
-          <div class="panel-body">
-            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
-            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
-            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
-            [doc title] ⎮ [Word] • [PDF] • [HTML]<br />
-          </div>
-      </div>
-    </div>
-
-    <!-- COMMENTS -->
-    <div class="col-md-12">
-      <p><strong><u>Comments by the Oslaw Commmunity</strong></u></p>
-      <% if @post.comments.empty? %>
-        <p><%= "There are no comments. Be the first to contribute to this post." %></p>
-      <% else %>
-        <%= render @post.comments %>
-      <% end %>
-      <% if current_user %>
-        <%= render "comments/form", comment: Comment.new, post: @post %>
-      <% end %>
-    </div>
+  <!-- POST INFORMATION -->
+  <div class="col-md-8" style="padding-left: 0">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Description:</th>
+            <td><%= markdown(@post.body) %></td>
+        </tr>
+        <tr>
+          <th>Categories:</th>
+            <td><%= link_to "#{@post.category.name}", category_path(@post.category) %></td>
+        </tr>
+        <tr>
+          <th>Tags:</th>
+            <td></td>
+        </tr>
+        <tr>
+          <th>Main Document:</th>
+            <td> [Word] • [PDF] • [HTML] (<%= link_to "Terms of Use", "#" %>)</td>
+        </tr>
+        <tr>
+          <th>Author:</th>
+            <td><%= link_to "#{@post.user.username}", user_path(@post.user) %></td>
+        </tr>
+          <th>Date Created:</th>
+            <td><%= localize(@post.created_at, :format => :default) %></td>
+        <tr>
+          <th>Last Revision:</th>
+            <td><%= localize(@post.updated_at, :format => :default) %></td>
+        </tr>
+        <tr>
+          <th>No. of Revisions:</th>
+            <td></td>
+        </tr>
+        <tr>
+          <th>Views:</th>
+            <td></td>
+        </tr>
+        <tr>
+          <th>Upvotes:</th>
+            <td></td>
+        </tr>
+        <tr>
+          <th>Favorites:</th>
+            <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+
+<!-- POST INFORMATION -->
+<div class="col-md-4" style="padding-left: 0">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Related Posts:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>list of related posts</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <!-- COMMENTS -->
+  <div class="col-md-8" style="padding-left: 0">
+    <p><strong><u>Comments by the Oslaw Commmunity</strong></u></p>
+    <% if @post.comments.empty? %>
+      <p><%= "There are no comments. Be the first to contribute to this post." %></p>
+    <% else %>
+      <%= render @post.comments %>
+    <% end %>
+    <% if current_user %>
+      <%= render "comments/form", comment: Comment.new, post: @post %>
+    <% end %>
+  </div>
+
 </div>

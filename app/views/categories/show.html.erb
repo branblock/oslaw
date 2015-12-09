@@ -1,35 +1,88 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12" style="margin-top: 60px">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="font-size: 16px">
-          <strong> <%= @category.name %></strong>
-        </div>
-        <div class="panel-body">
-          Created by: <%= link_to "#{@user.username}", user_path(@user) %><br />
-          Created: <%= localize(@category.created_at, :format => :default) %><br />
-          Number of posts: <%= @category.posts.count %><br />
-          <% if policy(@category).update? %>
-            <%= link_to "Edit this category", edit_category_path(@category) %><br />
-            <%= link_to "Delete this category", @category, method: :delete, data: {confirm: "Please confirm the deletion of '#{@category.name}'."} %>
-          <% end %>
-        </div>
-      </div>
+
+  <!-- CATEGORY NAME -->
+  <p style="margin-top: 40px"><span style="font-size: 18px; font-weight: bold"><%= @category.name %></span>
+    <% if policy(@category).update? %>
+      <br />(<%= link_to "edit this category", edit_category_path(@category) %>)
+    <% end %>
+    <% if policy(@category).destroy? %>
+       (<%= link_to "delete this category", @category, method: :delete, data: {confirm: "Please confirm the deletion of '#{@category.name}'."} %>)
+    <% end %>
+  </p>
+
+
+  <!-- CATEGORY INFORMATION -->
+  <div class="col-md-8" style="padding-left: 0">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Created by:</th>
+              <td><%= link_to "#{@user.username}", user_path(@user) %></td>
+          </tr>
+          <tr>
+            <th>Date Created:</th>
+              <td><%= localize(@category.created_at, :format => :default) %></td>
+          </tr>
+          <tr>
+            <th>No. of Posts:</th>
+              <td><%= link_to "#{@category.posts.count}", "#" %></td>
+          </tr>
+            <th>Date Created:</th>
+              <td></td>
+          <tr>
+            <th>Last Revision:</th>
+              <td><%= localize(@category.updated_at, :format => :default) %></td>
+          </tr>
+          <tr>
+            <th>Most Favorited Posts:</th>
+            <td>
+              <% if @category.posts.count == 0 %>
+                <p><%= "There are no posts associated with this category." %></p>
+              <% else %>
+                <% @category.posts.each do |post| %>
+                  <ol style="margin-left: 0">
+                    <li><%= link_to post.title, category_post_path(@category, post) %> / <small>last updated: <%= localize(post.created_at, :format => :default) %></small></li>
+                  </ol>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>Most Upvoted Posts:</th>
+            <td>
+              <% if @category.posts.count == 0 %>
+                <p><%= "There are no posts associated with this category." %></p>
+              <% else %>
+                <% @category.posts.each do |post| %>
+                <ol style="margin-left: 0">
+                  <li><%= link_to post.title, category_post_path(@category, post) %> / <small>last updated: <%= localize(post.created_at, :format => :default) %></small></li>
+                </ol>
+                <% end %>
+              <% end %>
+            </td>
+            </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-    <div class="col-md-12">
-      <p><strong><u>Posts by the Oslaw Commmunity</strong></u></p>
-      <% if @category.posts.empty? %>
-        <p><%= "There are no posts associated with this category." %></p>
-      <% else %>
-        <% @category.posts.each do |post| %>
-          <div class="media">
-            <div class="media-body">
-              <p class="media-heading"><%= link_to post.title, post %></p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+
+  <!-- NEW POST -->
+  <div class="col-md-4" style="padding-left: 0">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Category Options:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= link_to "Create a New Post", new_category_post_path(@category) %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+
 </div>

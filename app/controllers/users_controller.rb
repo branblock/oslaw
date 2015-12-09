@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @category = Category.new
+    @categories = Category.all
   end
 
   def show
