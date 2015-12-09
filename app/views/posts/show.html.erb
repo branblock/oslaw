@@ -12,73 +12,76 @@
 
   <!-- POST INFORMATION -->
   <div class="col-md-8" style="padding-left: 0">
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <th>Description:</th>
-            <td><%= markdown(@post.body) %></td>
-        </tr>
-        <tr>
-          <th>Categories:</th>
-            <td><%= link_to "#{@post.category.name}", category_path(@post.category) %></td>
-        </tr>
-        <tr>
-          <th>Tags:</th>
-            <td></td>
-        </tr>
-        <tr>
-          <th>Main Document:</th>
-            <td> [Word] • [PDF] • [HTML] (<%= link_to "Terms of Use", "#" %>)</td>
-        </tr>
-        <tr>
-          <th>Author:</th>
-            <td><%= link_to "#{@post.user.username}", user_path(@post.user) %></td>
-        </tr>
-          <th>Date Created:</th>
-            <td><%= localize(@post.created_at, :format => :default) %></td>
-        <tr>
-          <th>Last Revision:</th>
-            <td><%= localize(@post.updated_at, :format => :default) %></td>
-        </tr>
-        <tr>
-          <th>No. of Revisions:</th>
-            <td></td>
-        </tr>
-        <tr>
-          <th>Views:</th>
-            <td></td>
-        </tr>
-        <tr>
-          <th>Upvotes:</th>
-            <td></td>
-        </tr>
-        <tr>
-          <th>Favorites:</th>
-            <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Description:</th>
+              <td><%= markdown(@post.body) %></td>
+          </tr>
+          <tr>
+            <th>Categories:</th>
+              <td><%= link_to "#{@post.category.name}", category_path(@post.category) %></td>
+          </tr>
+          <tr>
+            <th>Tags:</th>
+              <td></td>
+          </tr>
+          <tr>
+            <th>Main Document:</th>
+              <td> [Word] • [PDF] • [HTML] (<%= link_to "Terms of Use", "#" %>)</td>
+          </tr>
+          <tr>
+            <th>Author:</th>
+              <td><%= link_to "#{@post.user.username}", user_path(@post.user) %></td>
+          </tr>
+            <th>Date Created:</th>
+              <td><%= localize(@post.created_at, :format => :default) %></td>
+          <tr>
+            <th>Last Revision:</th>
+              <td><%= localize(@post.updated_at, :format => :default) %></td>
+          </tr>
+          <tr>
+            <th>No. of Revisions:</th>
+              <td></td>
+          </tr>
+          <tr>
+            <th>Comments:</th>
+              <td><div class='js-comments-count'><%= pluralize(@post.comments.count, 'comment') %></div></td>
+          <tr>
+            <th>Views:</th>
+              <td></td>
+          </tr>
+          <tr>
+            <th>Upvotes:</th>
+              <td></td>
+          </tr>
+          <tr>
+            <th>Favorites:</th>
+              <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
-<!-- POST INFORMATION -->
-<div class="col-md-4" style="padding-left: 0">
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Related Posts:</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>list of related posts</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+    <!-- POST INFORMATION -->
+    <div class="col-md-4" style="padding-left: 0">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Related Posts:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>list of related posts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   <!-- COMMENTS -->
   <div class="col-md-8" style="padding-left: 0">
@@ -86,10 +89,14 @@
     <% if @post.comments.empty? %>
       <p><%= "There are no comments. Be the first to contribute to this post." %></p>
     <% else %>
-      <%= render @post.comments %>
+      <div class='js-comments'>
+        <%= render @post.comments %>
+      </div>
     <% end %>
     <% if current_user %>
-      <%= render "comments/form", comment: Comment.new, post: @post %>
+      <div class='new-comment'>
+        <%= render 'comments/form', comment: Comment.new, post: @post %>
+      </div>
     <% end %>
   </div>
 

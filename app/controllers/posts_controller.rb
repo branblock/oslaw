@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   def destroy
     if @post.destroy
       flash[:notice] = "Post has been deleted."
-      redirect_to posts_path
+      redirect_to [@post.category]
     else
       flash[:error] = "There was an error deleting the post."
       render :show

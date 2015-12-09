@@ -1,5 +1,13 @@
-<p><%= link_to "#{comment.user.username}", user_path(comment.user) %> commented on <%= localize(comment.created_at, :format => :comment_default) %>
-<% if policy(comment).destroy? %>
-  (<%= link_to "Delete comment", [comment.post, comment], method: :delete %>)
-<% end %></p>
-<blockquote><%= markdown(comment.body) %></blockquote>
+<%= content_tag :div, class: 'media', id: "comment-#{comment.id}" do %>
+  <div class="media">
+    <div class="media-body">
+      <small>
+        <%= link_to "#{comment.user.username}", user_path(comment.user) %> commented on <%= localize(comment.created_at, :format => :comment_default) %>
+        <% if policy(comment).destroy? %>
+          | <%= link_to "delete", [comment.post, comment], method: :delete, remote: true %>
+        <% end %>
+      </small>
+      <blockquote><%= markdown(comment.body) %></blockquote>
+    </div>
+  </div>
+<% end %>
