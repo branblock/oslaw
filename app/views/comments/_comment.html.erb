@@ -2,4 +2,4 @@
 <% if policy(comment).destroy? %>
   (<%= link_to "Delete comment", [comment.post, comment], method: :delete %>)
 <% end %></p>
-<blockquote><%= comment.body %></blockquote>
+<blockquote><%= markdown(comment.body) %></blockquote>

@@ -38,3 +38,5 @@ gem 'turbolinks'
 gem 'devise'
 # User Pundit for authorization
 gem 'pundit'
+# Use Redcarpet for markdown
+gem 'redcarpet'

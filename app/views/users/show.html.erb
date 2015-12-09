@@ -16,17 +16,17 @@
       Twitter:<br />
       Facebook:<br />
       <p><strong><u>Oslaw Stats</strong></u><br/>
-      Posts:<br />
-      Comments:<br />
+      Posts: <%= @user.posts.count %><br />
+      Comments: <%= @user.comments.count %><br />
       Favorited posts:<br />
       Upvotes:</p>
     </div>
   </div>
   <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
     <div class="panel panel-default">
-      <div class="panel-heading">Search Posts</div>
+      <div class="panel-heading">Search</div>
         <div class="panel-body" style="font-size: 11px">
-        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+        <%= form_tag(categories_path, :method => "get", id: "search-form") do %>
           <%= text_field_tag :search, params[:search], placeholder: " Enter terms" %><br />
           <%= submit_tag "Search", class: "btn btn-default btn-sm" %>
         <% end %>

@@ -4,7 +4,6 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @category = Category.new
   end
 
   def show
@@ -21,7 +20,7 @@ class CategoriesController < ApplicationController
 
     if @category.save
       flash[:notice] = "Category has been saved."
-      redirect_to categories_path
+      redirect_to users_path
     else
       flash[:error] = "There was an error saving the category. Please try again."
       render :new
@@ -32,9 +31,11 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    @category.assign_attributes(category_params)
+
     if @category.update_attributes(category_params)
       flash[:notice] = "Category has been updated."
-      redirect_to categories_path
+      redirect_to users_path
     else
       flash[:error] = "There was an error updating the category. Please try again."
       render :edit
@@ -44,7 +45,7 @@ class CategoriesController < ApplicationController
   def destroy
     if @category.destroy
       flash[:notice] = "Category has been deleted."
-      redirect_to categories_path
+      redirect_to users_path
     else
       flash[:error] = "There was an error deleting the category."
       render :show

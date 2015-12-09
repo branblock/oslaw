@@ -257,6 +257,30 @@ a:active, a:focus {
   margin-top: 10px;
 }
 
+/* POST SHOW TABLE
+--------------------------------------------------*/
+
+.table-bordered > tbody > tr > th:first-child {
+  background: #f2f2f2;
+  text-align: right;
+  width: 25%;
+}
+
+.table-bordered > tbody > tr {
+  height: 10px;
+}
+
+.table-bordered > thead > tr > th:first-child {
+  background: #f2f2f2;
+  border-bottom: none;
+}
+
+.table-bordered ol {
+  list-style-position: inside;
+  margin-bottom: 0;
+  padding-left:0;
+}
+
 /* COMMENTS
 --------------------------------------------------*/
 

@@ -7,10 +7,10 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = "Comment was added."
-      redirect_to [@post]
+      redirect_to [@post.category, @post]
     else
       flash[:error] = "Comment was not added. Please try again."
-      redirect_to [@post]
+      redirect_to [@post.category, @post]
     end
   end
 
@@ -20,10 +20,10 @@ class CommentsController < ApplicationController
 
     if @comment.destroy
       flash[:notice] = "Comment was deleted."
-      redirect_to [@post]
+      redirect_to [@post.category, @post]
     else
       flash[:error] = "Comment was not deleted. Please try again."
-      redirect_to [@post]
+      redirect_to [@post.category, @post]
     end
   end
 

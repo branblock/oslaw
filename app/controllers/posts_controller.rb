@@ -16,17 +16,18 @@ class PostsController < ApplicationController
   end
 
   def new
+    @category = Category.find(params[:category_id])
     @post = Post.new
-    @categories = Category.all
   end
 
   def create
-    @post = Post.new(post_params)
+    @category = Category.find(params[:category_id])
+    @post = @category.posts.build(post_params)
     @post.user = current_user
 
     if @post.save
       flash[:notice] = "Post has been saved."
-      redirect_to [@post]
+      redirect_to [@category, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :new
@@ -34,15 +35,14 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @categories = Category.all
   end
 
   def update
-    @categories = Category.find(params[:category_id])
+    @post.assign_attributes(post_params)
 
     if @post.update_attributes(post_params)
       flash[:notice] = "Post has been updated."
-      redirect_to posts_path
+      redirect_to [@post.category, @post]
     else
       flash[:error] = "There was an error updating the post. Please try again."
       render :edit
@@ -50,8 +50,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-
     if @post.destroy
       flash[:notice] = "Post has been deleted."
       redirect_to posts_path
