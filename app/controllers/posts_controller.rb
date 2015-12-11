@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @user = @post.user
   end
 
   def new
@@ -40,7 +41,7 @@ class PostsController < ApplicationController
   def update
     @post.assign_attributes(post_params)
 
-    if @post.update_attributes(post_params)
+    if @post.save
       flash[:notice] = "Post has been updated."
       redirect_to [@post.category, @post]
     else

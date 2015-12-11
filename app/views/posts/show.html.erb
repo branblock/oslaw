@@ -1,132 +1,81 @@
-<div class="container">
-
-  <!-- POST INFORMATION -->
-  <div class="col-md-8" style="margin-top: 40px; padding-left: 0">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <th style="text-decoration: underline">Post Title:</th>
-              <td style="font-weight: bold; text-decoration: underline"><%= @post.title %></td>
-          </tr>
-          <tr>
-            <th>Description:</th>
-              <td><%= markdown(@post.body) %></td>
-          </tr>
-          <tr>
-            <th>Author:</th>
-              <td><%= link_to "#{@post.user.username}", user_path(@post.user) %></td>
-          </tr>
-          <tr>
-            <th>Categories:</th>
-              <td><%= link_to "#{@post.category.name}", category_path(@post.category) %></td>
-          </tr>
-          <tr>
-            <th>Tags:</th>
-              <td></td>
-          </tr>
-          <tr>
-            <th>Main Document:</th>
-              <td> [Word] • [PDF] • [HTML]</td>
-          </tr>
-          <tr>
-            <th>Date Created:</th>
-              <td><%= localize(@post.created_at, :format => :default) %></td>
-          </tr>
-          <tr>
-            <th>Last Revision:</th>
-              <td><%= localize(@post.updated_at, :format => :default) %></td>
-          </tr>
-          <tr>
-            <th>No. of Revisions:</th>
-              <td></td>
-          </tr>
-          <tr>
-            <th>Comments:</th>
-              <td><div class='js-comments-count'><%= pluralize(@post.comments.count, 'comment') %></div></td>
-          <tr>
-            <th>Views:</th>
-              <td></td>
-          </tr>
-          <tr>
-            <th>Points:</th>
-              <td><%= pluralize(@post.points, 'point') %></td>
-          </tr>
-          <tr>
-            <th>Favorites:</th>
-              <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- POST OPTIONS -->
-  <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <tbody>
+<!-- TITLE -->
+<div class="container-fluid" style="background: #f2f2f2; border-bottom: 1px solid #b5b5b5;">
+  <div class="row-fluid">
+    <div class="container">
+      <div class="col-md-12" style="margin-top: 20px; padding-bottom: 10px; padding-left: 0">
+        <p><span style="font-size: 22px; font-weight: bold; text-decoration: underline"><%= @post.title %></span></p>
+        <p style="margin-top: -10px">by <%= link_to "#{@post.user.username}", user_path(@post.user) %> • <%= @user.posts.count %> posts</p>
+        <p> Created on <strong><%= localize(@post.created_at, :format => :default) %></strong> • Last Revised on <strong><%= localize(@post.updated_at, :format => :default) %></strong><br />
+          <%= link_to 'Like <i class="fa fa-thumbs-o-up"></i>'.html_safe, post_up_vote_path(@post), method: :post %> • <%= link_to 'Favorite <i class="fa fa-star-o"></i>'.html_safe, post_up_vote_path(@post), method: :post %>
           <% if policy(@post).update? %>
-          <tr>
-            <th style="background: #fff">Options:</th>
-            <td>
-                  <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_category_post_path(@post.category, @post) %>
-                <% if policy(@post).destroy? %>
-                    ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Please confirm the deletion of '#{@post.title}'."} %>
-                <% end %>
-            </td>
-          </tr>
+             • <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_category_post_path(@post.category, @post) %>
           <% end %>
-          <tr>
-            <th style="background: #fff">Vote:</th>
-              <td> <%= link_to 'Add Point <i class="fa fa-thumbs-o-up"></i>'.html_safe, post_up_vote_path(@post), method: :post %> ⎜ <%= link_to 'Subtract Point <i class="fa fa-thumbs-o-down"></i>'.html_safe, method: :post %></td>
-          </tr>
-          <tr>
-            <th style="background: #fff">Favorite:</th>
-              <td>Favorite <i class="fa fa-star"></i> ⎜ Unfavorite <i class="fa fa-star-o"></i></td>
-          </tr>
-          <tr>
-            <th style="background: #fff">Share:</th>
-              <td></td>
-          </tr>
-        </tbody>
-      </table>
+          <% if policy(@post).destroy? %>
+             • <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Please confirm the deletion of '#{@post.title}'."} %>
+          <% end %>
+        </p>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- RELATED POSTS -->
-  <div class="col-md-4" style="padding-left: 0">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th style="background: #fff">Related Posts:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>list of related posts</td>
-          </tr>
-        </tbody>
-      </table>
+<!-- POST -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8" style="margin-top: 10px">
+      <p><i class="fa fa-file"></i> Document(s): <%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %> [Search Post]</p>
+      <div class="panel panel-default" style="border: 1px solid #b5b5b5; border-radius: 0">
+        <div class="panel-body" style="padding: 20px;">
+        <p><span style="margin-top: 0"><%= markdown(@post.body) %></span></p>
+      </div>
+    </div>
+
+      <!-- COMMENTS -->
+      <p style="border-top: 1px solid #b5b5b5; padding-top: 20px"><strong>Input from The Community:</strong></p>
+      <% if @post.comments.empty? %>
+        <p><%= "There are no comments. Be the first to contribute to this post." %></p>
+      <% else %>
+        <div class='js-comments'>
+          <%= render @post.comments %>
+        </div>
+      <% end %>
+      <% if current_user %>
+        <div class='new-comment'>
+          <%= render 'comments/form', comment: Comment.new, post: @post %>
+        </div>
+      <% end %>
+    </div>
+
+
+  <!-- RIGHT SIDEBAR -->
+    <div class="col-md-4" style="margin-top: 10px">
+      <div class="panel panel-default" style="border: 1px solid #b5b5b5; border-radius: 0">
+        <div class="panel-heading" style="background: #fff; border-bottom: 1px solid #b5b5b5; font-weight: bold"><%= @user.username.capitalize %>'s Notes</div>
+        <div class="panel-body">
+          <p>Author notes will go here. Needs to be added to model and form for creating/updating posts.</p>
+        </div>
+      </div>
+
+      <div class="panel panel-default" style="border: 1px solid #b5b5b5; border-radius: 0">
+        <div class="panel-heading" style="background: #fff; border-bottom: 1px solid #b5b5b5; font-weight: bold">About This Post</div>
+        <div class="panel-body">
+          <p><u>Categories:</u> <%= link_to "#{@post.category.name}", category_path(@post.category) %></p>
+          <p><u>Tags:</u></p>
+          <p><u>Likes:</u> <%= pluralize(@post.points, '') %></p>
+          <p><u>Favorited:</u> <%= pluralize(@post.points, '') %></p>
+          <p><u>Viewed:</u></p>
+        </div>
+      </div>
+
+      <div class="panel panel-default" style="border: 1px solid #b5b5b5; border-radius: 0">
+        <div class="panel-heading" style="background: #fff; border-bottom: 1px solid #b5b5b5; font-weight: bold">Related Posts</div>
+        <div class="panel-body">
+          <p>Related post</p>
+          <p>Related post</p>
+          <p>Related post</p>
+          <p>Related post</p>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- COMMENTS -->
-  <div class="col-md-8" style="padding-left: 0">
-    <p><strong><u>Comments by the Oslaw Commmunity</strong></u></p>
-    <% if @post.comments.empty? %>
-      <p><%= "There are no comments. Be the first to contribute to this post." %></p>
-    <% else %>
-      <div class='js-comments'>
-        <%= render @post.comments %>
-      </div>
-    <% end %>
-    <% if current_user %>
-      <div class='new-comment'>
-        <%= render 'comments/form', comment: Comment.new, post: @post %>
-      </div>
-    <% end %>
-  </div>
-
 </div>
