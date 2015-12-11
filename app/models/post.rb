@@ -4,8 +4,8 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
-  validates :title, length: { minimum: 5, maximum: 25 }, presence: true
-  validates :body, length: { minimum: 5, maximum: 100 }, presence: true
+  validates :title, length: { minimum: 5 }, presence: true
+  validates :body, length: { minimum: 5 }, presence: true
   validates :user, presence: true
 
   # refactor to avoid SQL queries
