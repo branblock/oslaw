@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
-  has_many :posts
   belongs_to :user
+  has_many :posts
 
   validates :name, length: { minimum: 5, maximum: 25 }, presence: true
   validates :description, length: { minimum: 5, maximum: 100 }, presence: true

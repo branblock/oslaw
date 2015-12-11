@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  let(:user) { create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
 
   it { should have_many(:posts) }
   it { should have_many(:comments) }
+  it { should have_many(:votes) }
 
   describe "attributes" do
     it "should respond to first name" do

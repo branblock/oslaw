@@ -1,23 +1,21 @@
 <div class="container">
 
-  <!-- POST TITLE -->
-  <p style="margin-top: 40px"><span style="font-size: 18px; font-weight: bold"><%= @post.title %></span>
-    <% if policy(@post).update? %>
-      <br />(<%= link_to "edit this post", edit_category_post_path(@post.category, @post) %>)
-    <% end %>
-    <% if policy(@post).destroy? %>
-       (<%= link_to "delete this post", [@post.category, @post], method: :delete, data: {confirm: "Please confirm the deletion of '#{@post.title}'."} %>)
-    <% end %>
-  </p>
-
   <!-- POST INFORMATION -->
-  <div class="col-md-8" style="padding-left: 0">
+  <div class="col-md-8" style="margin-top: 40px; padding-left: 0">
     <div class="table-responsive">
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <th style="text-decoration: underline">Post Title:</th>
+              <td style="font-weight: bold; text-decoration: underline"><%= @post.title %></td>
+          </tr>
+          <tr>
             <th>Description:</th>
               <td><%= markdown(@post.body) %></td>
+          </tr>
+          <tr>
+            <th>Author:</th>
+              <td><%= link_to "#{@post.user.username}", user_path(@post.user) %></td>
           </tr>
           <tr>
             <th>Categories:</th>
@@ -29,14 +27,12 @@
           </tr>
           <tr>
             <th>Main Document:</th>
-              <td> [Word] • [PDF] • [HTML] (<%= link_to "Terms of Use", "#" %>)</td>
+              <td> [Word] • [PDF] • [HTML]</td>
           </tr>
           <tr>
-            <th>Author:</th>
-              <td><%= link_to "#{@post.user.username}", user_path(@post.user) %></td>
-          </tr>
             <th>Date Created:</th>
               <td><%= localize(@post.created_at, :format => :default) %></td>
+          </tr>
           <tr>
             <th>Last Revision:</th>
               <td><%= localize(@post.updated_at, :format => :default) %></td>
@@ -53,8 +49,8 @@
               <td></td>
           </tr>
           <tr>
-            <th>Upvotes:</th>
-              <td></td>
+            <th>Points:</th>
+              <td><%= pluralize(@post.points, 'point') %></td>
           </tr>
           <tr>
             <th>Favorites:</th>
@@ -65,23 +61,56 @@
     </div>
   </div>
 
-    <!-- POST INFORMATION -->
-    <div class="col-md-4" style="padding-left: 0">
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Related Posts:</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>list of related posts</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <!-- POST OPTIONS -->
+  <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <% if policy(@post).update? %>
+          <tr>
+            <th style="background: #fff">Options:</th>
+            <td>
+                  <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_category_post_path(@post.category, @post) %>
+                <% if policy(@post).destroy? %>
+                    ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Please confirm the deletion of '#{@post.title}'."} %>
+                <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <th style="background: #fff">Vote:</th>
+              <td> <%= link_to 'Add Point <i class="fa fa-thumbs-o-up"></i>'.html_safe, post_up_vote_path(@post), method: :post %> ⎜ <%= link_to 'Subtract Point <i class="fa fa-thumbs-o-down"></i>'.html_safe, method: :post %></td>
+          </tr>
+          <tr>
+            <th style="background: #fff">Favorite:</th>
+              <td>Favorite <i class="fa fa-star"></i> ⎜ Unfavorite <i class="fa fa-star-o"></i></td>
+          </tr>
+          <tr>
+            <th style="background: #fff">Share:</th>
+              <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <!-- RELATED POSTS -->
+  <div class="col-md-4" style="padding-left: 0">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th style="background: #fff">Related Posts:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>list of related posts</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- COMMENTS -->
   <div class="col-md-8" style="padding-left: 0">

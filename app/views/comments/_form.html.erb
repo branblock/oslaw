@@ -1,8 +1,8 @@
-<p><strong>Add a Comment</strong><small> (<a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Markdown&oldid=694169869">markdown</a> supported)</small></p>
+<p style="margin-top: 20px;"><strong>Add a Comment</strong><small> (<a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Markdown&oldid=694169869">markdown</a> supported)</small></p>
 <%= form_for [post, comment], remote: true do |f| %>
   <div class="form-group">
     <%= f.label :body, class: 'sr-only' %>
-    <%= f.text_field :body, class: 'form-control', placeholder: "Enter comment" %>
+    <%= f.text_field :body, rows: 5, class: 'form-control', placeholder: "Enter comment" %>
   </div>
     <%= f.submit "Save Comment", class: 'btn btn-success btn-sm' %>
 <% end %>
