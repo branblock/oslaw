@@ -8,6 +8,9 @@ class CategoriesController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @category.posts.order("title ASC")
+    @pop_posts = @category.posts.order("rank DESC").limit(5)
+    @recent_posts = @category.posts.order("created_at DESC").limit(5)
   end
 
   def new
@@ -20,7 +23,7 @@ class CategoriesController < ApplicationController
 
     if @category.save
       flash[:notice] = "Category has been saved."
-      redirect_to users_path
+      redirect_to category_path
     else
       flash[:error] = "There was an error saving the category. Please try again."
       render :new
@@ -35,7 +38,7 @@ class CategoriesController < ApplicationController
 
     if @category.update_attributes(category_params)
       flash[:notice] = "Category has been updated."
-      redirect_to users_path
+      redirect_to category_path
     else
       flash[:error] = "There was an error updating the category. Please try again."
       render :edit

@@ -19,9 +19,9 @@
               <td><%= user.id %></td>
               <td><%= user.first_name %> <%= user.last_name %></td>
               <td><%= link_to "#{user.username}", user_path(user) %></td>
-              <td><%= user.email %></td>
+              <td><%= mail_to(user.email) %></td>
               <td>
-                <%= link_to "delete this user", user, method: :delete, data: {confirm: "Please confirm the deletion of '#{user.username}'."} %>
+                <%= link_to '<i class="fa fa-trash-o"></i> Delete User'.html_safe, user, method: :delete, data: {confirm: "THIS DELETES THE USER! Are you sure? Please confirm the deletion of '#{user.username}'."} %>
               </td>
             </tr>
           <% end %>
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div class="col-md-8" style="padding-left: 0">
+  <div class="col-md-12" style="padding-left: 0">
     <p style="font-size: 18px; font-weight: bold">Manage Categories</p>
       <div class="table-responsive">
         <table class="table table-bordered">
@@ -39,6 +39,8 @@
               <th>Id</th>
               <th>Name</th>
               <th>Description</th>
+              <th>Date Created</th>
+              <th>Posts</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -48,7 +50,9 @@
               <td><%= category.id %></td>
               <td><%= link_to "#{category.name}", category_path(category) %></td>
               <td><%= category.name %></td>
-              <td><%= link_to "edit", edit_category_path(category) %> | <%= link_to "delete", category, method: :delete, data: {confirm: "Please confirm the deletion of '#{category.name}'."} %></td>
+              <td><%= localize(category.created_at, :format => :default) %></td>
+              <td><%= category.posts.count %></td>
+              <td><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Category'.html_safe, edit_category_path(category) %> ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Category'.html_safe, category, method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Are you sure? Please confirm the deletion of '#{category.name}'."} %></td>
             </tr>
           <% end %>
         </tbody>
@@ -56,7 +60,7 @@
     </div>
   </div>
 
-  <div class="col-md-4" style="padding-left: 0">
+  <div class="col-md-6" style="padding-left: 0">
     <p style="font-size: 18px; font-weight: bold">Create A Category</p>
       <div class="panel panel-default">
         <div class="panel-body">
@@ -69,7 +73,7 @@
             <%= f.label :description %>
             <%= f.text_area :description, rows: 3, class: 'form-control', placeholder: "Enter category description" %>
           </div>
-          <%= f.submit "Save Category", class: 'btn btn-success btn-sm' %>
+          <%= f.submit "Save Category", class: 'btn btn-success' %>
         <% end %>
       </div>
     </div>

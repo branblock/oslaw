@@ -5,7 +5,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @new_comment = Comment.new
 
-    unless @comment.save
+    if @comment.save
+      flash.now[:notice] = "Comment was added."
+    else
       flash.now[:alert] = "Comment was not added. Please try again."
     end
 
@@ -19,7 +21,9 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
 
-    unless @comment.destroy
+    if @comment.destroy
+      flash.now[:notice] = "Comment was deleted."
+    else
       flash.now[:alert] = "Comment was not deleted. Please try again."
     end
 
