@@ -72,7 +72,7 @@ a:active, a:focus {
 }
 
 .panel-body input {
-  border: 1px solid #e5e5e5;
+  border: 1px solid #b5b5b5;
   border-radius: 3px;
   height: 30px;
   width: 100%;
@@ -136,19 +136,14 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 .jumbotron {
-  background: #007EA7;
-  color: #fff;
+  background: #f2f2f2;
+  border-bottom: 1px solid #b5b5b5;
+  color: #00171F;
   padding-top: 80px;
   text-align: center;
 }
 
-.jumbotron a {
-  color: #fff;
-  text-decoration: underline;
-}
-
 .jumbotron a:hover {
-  color: #00171F;
   background: transparent;
   -webkit-transition-property: color;
   -moz-transition-property: color;
@@ -161,12 +156,14 @@ a:active, a:focus {
 }
 
 .jumbotron h2 {
-  font-size: 38px;
+  font-size: 42px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .jumbotron p {
-  font-size: 32px;
+  font-size: 18px;
+  line-height: 1;
 }
 
 /* FORM - HOME
@@ -184,7 +181,7 @@ a:active, a:focus {
 .home-form-div input[type="text"],
 .home-form-div input[type="email"],
 .home-form-div input[type="password"] {
-  border: 1px solid #e5e5e5;
+  border: 1px solid #b5b5b5;
   border-radius: 3px;
   font-size: 14px;
   height: auto;
@@ -197,7 +194,7 @@ a:active, a:focus {
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: 20px;
-  width: 300px;
+  width: 150px;
 }
 
 .home-form-div label {
@@ -215,7 +212,7 @@ a:active, a:focus {
 .form-div input[type="text"],
 .form-div input[type="email"],
 .form-div input[type="password"] {
-  border: 1px solid #e5e5e5;
+  border: 1px solid #b5b5b5;
   border-radius: 3px;
   font-size: 14px;
   height: auto;
@@ -281,28 +278,22 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 160px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 footer {
-  background: #003459;
+  background: #00171F;
   bottom: 0;
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   /* Set the fixed height of the footer here */
   height: 160px;
-  padding: 30px 0 20px;
+  padding: 40px 0 20px;
   position: absolute;
   text-align: center;
   width: 100%;
 }
 
-footer a, footer a:active, footer a:focus {
-  color: #fff;
-  text-decoration: underline;
-}
-
 footer a:hover {
-  color: #007EA7;
-  text-decoration: underline;
+  color: #fff;
 }
