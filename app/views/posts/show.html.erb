@@ -6,7 +6,7 @@
         <p><span style="font-size: 22px; font-weight: bold; text-decoration: underline"><%= @post.title %></span></p>
         <p style="margin-top: -10px">by <%= link_to "#{@post.user.username}", user_path(@post.user) %> • <%= @user.posts.count %> posts</p>
         <p> Created on <strong><%= localize(@post.created_at, :format => :default) %></strong> • Last Revised on <strong><%= localize(@post.updated_at, :format => :default) %></strong><br />
-          <%= link_to 'Like <i class="fa fa-thumbs-o-up"></i>'.html_safe, post_up_vote_path(@post), method: :post %> • <%= link_to 'Favorite <i class="fa fa-star-o"></i>'.html_safe, post_up_vote_path(@post), method: :post %>
+          <%= link_to 'Like <i class="fa fa-thumbs-o-up"></i>'.html_safe, post_like_path(@post), method: :post %> • <%= link_to 'Favorite <i class="fa fa-star-o"></i>'.html_safe, post_like_path(@post), method: :post %>
           <% if policy(@post).update? %>
              • <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_category_post_path(@post.category, @post) %>
           <% end %>
@@ -22,7 +22,7 @@
 <!-- POST -->
 <div class="container">
   <div class="row">
-    <div class="col-md-8" style="margin-top: 10px">
+    <div class="col-md-8" style="; margin-top: 10px">
       <p><i class="fa fa-file"></i> Document(s): <%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %> [Search Post]</p>
       <div class="panel panel-default" style="border: 1px solid #b5b5b5; border-radius: 0">
         <div class="panel-body" style="padding: 20px;">
@@ -31,7 +31,7 @@
     </div>
 
       <!-- COMMENTS -->
-      <p style="border-top: 1px solid #b5b5b5; padding-top: 20px"><strong>Input from The Community:</strong></p>
+      <p style="border-top: 1px solid #b5b5b5; padding-top: 10px"><strong>Input from The Community:</strong></p>
       <% if @post.comments.empty? %>
         <p><%= "There are no comments. Be the first to contribute to this post." %></p>
       <% else %>
@@ -47,7 +47,7 @@
     </div>
 
 
-  <!-- RIGHT SIDEBAR -->
+    <!-- RIGHT SIDEBAR -->
     <div class="col-md-4" style="margin-top: 10px">
       <div class="panel panel-default" style="border: 1px solid #b5b5b5; border-radius: 0">
         <div class="panel-heading" style="background: #fff; border-bottom: 1px solid #b5b5b5; font-weight: bold"><%= @user.username.capitalize %>'s Notes</div>
@@ -61,8 +61,8 @@
         <div class="panel-body">
           <p><u>Categories:</u> <%= link_to "#{@post.category.name}", category_path(@post.category) %></p>
           <p><u>Tags:</u></p>
-          <p><u>Likes:</u> <%= pluralize(@post.points, '') %></p>
-          <p><u>Favorited:</u> <%= pluralize(@post.points, '') %></p>
+          <p><u>Likes:</u> <%= pluralize(@post.total_likes, '') %></p>
+          <p><u>Favorited:</u> <%= pluralize(@post.total_likes, '') %></p>
           <p><u>Viewed:</u></p>
         </div>
       </div>

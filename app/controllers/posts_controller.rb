@@ -68,4 +68,17 @@ class PostsController < ApplicationController
   def ready_post
     @post = Post.find(params[:id])
   end
+
+  def liked
+    @post = Post.find(params[:id])
+    @post.user = current_user
+
+    if @post.user.like(@post)
+      flash[:notice] = "Post has been deleted."
+      redirect_to [@post.category]
+    else
+      flash[:error] = "There was an error deleting the post."
+      render :show
+    end      
+  end
 end
