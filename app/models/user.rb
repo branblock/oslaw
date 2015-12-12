@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
 
+  acts_as_voter
+
   def login=(login)
     @login = login
   end

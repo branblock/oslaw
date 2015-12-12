@@ -40,3 +40,5 @@ gem 'devise'
 gem 'pundit'
 # Use Redcarpet for markdown
 gem 'redcarpet'
+# Use Act_As_Votable for voting
+gem 'acts_as_votable', '~> 0.10.0'

@@ -26,34 +26,4 @@ RSpec.describe Post, type: :model do
       expect(post).to respond_to(:body)
     end
   end
-
-  describe "liking" do
-    let(:like) { FactoryGirl.create(:like, value: 1) }
-    @likes = post.likes.where(value: 1)
-
-    describe "#likes" do
-      it "counts the number of votes with value = 1" do
-        expect( post.likes ).to eq(@likes)
-      end
-    end
-
-    describe "#total_likes" do
-      it "returns the sum of all likes" do
-        expect( post.likes ).to eq(@likes)
-      end
-    end
-
-    describe "#update_rank" do
-      it "calculates the correct rank" do
-        post.update_rank
-        expect(post.rank).to eq (post.total_likes + (post.created_at - Time.new(1970, 1, 1)) / 1.day.seconds )
-      end
-
-      it "updates the rank when a like is created" do
-        old_rank = post.rank
-        FactoryGirl.create(:like, value: 1)
-        expect(post.rank).to eq (old_rank + 1)
-      end
-    end
-  end
 end

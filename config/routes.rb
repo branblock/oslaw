@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
-    post '/like' => 'likes#like', as: :like
+  end
+
+  resources :posts do
+    member do
+      put "like" => "posts#upvote"
+      put "unlike" => "posts#downvote"
+    end
   end
 
   devise_for :users

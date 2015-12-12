@@ -6,12 +6,31 @@
         <p><span style="font-size: 22px; font-weight: bold; text-decoration: underline"><%= @post.title %></span></p>
         <p style="margin-top: -10px">by <%= link_to "#{@post.user.username}", user_path(@post.user) %> • <%= @user.posts.count %> posts</p>
         <p> Created on <strong><%= localize(@post.created_at, :format => :default) %></strong> • Last Revised on <strong><%= localize(@post.updated_at, :format => :default) %></strong><br />
-          <%= link_to 'Like <i class="fa fa-thumbs-o-up"></i>'.html_safe, post_like_path(@post), method: :post %> • <%= link_to 'Favorite <i class="fa fa-star-o"></i>'.html_safe, post_like_path(@post), method: :post %>
+          <%= link_to like_post_path(@post), method: :put do %>
+            <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+              <span class="badge"><%= @post.get_upvotes.size %></span>
+            </button>
+          <% end %>
+          <%= link_to unlike_post_path(@post), method: :put do %>
+            <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+              <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+              <span class="badge"><%= @post.get_downvotes.size %></span>
+            </button>
+          <% end %>
           <% if policy(@post).update? %>
-             • <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_category_post_path(@post.category, @post) %>
+            <%= link_to edit_post_path(@post) do %>
+              <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit glyphicon-align-center" aria-hidden="true"></span> Edit Post
+              </button>
+            <% end %>
           <% end %>
           <% if policy(@post).destroy? %>
-             • <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Please confirm the deletion of '#{@post.title}'."} %>
+              <%= link_to [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE POST! Please confirm the deletion of #{@post.title}."} do %>
+              <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit glyphicon-align-center" aria-hidden="true"></span> Delete Post
+              </button>
+            <% end %>
           <% end %>
         </p>
       </div>
@@ -61,8 +80,8 @@
         <div class="panel-body">
           <p><u>Categories:</u> <%= link_to "#{@post.category.name}", category_path(@post.category) %></p>
           <p><u>Tags:</u></p>
-          <p><u>Likes:</u> <%= pluralize(@post.total_likes, '') %></p>
-          <p><u>Favorited:</u> <%= pluralize(@post.total_likes, '') %></p>
+          <p><u>Likes:</u></p>
+          <p><u>Favorited:</u></p>
           <p><u>Viewed:</u></p>
         </div>
       </div>
