@@ -8,9 +8,11 @@ class CategoriesController < ApplicationController
 
   def show
     @user = @category.user(params[:id])
-    @posts = @category.posts.alphabetical
-    @popular_posts = @category.posts.most_liked(5)
-    @recent_posts = @category.posts.most_recent(5)
+    @posts = @category.posts
+    @alphabetical_posts = @posts.alphabetical
+    @popular_posts = @posts.most_liked
+    @recent_posts = @posts.most_recent
+    @updated_posts = @posts.updated
   end
 
   def new

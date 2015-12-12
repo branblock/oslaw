@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ready_post, only: [:show, :edit, :update, :destroy]
+  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
     @posts = Post.all
@@ -60,6 +60,18 @@ class PostsController < ApplicationController
     end
   end
 
+  #upvote_from user
+  #downvote_from user
+  def upvote
+    @post.upvote_from current_user
+    redirect_to [@post]
+  end
+
+  def downvote
+    @post.downvote_from current_user
+    redirect_to [@post]
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :body)
@@ -67,18 +79,5 @@ class PostsController < ApplicationController
 
   def ready_post
     @post = Post.find(params[:id])
-  end
-
-  def liked
-    @post = Post.find(params[:id])
-    @post.user = current_user
-
-    if @post.user.like(@post)
-      flash[:notice] = "Post has been deleted."
-      redirect_to [@post.category]
-    else
-      flash[:error] = "There was an error deleting the post."
-      render :show
-    end      
   end
 end

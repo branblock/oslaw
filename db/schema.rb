@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212002036) do
+ActiveRecord::Schema.define(version: 20151212172856) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -34,27 +34,34 @@ ActiveRecord::Schema.define(version: 20151212002036) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
-  create_table "likes", force: :cascade do |t|
-    t.integer  "value"
-    t.integer  "user_id"
-    t.integer  "post_id"
+  create_table "links", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "likes", ["post_id"], name: "index_likes_on_post_id"
-  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
-
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "user_id"
     t.integer  "category_id"
-    t.float    "rank"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
+  add_index "posts", ["cached_votes_score"], name: "index_posts_on_cached_votes_score"
+  add_index "posts", ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
+  add_index "posts", ["cached_votes_up"], name: "index_posts_on_cached_votes_up"
+  add_index "posts", ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average"
+  add_index "posts", ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
+  add_index "posts", ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
@@ -84,5 +91,20 @@ ActiveRecord::Schema.define(version: 20151212002036) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
 end

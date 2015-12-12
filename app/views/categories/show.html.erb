@@ -28,37 +28,24 @@
           <tr>
             <th>Most Recent Posts:</th>
             <td>
-              <% if @category.posts.count == 0 %>
-                <p><%= "There are no posts associated with this category." %></p>
-              <% else %>
-                <% @recent_posts.each do |post| %>
-                  <li><%= link_to post.title, category_post_path(@category, post) %> - <small>created on <%= localize(post.created_at, :format => :default) %></small></li>
-                <% end %>
+              <% @recent_posts.each do |post| %>
+                <li><%= link_to post.title, category_post_path(@category, post) %> - <small>created on <%= localize(post.created_at, :format => :default) %></small></li>
               <% end %>
             </td>
           </tr>
           <tr>
             <th>Most Liked Posts:</th>
-            <td>
-              <% if @category.posts.count == 0 %>
-                <p><%= "There are no posts associated with this category." %></p>
-              <% else %>
+              <td>
                 <% @popular_posts.each do |post| %>
-                  <li><%= link_to post.title, category_post_path(@category, post) %> - <small><%= pluralize(post.total_likes, 'like') %></small></li>
+                  <% if post.get_upvotes.count > 0 %>
+                    <li><%= link_to post.title, category_post_path(@category, post) %> - <small><%= pluralize(post.get_upvotes.count, 'like') %></small></li>
                 <% end %>
               <% end %>
-            </td>
+              </td>
           </tr>
           <tr>
             <th>Most Favorited Posts:</th>
             <td>
-              <% if @posts.count == 0 %>
-                <p><%= "There are no posts associated with this category." %></p>
-              <% else %>
-                <% @posts.each do |post| %>
-                  <li><%= link_to post.title, category_post_path(@category, post) %> - <small>last updated: <%= localize(post.created_at, :format => :default) %></small></li>
-                <% end %>
-              <% end %>
             </td>
           </tr>
         </tbody>
@@ -83,7 +70,7 @@
           <% end %>
           <% if policy(@category).destroy? %>
             <tr>
-              <td><%= link_to '<i class="fa fa-trash-o"></i> Delete Category'.html_safe, @category, method: :delete, data: {confirm: "Please confirm the deletion of '#{@category.name}'."} %></td>
+              <td><%= link_to '<i class="fa fa-trash-o"></i> Delete Category'.html_safe, @category, method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Please confirm the deletion of #{@category.name}."} %></td>
             </tr>
           <% end %>
           <tr>
@@ -95,14 +82,33 @@
   </div>
 
   <!-- DISPLAY ALL POSTS -->
-  <div class="col-md-8" style="padding-left: 0">
-    <p><strong><u>All Posts in <%= @category.name %></strong></u></p>
+  <div class="col-md-12" style="padding-left: 0">
     <% if @category.posts.empty? %>
       <p><%= "There are no posts. Be the first to contribute to this category." %></p>
     <% else %>
-      <% @posts.each do |post| %>
-        <%= link_to post.title, category_post_path(@category, post) %> - <small>last updated: <%= localize(post.created_at, :format => :default) %></small><br />
-      <% end %>
+      <p><strong>Posts</strong></p>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="col-md-4">Title:</th>
+              <th class="col-md-6">Description:</th>
+              <th class="col-md-2">Date Created:</th>
+              <th class="col-md-2">Last Updated:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @alphabetical_posts.each do |post| %>
+              <tr>
+                <td><%= link_to post.title, category_post_path(@category, post) %></td>
+                <td><%= post.body[0,100] %>...</td>
+                <td><%= localize(post.created_at, :format => :default) %></td>
+                <td><%= localize(post.updated_at, :format => :default) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     <% end %>
   </div>
 
