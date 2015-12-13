@@ -15,6 +15,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :posts, only: [] do
+    resources :comments do
+      member do
+        put "like" => "comments#upvote"
+        put "unlike" => "comments#downvote"
+      end
+    end
+  end
+
   devise_for :users
     resources :users, :only => [:index, :show, :destroy]
 

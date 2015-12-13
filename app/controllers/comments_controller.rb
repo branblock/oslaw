@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
@@ -31,6 +33,22 @@ class CommentsController < ApplicationController
       format.html
       format.js
     end
+  end
+
+  #upvote_from user
+  #downvote_from user
+  def upvote
+    @post = Post.find(params[:post_id])
+    comment = @post.comments.find(params[:id])
+    comment.upvote_from current_user
+    redirect_to [@post.category, @post]
+  end
+
+  def downvote
+    @post = Post.find(params[:post_id])
+    comment = @post.comments.find(params[:id])
+    comment.downvote_from current_user
+    redirect_to [@post.category, @post]
   end
 
   private
