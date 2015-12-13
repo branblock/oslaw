@@ -42,3 +42,5 @@ gem 'pundit'
 gem 'redcarpet'
 # Use Act_As_Votable for voting
 gem 'acts_as_votable', '~> 0.10.0'
+# Use Simple_Form for forms
+gem 'simple_form'
