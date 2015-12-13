@@ -28,7 +28,7 @@
         <% end %>
         <% if policy(@post).destroy? %>
             <%= link_to [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE POST! Please confirm the deletion of #{@post.title}."} do %>
-            <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+            <button type="button" class="btn btn-danger btn-xs" aria-label="Left Align">
               <span class="glyphicon glyphicon-edit glyphicon-align-center" aria-hidden="true"></span> Delete Post
             </button>
           <% end %>

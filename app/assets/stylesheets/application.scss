@@ -92,10 +92,7 @@ a:active, a:focus {
 
 .navbar {
   background: #00A8E8;
-  border-bottom: 3px solid #00171F;
-  border-left: none;
-  border-right: none;
-  border-top: none;
+  border: none;
   border-radius: 0;
   margin-bottom: 0;
   padding-bottom: 5px;
@@ -136,10 +133,9 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 .jumbotron {
-  background: #f2f2f2;
-  border-bottom: 1px solid #b5b5b5;
-  color: #00171F;
-  padding-top: 80px;
+  background: #00A8E8;
+  color: #fff;
+  padding-top: 40px;
   text-align: center;
 }
 
@@ -155,79 +151,27 @@ a:active, a:focus {
   transition-duration: 0.3s;
 }
 
+.jumbotron .col-md-4 {
+  background: #fff;
+  border-radius: 5px;
+  color: #00171F;
+  padding: 25px
+}
+
 .jumbotron h2 {
-  font-size: 42px;
+  font-size: 45px;
   font-weight: bold;
   margin-bottom: 20px;
+  padding-top: 20px;
 }
 
 .jumbotron p {
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1;
 }
 
-/* FORM - HOME
--------------------------------------------------- */
-
-.home-form-div h3 {
-  font-size: 18px;
-}
-
-.home-form-div .form-signin-heading,
-.home-form-div .checkbox {
-  margin-bottom: 10px;
-}
-
-.home-form-div input[type="text"],
-.home-form-div input[type="email"],
-.home-form-div input[type="password"] {
-  border: 1px solid #b5b5b5;
-  border-radius: 3px;
-  font-size: 14px;
-  height: auto;
-  margin-bottom: 15px;
-  padding: 7px 9px;
-  width: 300px;
-}
-
-.home-form-div .btn-success {
-  font-size: 16px;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  width: 150px;
-}
-
-.home-form-div label {
-  margin-top: 10px;
-}
-
-/* FORM - NEW SESSION
--------------------------------------------------- */
-
-.form-div {
-  border: none;
-  margin-top: 20px;
-}
-
-.form-div input[type="text"],
-.form-div input[type="email"],
-.form-div input[type="password"] {
-  border: 1px solid #b5b5b5;
-  border-radius: 3px;
-  font-size: 14px;
-  height: auto;
+.jumbotron .form-group {
   margin-bottom: 5px;
-  padding: 7px 9px;
-  width: 100%;
-}
-
-.form-div input[type="checkbox"] {
-  margin-top: 10px;
-}
-
-.form-div .btn-success {
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
 
 /* POST SHOW TABLE
