@@ -44,3 +44,5 @@ gem 'redcarpet'
 gem 'acts_as_votable', '~> 0.10.0'
 # Use Simple_Form for forms
 gem 'simple_form'
+# User Paperclip for uploads
+gem 'paperclip', '~> 4.3'

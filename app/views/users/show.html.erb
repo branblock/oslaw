@@ -2,7 +2,7 @@
   <div class="col-md-4" style="padding-left: 0">
     <div style="margin-top: 40px">
       <h3><%= @user.first_name %> <%= @user.last_name %></h3>
-      <p><%= image_tag avatar_url(current_user), class: "gravatar" %></p>
+      <p><%= image_tag @user.avatar.url(:thumb) %></p>
     </div>
     <div>
       <p><%= link_to "Edit your profile", edit_user_registration_path %><br />
