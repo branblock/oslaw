@@ -24,20 +24,22 @@
 -------------------------------------------------- */
 
 html, body {
-  color: #00171F;
+  color: #111;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-// body {
-//   padding-top: 70px;
-// }
+body {
+  padding-top: 60px;
+}
+
+/* Links */
 
 a {
-  color: #007EA7;
+  color: #2980b9;
 }
 
 a:hover {
-  color: #00171F;
+  color: #34495e;
   text-decoration: none;
   -webkit-transition-property: color;
   -moz-transition-property: color;
@@ -50,7 +52,7 @@ a:hover {
 }
 
 a:active, a:focus {
-  color: #007EA7;
+  color: #2980b9;
   text-decoration: none;
 }
 
@@ -61,14 +63,68 @@ a:active, a:focus {
   margin-right: auto;
 }
 
+/* To address pull-right class on mobile devices */
+@media (max-width: 1200px) {
+    .row .col-md-6 > .pull-right {
+        float: none !important;
+    }
+}
+
 /* Bootstrap Components */
-.btn, .form-control, .panel {
+
+.btn {
+  border: none;
+  border-radius: 3px;
+}
+
+.btn:hover {
+  opacity: .8;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-danger {
+    background: #c0392b;
+    color: #fff;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+  text-decoration: none;
+}
+
+.btn-info {
+    background: #2980b9;
+    color: #fff;
+}
+
+.btn-info:hover {
+  background: #2980b9;
+  text-decoration: none;
+}
+
+.form-control, .panel {
   border-radius: 3px;
 }
 
 .panel-body .btn-sm {
   margin-top: 5px;
-  width: 50% !important;
 }
 
 .panel-body input {
@@ -91,7 +147,7 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 .navbar {
-  background: #00A8E8;
+  background: #34495e;
   border: none;
   border-radius: 0;
   margin-bottom: 0;
@@ -106,7 +162,7 @@ a:active, a:focus {
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
   color: #fff !important;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -116,7 +172,7 @@ a:active, a:focus {
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #00171F;
+  color: #4A9DF9;
   background: transparent;
   text-decoration: none;
   -webkit-transition-property: color;
@@ -133,7 +189,7 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 .jumbotron {
-  background: #00A8E8;
+  background: #34495e;
   color: #fff;
   padding-top: 40px;
   text-align: center;
@@ -226,7 +282,7 @@ body {
 }
 
 footer {
-  background: #00171F;
+  background: #2980b9;
   bottom: 0;
   color: #fff;
   font-size: 13px;
@@ -238,6 +294,12 @@ footer {
   width: 100%;
 }
 
-footer a:hover {
+footer a {
   color: #fff;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #111;
+  text-decoration: underline;
 }
