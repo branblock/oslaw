@@ -14,8 +14,10 @@
           <%= f.input :terms_and_conditions, label: ("I agree to the #{link_to 'Terms of Service', '#'}.").html_safe, :as => :boolean, :input_html => { :checked => "false" }, required: true %>
         </div>
 
-        <div class="form-actions" style="margin-bottom: 10px">
-          <%= f.button :submit, "Sign up", class: 'btn btn-success' %>
+        <div class="form-actions">
+          <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+           <i class="fa fa-user-plus"></i> Sign Up
+          <% end %>
         </div>
       <% end %>
       <div>

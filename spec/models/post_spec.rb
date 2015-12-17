@@ -6,7 +6,6 @@ RSpec.describe Post, type: :model do
   let(:post) { FactoryGirl.create(:post, category: category, user: user) }
 
   it { should have_many(:comments) }
-  it { should have_many(:likes) }
 
   it { should belong_to(:category) }
   it { should belong_to(:user) }

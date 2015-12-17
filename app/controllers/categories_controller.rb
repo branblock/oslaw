@@ -27,8 +27,8 @@ class CategoriesController < ApplicationController
       flash[:notice] = "Category has been saved."
       redirect_to categories_path
     else
-      flash[:error] = "There was an error saving the category. Please try again."
-      render :new
+      flash[:alert] = "There was an error saving the category."
+      redirect_to users_path
     end
   end
 
@@ -42,19 +42,15 @@ class CategoriesController < ApplicationController
       flash[:notice] = "Category has been updated."
       redirect_to category_path
     else
-      flash[:error] = "There was an error updating the category. Please try again."
+      flash[:alert] = "There was an error updating the category."
       render :edit
     end
   end
 
   def destroy
-    if @category.destroy
-      flash[:notice] = "Category has been deleted."
-      redirect_to users_path
-    else
-      flash[:error] = "There was an error deleting the category."
-      render :show
-    end
+    @category.destroy
+    flash[:notice] = "Category has been deleted."
+    redirect_to users_path
   end
 
   private
