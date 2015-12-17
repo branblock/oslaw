@@ -41,8 +41,8 @@
           <% else %>
             <li><%= link_to '<i class="fa fa-info-circle"></i> About Oslaw'.html_safe, "#", class: 'navbar-link' %></li>
             <li><%= link_to '<i class="fa fa-cogs"></i> How It Works'.html_safe, "#", class: 'navbar-link' %></li>
-            <li><button type="button" class="btn btn-success" style="margin-top: 7px"><%= link_to '<i class="fa fa-user-plus"></i> Sign Up'.html_safe,new_user_registration_path%></button></li>
-            <li><%= link_to '<i class="fa fa-sign-in"></i> Sign In'.html_safe, new_user_session_path, class: 'navbar-link' %></li>
+            <li><button type="button" class="btn btn-success navbar-btn" style="margin-top: 7px"><%= link_to '<i class="fa fa-user-plus"></i> Sign Up'.html_safe,new_user_registration_path %></button></li>
+            <li><button type="button" class="btn btn-info navbar-btn" style="margin-top: 7px"><%= link_to '<i class="fa fa-sign-in"></i> Sign In'.html_safe, new_user_session_path %></button></li>
           <% end %>
         </ul>
         </div>

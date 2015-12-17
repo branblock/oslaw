@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash.now[:notice] = "Comment was added."
     else
-      flash.now[:alert] = "Comment was not added. Please try again."
+      flash.now[:alert] = "Comment was not added."
     end
 
     respond_to do |format|
@@ -23,11 +23,8 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
 
-    if @comment.destroy
-      flash.now[:notice] = "Comment was deleted."
-    else
-      flash.now[:alert] = "Comment was not deleted. Please try again."
-    end
+    @comment.destroy
+    flash.now[:notice] = "Comment was deleted."
 
     respond_to do |format|
       format.html

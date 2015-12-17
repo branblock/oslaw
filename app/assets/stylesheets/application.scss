@@ -35,11 +35,11 @@ body {
 /* Links */
 
 a {
-  color: #2980b9;
+  color: #3498db;
 }
 
 a:hover {
-  color: #34495e;
+  color: #2980b9;
   text-decoration: none;
   -webkit-transition-property: color;
   -moz-transition-property: color;
@@ -52,7 +52,7 @@ a:hover {
 }
 
 a:active, a:focus {
-  color: #2980b9;
+  color: #3498db;
   text-decoration: none;
 }
 
@@ -73,8 +73,13 @@ a:active, a:focus {
 /* Bootstrap Components */
 
 .btn {
-  border: none;
+  border: none !important;
   border-radius: 3px;
+  color: #fff
+}
+
+.btn:hover {
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -89,34 +94,20 @@ a:active, a:focus {
   transition-duration: 0.5s;
 }
 
-.btn-success {
+.btn-success, .btn-success:hover {
     background: #27ae60;
-    color: #fff;
 }
 
-.btn-success:hover {
-    background: #27ae60;
-    color: #fff;
+.btn-danger, .btn-danger:hover {
+  background: #e74c3c;
 }
 
-.btn-danger {
-    background: #c0392b;
-    color: #fff;
+.btn-info, .btn-info:hover {
+  background: #3498db;
 }
 
-.btn-danger:hover {
-  background: #c0392b;
-  text-decoration: none;
-}
-
-.btn-info {
-    background: #2980b9;
-    color: #fff;
-}
-
-.btn-info:hover {
-  background: #2980b9;
-  text-decoration: none;
+.btn-primary, .btn-primary:hover {
+  background: #7f8c8d;
 }
 
 .form-control, .panel {
@@ -172,7 +163,7 @@ a:active, a:focus {
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #4A9DF9;
+  color: #3498db;
   background: transparent;
   text-decoration: none;
   -webkit-transition-property: color;
@@ -183,6 +174,10 @@ a:active, a:focus {
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
+}
+
+.navbar .btn {
+  margin-left: 10px;
 }
 
 /* WELCOME PAGE

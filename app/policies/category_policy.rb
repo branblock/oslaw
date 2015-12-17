@@ -1,6 +1,6 @@
 class CategoryPolicy < ApplicationPolicy
   def index?
-    true
+    user.present?
   end
 
   def create?
