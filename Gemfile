@@ -9,6 +9,7 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'better_errors'
 end
 
 group :development, :test do
@@ -20,6 +21,7 @@ end
 
 group :test do
   gem 'simplecov', :require => false
+  gem 'capybara'
 end
 
 # Use Bootstrap for CSS

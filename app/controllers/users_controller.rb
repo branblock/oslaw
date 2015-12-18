@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :ready_user, only: [:show, :destroy]
+  before_action :set_all
 
   def index
-    @users = User.all
     @category = Category.new
     @categories = Category.all
   end
@@ -11,17 +12,17 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
-      flash[:notice] = "User has been deleted."
-      redirect_to users_path
-    else
-      flash[:error] = "There was an error deleting the user."
-      render :show
-    end
+    @user.destroy
+    flash[:notice] = "User has been deleted."
+    redirect_to users_path
   end
 
   private
   def ready_user
     @user = User.find(params[:id])
+  end
+
+  def set_all
+    @users = User.all
   end
 end

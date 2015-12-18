@@ -127,7 +127,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "DELETE destroy" do
-    login_user
+    login_admin
     it "destroys the post" do
       delete :destroy, category_id: category.id, id: my_post.id
       count = Post.where({id: my_post.id}).size
