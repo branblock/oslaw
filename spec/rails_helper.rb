@@ -1,23 +1,24 @@
-require 'devise'
-require 'support/controller_macros'
-require 'factory_girl_rails'
-
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
+# Add additional requires below this line. Rails is not loaded until this point!
+
+require 'spec_helper'
+require 'rspec/rails'
+require 'capybara/rails'
+# note: require 'devise' after require 'rspec/rails'
+require 'devise'
+require 'support/controller_macros'
+require 'factory_girl_rails'
+
 # Start coverage analysis
 require 'simplecov'
 SimpleCov.start 'rails' do
   coverage_dir('coverage/rails')
 end
-
-require 'spec_helper'
-require 'rspec/rails'
-
-# Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -41,7 +42,6 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
-  # Devise
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, type: :controller
 

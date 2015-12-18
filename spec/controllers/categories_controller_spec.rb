@@ -30,7 +30,7 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   describe "POST create" do
-    login_user
+    login_admin
     context "with valid params" do
       it "creates a new Category" do
         expect {
@@ -77,7 +77,7 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   describe "GET edit" do
-    login_user
+    login_admin
     it "returns http success" do
       get :edit, id: category.id
       expect(response).to have_http_status(:success)
@@ -97,9 +97,9 @@ RSpec.describe CategoriesController, type: :controller do
       expect(category_instance.description).to eq category.description
     end
   end
-    #
+
   describe "PUT update" do
-    login_user
+    login_admin
     context "successfully updates category" do
       it "updates category with expected attributes" do
         new_name = "New Name"
@@ -133,7 +133,7 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   describe "DELETE destroy" do
-    login_user
+    login_admin
     it "destroys the category" do
       delete :destroy, id: category.id
       count = Category.where({id: category.id}).size

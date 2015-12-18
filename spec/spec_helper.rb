@@ -22,7 +22,7 @@ require 'simplecov'
 SimpleCov.start
 
 # Pundit gem (used for authorization)
-require "pundit/rspec"
+require 'pundit/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

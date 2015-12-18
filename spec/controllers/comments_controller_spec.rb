@@ -37,10 +37,8 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   context "deletion for an admin user" do
-    let(:user) { create(:user, role: 'admin') }
-
-    login_user
     describe "DELETE destroy" do
+      login_admin
       it "deletes the comment" do
         delete :destroy, format: :js, post_id: my_post.id, id: comment.id
         count = Comment.where({id: comment.id}).count
@@ -56,7 +54,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe "PUT upvote" do
-    login_user
+    login_admin
     it "first vote increases number of post votes by one" do
       votes = comment.get_upvotes.size
       put :upvote, post_id: my_post.id, id: comment.id
@@ -77,7 +75,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe "PUT downvote" do
-    login_user
+    login_admin
     it "first vote decreases number of post votes by one" do
       votes = comment.get_downvotes.size
       put :downvote, post_id: my_post.id, id: comment.id
