@@ -42,9 +42,11 @@ gem 'devise'
 gem 'pundit'
 # Use Redcarpet for markdown
 gem 'redcarpet'
-# Use Act_As_Votable for voting
+# Use Acts_As_Votable for voting
 gem 'acts_as_votable', '~> 0.10.0'
 # Use Simple_Form for forms
 gem 'simple_form'
 # User Paperclip for uploads
 gem 'paperclip', '~> 4.3'
+# Use Acts_As_Taggable_On for tagging
+gem 'acts-as-taggable-on', '~> 3.4'

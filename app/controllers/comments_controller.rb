@@ -38,14 +38,14 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     comment = @post.comments.find(params[:id])
     comment.upvote_from current_user
-    redirect_to [@post.category, @post]
+    redirect_to [@post]
   end
 
   def downvote
     @post = Post.find(params[:post_id])
     comment = @post.comments.find(params[:id])
     comment.downvote_from current_user
-    redirect_to [@post.category, @post]
+    redirect_to [@post]
   end
 
   private

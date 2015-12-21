@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <h3>Tags</h3>
+    <% @alpha_tags.each do |tag| %>
+      <%= link_to tag, tag_path(tag) %>
+        <% if current_user.admin? %>
+           ⎮ <%= link_to '<i class="fa fa-trash-o"></i> Delete Tag'.html_safe, tag_path(tag), method: :delete, data: {confirm: "THIS DELETES THE TAG! Are you sure? Please confirm the deletion of '#{tag.name}'."} %>
+        <% end %><br />
+    <% end %>
+  </div>
+</div>

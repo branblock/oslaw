@@ -23,15 +23,6 @@
     </div>
   </div>
   <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
-    <div class="panel panel-default">
-      <div class="panel-heading">Search</div>
-        <div class="panel-body" style="font-size: 11px">
-        <%= form_tag(categories_path, :method => "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], placeholder: " Enter terms" %><br />
-          <%= submit_tag "Search", class: "btn btn-default btn-sm" %>
-        <% end %>
-      </div>
-    </div>
   </div>
   <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
     <p>Column 3</p>

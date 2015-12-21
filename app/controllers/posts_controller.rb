@@ -3,25 +3,31 @@ class PostsController < ApplicationController
   before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
+    @posts = Post.all
+
+    @alphabetical_posts = @posts.order("title ASC").group_by{|u| u.title[0]}
+    @popular_posts = @posts.most_liked
+    @unpopular_posts = @posts.most_unliked
+    @recent_posts = @posts.most_recent
+    @updated_posts = @posts.updated
+
   end
 
   def show
-    @user = @post.user
+    @user = @post.user(params[:id])
   end
 
   def new
-    @category = Category.find(params[:category_id])
     @post = Post.new
   end
 
   def create
-    @category = Category.find(params[:category_id])
-    @post = @category.posts.build(post_params)
+    @post = Post.new(post_params)
     @post.user = current_user
 
     if @post.save
       flash[:notice] = "Post has been saved."
-      redirect_to [@category, @post]
+      redirect_to [@post]
     else
       flash[:alert] = "There was an error saving the post."
       render :new
@@ -36,7 +42,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice] = "Post has been updated."
-      redirect_to [@post.category, @post]
+      redirect_to [@post]
     else
       flash[:alert] = "There was an error updating the post."
       render :edit
@@ -46,7 +52,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:notice] = "Post has been deleted."
-    redirect_to [@post.category]
+    redirect_to action: :index
   end
 
   #upvote_from user
@@ -63,7 +69,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :tag_list)
   end
 
   def ready_post

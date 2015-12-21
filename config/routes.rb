@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :categories do
-    resources :posts, except: [:index]
-  end
+  resources :posts
+  resources :tags, only: [:index, :show, :destroy]
 
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
