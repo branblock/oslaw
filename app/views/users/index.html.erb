@@ -31,28 +31,35 @@
   </div>
 
   <div class="col-md-12" style="padding-left: 0">
-    <p style="font-size: 18px; font-weight: bold">Manage Categories</p>
-      <div class="table-responsive">
+    <p style="font-size: 18px; font-weight: bold">Manage Posts</p>
+      <div class="table-responsive" style="table-layout: fixed;
+    word-wrap: break-word;">
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Id</th>
+              <th style="text-align: center">Id</th>
               <th>Name</th>
-              <th>Description</th>
-              <th>Date Created</th>
-              <th>Posts</th>
+              <th>Tags</th>
+              <th style="text-align: center">Created</th>
+              <th style="text-align: center">Revised</th>
+              <th style="text-align: center">Comments</th>
               <th>Actions</th>
             </tr>
           </thead>
         <tbody>
-          <% @categories.each do |category| %>
+          <% @posts.each do |post| %>
             <tr>
-              <td><%= category.id %></td>
-              <td><%= link_to "#{category.name}", category_path(category) %></td>
-              <td><%= category.name %></td>
-              <td><%= localize(category.created_at, :format => :default) %></td>
-              <td><%= category.posts.count %></td>
-              <td><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Category'.html_safe, edit_category_path(category) %> ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Category'.html_safe, category, method: :delete, data: {confirm: "THIS DELETES THE CATEGORY! Are you sure? Please confirm the deletion of '#{category.name}'."} %></td>
+              <td style="text-align: center; width: 5%"><%= post.id %></td>
+              <td style="width: 35%"><%= link_to "#{post.title}", post_path(post) %></td>
+              <td style="width: 20%">
+                <% post.tags.each do |tag| %>
+                  <%= link_to tag, tag_path(tag) %><br />
+                <% end %>
+              </td>
+              <td style="text-align: center; width: 5%"><%= localize(post.created_at, :format => :default) %></td>
+              <td style="text-align: center; width: 5%"><%= localize(post.updated_at, :format => :default) %></td>
+              <td style="text-align: center; width: 5%"><%= pluralize (post.comments.count), '' %></td>
+              <td style="width: 25%"><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(post) %> ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, post, method: :delete, data: {confirm: "THIS DELETES THE POST! Are you sure? Please confirm the deletion of '#{post.title}'."} %></td>
             </tr>
           <% end %>
         </tbody>

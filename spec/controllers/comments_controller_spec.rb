@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-  let(:category) { FactoryGirl.create(:category) }
-  let(:my_post) { FactoryGirl.create(:post, category: category) }
+  let(:my_post) { FactoryGirl.create(:post) }
   let(:comment) { FactoryGirl.create(:comment, post: my_post) }
 
   describe "POST create" do
@@ -70,7 +69,7 @@ RSpec.describe CommentsController, type: :controller do
 
     it "redirects to the post" do
       put :upvote, post_id: my_post.id, id: comment.id
-      expect(response).to redirect_to [category, my_post]
+      expect(response).to redirect_to [my_post]
     end
   end
 
@@ -91,7 +90,7 @@ RSpec.describe CommentsController, type: :controller do
 
     it "redirects to the post" do
       put :downvote, post_id: my_post.id, id: comment.id
-      expect(response).to redirect_to [category, my_post]
+      expect(response).to redirect_to [my_post]
     end
   end
 end

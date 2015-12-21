@@ -1,125 +1,111 @@
-<div class="container">
-  <div class="row">
-
-    <!-- POST TITLE -->
-    <div class="col-md-12">
-      <h3><%= @post.title %></span></h3>
+<!-- POST TITLE -->
+<div class="container-fluid" style="background: #fbfbfb; border-bottom: 1px solid #eee; padding-bottom: 20px">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3><%= @post.title %></span></h3>
+      </div>
     </div>
 
-    <!-- POST INFORMATION -->
-    <div class="col-md-6">
-      Author: <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)<br />
-      <i class="fa fa-file"></i> Document(s): <%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
-      Created: <%= localize(@post.created_at, :format => :default) %><br />
-      Last Revised: <%= localize(@post.updated_at, :format => :default) %><br />
-      Views: <%= '# views' %><br />
-      Comments: <%= pluralize (@post.comments.count), '' %>
+    <div class="row">
+      <div class="col-md-12">
+        <p><span style="margin-top: 0"><%= markdown(@post.body) %></span></p>
+      </div>
     </div>
-    <!-- Buttons (depends on user) -->
-    <div class="col-md-6" style="margin-top: 10px">
-      <div class="pull-right">
+
+    <div class="row">
+      <div class="col-md-6" style="margin-top: 10px">
         <%= link_to like_post_path(@post), method: :put do %>
-          <button type="button" class="btn btn-info btn" aria-label="Left Align">
+          <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Upvote
             <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
             <span class="badge"><%= @post.get_upvotes.size %></span>
           </button>
         <% end %>
         <%= link_to unlike_post_path(@post), method: :put do %>
-          <button type="button" class="btn btn-info btn" aria-label="Left Align">
+          <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Downvote
             <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
             <span class="badge"><%= @post.get_downvotes.size %></span>
           </button>
-        <% end %>
-        <!-- If user can update post -->
-        <% if policy(@post).update? %>
-          <%= link_to edit_post_path(@post) do %>
-            <button type="button" class="btn btn-info btn" aria-label="Left Align">
-              <span class="glyphicon glyphicon-edit glyphicon-align-center" aria-hidden="true"></span> Edit Post
-            </button>
+        <% end %> ⎮
+        <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Favorite
+          <i class="fa fa-star-o"></i>
+          <span class="badge"><%= @post.get_downvotes.size %></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOCUMENTS & INFORMATION -->
+<div class="container">
+  <div class="row">
+
+    <!-- DOCUMENTS -->
+    <div class="col-md-8" style="margin-top: 15px">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong><i class="fa fa-folder-open"></i> Main Document</strong>
+        </div>
+        <div class="panel-body" style="padding-bottom: 10px;">
+          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong><i class="fa fa-folder"></i> Prior Versions</strong>
+        </div>
+        <div class="panel-body" style="padding-bottom: 10px;">
+          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
+          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
+          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST INFORMATION - SIDEBAR -->
+    <div class="col-md-4" style="margin-top: 15px">
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong><i class="fa fa-info-circle"></i> Post Information</strong></div>
+        <div class="panel-body">
+          <% if policy(@post).update? %>
+            <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(@post) %>
           <% end %>
-        <% end %>
-        <!-- If admin & can delete post -->
-        <% if policy(@post).destroy? %>
-          <%= link_to [@post.category, @post], method: :delete, data: {confirm: "THIS DELETES THE POST! Please confirm the deletion of #{@post.title}."} do %>
-            <button type="button" class="btn btn-danger btn" aria-label="Left Align">
-              <span class="glyphicon glyphicon-edit glyphicon-align-center" aria-hidden="true"></span> Delete Post
-            </button>
+          <!-- If admin & can delete post -->
+          <% if policy(@post).destroy? %>
+            ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, @post, method: :delete, data: {confirm: "THIS DELETES THE POST! Are you sure? Please confirm the deletion of '#{@post.title}'."} %><br />
           <% end %>
-        <% end %>
+        Author: <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)<br />
+          Created: <%= localize(@post.created_at, :format => :default) %><br />
+          Last Revised: <%= localize(@post.updated_at, :format => :default) %><br />
+          Tags:<br />
+            <% @post.tags.each do |tag| %>
+              <%= link_to tag, tag_path(tag) %><br />
+            <% end %>
+          Views: <%= '# views' %><br />
+          Comments: <%= pluralize (@post.comments.count), '' %><br />
+          Related posts:
+        </div>
       </div>
     </div>
 
-    <!-- AUTHOR'S NOTES -->
-    <div class="col-md-12" style="margin-top: 15px">
-      <div class="panel panel-default" style="border: 1px solid #b5b5b5">
-        <div class="panel-heading" style="background: #f8f8f8; border-bottom: 1px solid #b5b5b5; font-weight: bold">Author's Notes</div>
-        <div class="panel-body" style="padding-bottom: 5px;">
-          <p>Author notes will go here. Needs to be added to model and form for creating/updating posts.</p>
-      </div>
-      </div>
-    </div>
+  </div>
 
-    <!-- POST / COMMENTS -->
-    <div class="col-md-8" style="; margin-top: 5px">
 
-      <!-- POST DESCRIPTION -->
-      <div class="panel panel-default" style="border: 1px solid #b5b5b5">
-        <div class="panel-body" style="padding-bottom: 5px;">
-        <p><span style="margin-top: 0">[search box/markdown editor/share & print functions]</span></p>
-        </div>
+    <p style="border-top: 1px solid #eee; padding-top: 10px"><strong>Input from The Community:</strong></p>
+      <div class='js-comments'>
+        <%= render @post.comments %>
       </div>
-      <div class="panel panel-default" style="border: 1px solid #b5b5b5">
-        <div class="panel-heading" style="background: #f8f8f8; border-bottom: 1px solid #b5b5b5; font-weight: bold">Description</div>
-        <div class="panel-body" style="padding-bottom: 5px;">
-          <p><span style="margin-top: 0"><%= markdown(@post.body) %></span></p>
+      <% if current_user %>
+        <div class='new-comment'>
+          <%= render 'comments/form', comment: Comment.new, post: @post %>
         </div>
-      </div>
-
-      <!-- COMMENTS -->
-      <p style="border-top: 1px solid #b5b5b5; padding-top: 10px"><strong>Input from The Community:</strong></p>
-        <div class='js-comments'>
-          <%= render @post.comments %>
-        </div>
-        <% if current_user %>
-          <div class='new-comment'>
-            <%= render 'comments/form', comment: Comment.new, post: @post %>
-          </div>
-        <% end %>
+      <% end %>
 
     </div>
 
 
-    <!-- RIGHT SIDEBAR -->
-    <div class="col-md-4" style="margin-top: 5px">
 
-      <!-- CATEGORIES -->
-      <div class="panel panel-default" style="border: 1px solid #b5b5b5">
-        <div class="panel-heading" style="background: #f8f8f8; border-bottom: 1px solid #b5b5b5; font-weight: bold">Categories</div>
-        <div class="panel-body">
-          <p>Iterate through all categories<br /><%= link_to "#{@post.category.name}", category_path(@post.category) %></p>
-        </div>
-      </div>
-
-      <!-- TAGS -->
-      <div class="panel panel-default" style="border: 1px solid #b5b5b5">
-        <div class="panel-heading" style="background: #f8f8f8; border-bottom: 1px solid #b5b5b5; font-weight: bold">Tags</div>
-        <div class="panel-body">
-          <p>Iterate through all tags</p>
-        </div>
-      </div>
-
-      <!-- TAGS -->
-      <div class="panel panel-default" style="border: 1px solid #b5b5b5">
-        <div class="panel-heading" style="background: #f8f8f8; border-bottom: 1px solid #b5b5b5; font-weight: bold">Related Posts</div>
-        <div class="panel-body">
-          <p>Related post</p>
-          <p>Related post</p>
-          <p>Related post</p>
-          <p>Related post</p>
-        </div>
-      </div>
-
-    </div>
 
   </div>
 </div>

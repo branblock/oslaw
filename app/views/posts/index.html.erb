@@ -1,10 +1,62 @@
-<div class="container">
-  <div class="col-md-6" style="padding-left: 0">
-    <h3 style="margin-top: 60px">Posts</h3>
-    <% if @posts.present? %>
-      <%= render 'posts_index' %>
-    <% else %>
-      <p>There are no posts containing the term(s) '<%= params[:search] %>'.</p>
-    <% end %>
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+
+    <!-- POST STATS -->
+    <div class="col-md-4">
+
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>Post Statistics</strong></div>
+
+          <p style="margin-top: 10px; padding: 0 10px"><strong>Most Recent Posts</strong></p>
+            <p><% @recent_posts.each do |post| %>
+              <ul style="list-style: none; margin: 0; padding: 0 10px;">
+                <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small>created on <%= localize(post.created_at, :format => :default) %></small></li>
+              </ul>
+          <% end %></p>
+
+          <p style="margin-top: 10px; padding: 0 10px"><strong>Recently Updated Posts</strong></p>
+            <p><% @updated_posts.each do |post| %>
+              <ul style="list-style: none; margin: 0; padding: 0 10px">
+                <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small>updated on <%= localize(post.updated_at, :format => :default) %></small></li>
+              </ul>
+            <% end %></p>
+
+          <p style="margin-top: 10px; padding: 0 10px"><strong>Most Upvoted Posts</strong></p>
+            <p><% @popular_posts.each do |post| %>
+              <% if post.get_upvotes.count > 0 %>
+                <ul style="list-style: none; margin: 0; padding: 0 10px">
+                  <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small><%= pluralize(post.get_upvotes.count, 'upvote') %></small></li>
+                </ul>
+              <% end %>
+            <% end %></p>
+
+          <p style="margin-top: 10px; padding: 0 10px"><strong>Most Downvoted Posts</strong></p>
+            <p><% @unpopular_posts.each do |post| %>
+              <% if post.get_downvotes.count > 0 %>
+                <ul style="list-style: none; margin: 0; padding: 0 10px">
+                  <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small><%= pluralize(post.get_downvotes.count, 'downvote') %></small></li>
+                </ul>
+              <% end %>
+            <% end %></p>
+
+        </div>
+
+      </div>
+
+    <!-- All Posts -->
+    <div class="col-md-8">
+      <p style="font-size: 15px"><strong>Posts Index</strong></p>
+        <% @alphabetical_posts.each do |letter, posts| %>
+        <p style="text-decoration: underline"><%= letter.capitalize %></p>
+        <p>
+          <% posts.each do |post| %>
+            <ul style="list-style: none; margin: 0; padding: 0">
+              <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> (<small>Created by <td><%= link_to post.user.username, user_path(post.user) %> on <%= localize(post.created_at, :format => :default) %>; last revised on <%= localize(post.updated_at, :format => :default) %>; <%= pluralize(post.get_upvotes.count, 'upvote') %>; <%= pluralize(post.get_downvotes.count, 'downvote') %></small>)
+            </ul>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+
   </div>
 </div>

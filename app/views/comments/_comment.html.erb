@@ -8,13 +8,19 @@
       <blockquote><%= markdown(comment.body) %></blockquote>
     </div>
     <%= link_to like_post_comment_path(@post, comment), method: :put do %>
-      <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+      <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Upvote
         <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
         <span class="badge"><%= comment.get_upvotes.size %></span>
       </button>
     <% end %>
     <%= link_to unlike_post_comment_path(@post, comment), method: :put do %>
-      <button type="button" class="btn btn-info btn-xs" aria-label="Left Align">
+      <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Downvote
+        <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+        <span class="badge"><%= comment.get_downvotes.size %></span>
+      </button>
+    <% end %> ⎮
+    <%= link_to unlike_post_comment_path(@post, comment), method: :put do %>
+      <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Favorite
         <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
         <span class="badge"><%= comment.get_downvotes.size %></span>
       </button>

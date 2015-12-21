@@ -12,20 +12,11 @@ require 'factory_girl_rails'
   FactoryGirl.create :admin
 end
 
-10.times do
-  FactoryGirl.create :category
-end
-
-10.times do
-  FactoryGirl.create :post
-end
-
-10.times do
+100.times do
   FactoryGirl.create :comment
 end
 
 puts "Finished"
 puts "#{User.count} users created"
-puts "#{Category.count} categories created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

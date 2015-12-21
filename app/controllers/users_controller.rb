@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   before_action :set_all
 
   def index
-    @category = Category.new
-    @categories = Category.all
+    @posts = Post.all
   end
 
   def show
