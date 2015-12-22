@@ -10,9 +10,7 @@ FactoryGirl.define do
     confirmed_at Date.today
 
     factory :admin do
-      username  "adminuser"
       role      :admin
-      confirmed_at Date.today
     end
   end
 end

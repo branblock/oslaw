@@ -37,13 +37,10 @@
               <li><%= link_to '<i class="fa fa-home"></i> Your Home Page'.html_safe, user_path(current_user), :class => 'navbar-link' %></li>
             <% end %>
             <li><%= link_to '<i class="fa fa-files-o"></i> Posts'.html_safe, posts_path, :class => 'navbar-link' %></li>
-            <li><%= link_to '<i class="fa fa-tags"></i> Tags'.html_safe, tags_path, :class => 'navbar-link' %></li>
             <li><%= link_to '<i class="fa fa-sign-out"></i>Sign Out'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
           <% else %>
-            <li><%= link_to '<i class="fa fa-info-circle"></i> About Oslaw'.html_safe, "#", class: 'navbar-link' %></li>
-            <li><%= link_to '<i class="fa fa-cogs"></i> How It Works'.html_safe, "#", class: 'navbar-link' %></li>
-            <li><button type="button" class="btn btn-success navbar-btn" style="margin-top: 7px"><%= link_to '<i class="fa fa-user-plus"></i> Sign Up'.html_safe,new_user_registration_path, :class => 'navbar-link' %></button></li>
-            <li><button type="button" class="btn btn-info navbar-btn" style="margin-top: 7px"><%= link_to '<i class="fa fa-sign-in"></i> Sign In'.html_safe, new_user_session_path, :class => 'navbar-link' %></button></li>
+            <li><button type="button" class="btn btn-success" style="margin-top: 7px"><%= link_to '<i class="fa fa-user-plus"></i> Sign Up'.html_safe,new_user_registration_path %></button></li>
+            <li><button type="button" class="btn btn-info" style="margin-top: 7px"><%= link_to '<i class="fa fa-sign-in"></i> Sign In'.html_safe, new_user_session_path %></button></li>
           <% end %>
         </ul>
         </div>
@@ -75,8 +72,8 @@
       <p>
         Copyright © 2015 Oslaw. All Rights Reserved.<br />
         Oslaw is an online service that provides legal forms and legal information. Oslaw is not a law firm and is not a substitute for legal advice.<br />
-        Use of Oslaw is subject to our <%= link_to "Terms and Conditions", "#" %>. Have a question? <span><%= link_to "Contact Oslaw", "#" %>.<br />
-        <a href="#"><i class="fa fa-twitter"></i></a>  <a href="#"><i class="fa fa-facebook"></i></a>  <a href="#"><i class="fa fa-linkedin"></i></a>  <a href="#"><i class="fa fa-google-plus"></i></a></span>
+        Use of Oslaw is subject to our <span class="future"><%= link_to "Terms and Conditions", "#" %></span>. Have a question? <span class="future"><%= link_to "Contact Oslaw", "#" %></span>.<br />
+        <span class="future"><a href="#"><i class="fa fa-twitter"></i></a>  <a href="#"><i class="fa fa-facebook"></i></a>  <a href="#"><i class="fa fa-linkedin"></i></a>  <a href="#"><i class="fa fa-google-plus"></i></a></span>
       </p>
     </footer>
 

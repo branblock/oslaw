@@ -5,12 +5,16 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
 
-    @alphabetical_posts = @posts.order("title ASC").group_by{|u| u.title[0]}
-    @popular_posts = @posts.most_liked
-    @unpopular_posts = @posts.most_unliked
-    @recent_posts = @posts.most_recent
-    @updated_posts = @posts.updated
-
+    if params[:tag].present?
+      @tagged_posts = @posts.tagged_with(params[:tag])
+      @alphabetical_posts = @tagged_posts.order("title ASC").group_by{|u| u.title[0]}
+    else
+      @alphabetical_posts = @posts.order("title ASC").group_by{|u| u.title[0]}
+    end
+      @popular_posts = @posts.most_liked
+      @unpopular_posts = @posts.most_unliked
+      @recent_posts = @posts.most_recent
+      @updated_posts = @posts.updated
   end
 
   def show

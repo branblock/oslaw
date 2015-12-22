@@ -17,14 +17,9 @@
       <%= simple_form_for [@post] do |f| %>
         <div class="form-inputs">
           <%= f.input :title %>
-          <%= f.input :body, rows: 8 %>
-          <%= f.input :tag_list, :label => "Tags* (seperated by commas)", :input_html => { :class => "css-class", :value => @post.tag_list.join(", ") } %>
-        </div>
-
-        <div class="form-actions">
-          <%= button_tag(type: 'submit', class: "btn btn-success") do %>
-           <i class="fa fa-user-plus"></i> Save Post
-          <% end %>
+          <%= f.input :body, :as => :text, :input_html => { :rows => 10 } %>
+          <%= f.input :tag_list, :label => "Tags* (seperated by commas)" %>
+          <%= f.button :submit, class: 'btn btn-success' %>
         </div>
       <% end %>
     </div>

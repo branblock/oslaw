@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:category) { FactoryGirl.create(:category) }
   let(:user) { FactoryGirl.create(:user) }
-  let(:post) { FactoryGirl.create(:post, category: category, user: user) }
+  let(:post) { FactoryGirl.create(:post, user: user) }
 
   it { should have_many(:comments) }
 
-  it { should belong_to(:category) }
   it { should belong_to(:user) }
 
   it { should validate_presence_of(:title) }

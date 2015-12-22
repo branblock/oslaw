@@ -13,14 +13,14 @@
                 <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small>created on <%= localize(post.created_at, :format => :default) %></small></li>
               </ul>
           <% end %></p>
-
+          <div class="future">
           <p style="margin-top: 10px; padding: 0 10px"><strong>Recently Updated Posts</strong></p>
             <p><% @updated_posts.each do |post| %>
               <ul style="list-style: none; margin: 0; padding: 0 10px">
                 <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small>updated on <%= localize(post.updated_at, :format => :default) %></small></li>
               </ul>
             <% end %></p>
-
+          </div>
           <p style="margin-top: 10px; padding: 0 10px"><strong>Most Upvoted Posts</strong></p>
             <p><% @popular_posts.each do |post| %>
               <% if post.get_upvotes.count > 0 %>
@@ -46,6 +46,9 @@
     <!-- All Posts -->
     <div class="col-md-8">
       <p style="font-size: 15px"><strong>Posts Index</strong></p>
+        <% if params[:tag].present? %>
+          <p> These are the tagged posts. <%= link_to 'See all posts', posts_path %>.</p>
+        <% end %>
         <% @alphabetical_posts.each do |letter, posts| %>
         <p style="text-decoration: underline"><%= letter.capitalize %></p>
         <p>
