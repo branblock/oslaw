@@ -39,7 +39,7 @@
 /* 1. General
 -------------------------------------*/
 
-/* 1.1 HTML/Body */
+  /* 1.1 HTML/Body */
 
 html, body {
   color: #111;
@@ -55,7 +55,7 @@ body {
   margin-right: 15px;
 }
 
-/* 1.2 Links */
+  /* 1.2 Links */
 
 a {
   color: #3498db;
@@ -86,7 +86,7 @@ a:active, a:focus {
   margin-right: auto;
 }
 
-/* 1.3 Mobile Issues */
+  /* 1.3 Mobile Issues */
 
 /* to address pull-right class on mobile devices */
 @media (max-width: 1200px) {
@@ -95,7 +95,7 @@ a:active, a:focus {
     }
 }
 
-/* 1.4 Messages */
+  /* 1.4 Messages */
 
 .alert {
   border-radius: 0;
@@ -108,6 +108,12 @@ a:active, a:focus {
   margin-bottom: 15px;
 }
 
+  /* 1.3 Mobile Issues */
+
+.future {
+  display: none;
+}
+
 /* 2. Bootstrap Components
 -------------------------------------*/
 
@@ -116,9 +122,11 @@ a:active, a:focus {
 .btn {
   border: none !important;
   border-radius: 3px;
+  color: #fff;
 }
 
 .btn:hover {
+  color: #fff;
   text-decoration: none;
 }
 
@@ -144,10 +152,6 @@ a:active, a:focus {
 
 .btn-info, .btn-info:hover {
   background: #3498db;
-}
-
-.btn-primary, .btn-primary:hover {
-  background: #7f8c8d;
 }
 
 .form-control, .panel {
@@ -176,17 +180,17 @@ a:active, a:focus {
 }
 
 .navbar-nav {
-  padding-top: 5px;
+  padding-top: 4px;
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
-  color: #111 !important;
+  color: #3498db !important;
   font-size: 28px;
   font-weight: bold;
 }
 
 .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:focus {
-  color: #111;
+  color: #888;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -225,6 +229,10 @@ a:active, a:focus {
   text-align: center;
 }
 
+.jumbotron .btn a {
+  color: #fff;
+}
+
 .jumbotron a:hover {
   background: transparent;
   -webkit-transition-property: color;
@@ -250,7 +258,7 @@ a:active, a:focus {
   font-size: 45px;
   font-weight: bold;
   margin-bottom: 20px;
-  padding-top: 20px;
+  padding-top: 45px;
 }
 
 .jumbotron p {

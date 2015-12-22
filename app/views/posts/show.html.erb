@@ -1,5 +1,5 @@
 <!-- POST TITLE -->
-<div class="container-fluid" style="background: #fbfbfb; border-bottom: 1px solid #eee; padding-bottom: 20px">
+<div class="container-fluid" style="background: #fbfbfb; border-bottom: 1px solid #eee; padding-bottom: 20px; padding-top: 10px;">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -9,7 +9,11 @@
 
     <div class="row">
       <div class="col-md-12">
-        <p><span style="margin-top: 0"><%= markdown(@post.body) %></span></p>
+        <p><span style="margin-top: 0"><%= markdown(@post.body) %>
+          <% if policy(@post).update? %>
+            <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(@post) %>
+          <% end %>
+        </span></p>
       </div>
     </div>
 
@@ -17,19 +21,19 @@
       <div class="col-md-6" style="margin-top: 10px">
         <%= link_to like_post_path(@post), method: :put do %>
           <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Upvote
-            <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             <span class="badge"><%= @post.get_upvotes.size %></span>
           </button>
         <% end %>
         <%= link_to unlike_post_path(@post), method: :put do %>
           <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Downvote
-            <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             <span class="badge"><%= @post.get_downvotes.size %></span>
           </button>
-        <% end %> ⎮
-        <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Favorite
-          <i class="fa fa-star-o"></i>
-          <span class="badge"><%= @post.get_downvotes.size %></span>
+        <% end %>
+        <button type="button" class="btn btn-primary btn-sm future" aria-label="Left Align"> Favorite
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="badge"> # </span>
         </button>
       </div>
     </div>
@@ -41,7 +45,7 @@
   <div class="row">
 
     <!-- DOCUMENTS -->
-    <div class="col-md-8" style="margin-top: 15px">
+    <div class="col-md-8 future" style="margin-top: 15px">
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong><i class="fa fa-folder-open"></i> Main Document</strong>
@@ -68,30 +72,20 @@
       <div class="panel panel-default">
         <div class="panel-heading"><strong><i class="fa fa-info-circle"></i> Post Information</strong></div>
         <div class="panel-body">
-          <% if policy(@post).update? %>
-            <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(@post) %>
-          <% end %>
-          <!-- If admin & can delete post -->
-          <% if policy(@post).destroy? %>
-            ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, @post, method: :delete, data: {confirm: "THIS DELETES THE POST! Are you sure? Please confirm the deletion of '#{@post.title}'."} %><br />
-          <% end %>
-        Author: <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)<br />
-          Created: <%= localize(@post.created_at, :format => :default) %><br />
-          Last Revised: <%= localize(@post.updated_at, :format => :default) %><br />
-          Tags:<br />
-            <% @post.tags.each do |tag| %>
-              <%= link_to tag, tag_path(tag) %><br />
-            <% end %>
-          Views: <%= '# views' %><br />
-          Comments: <%= pluralize (@post.comments.count), '' %><br />
-          Related posts:
+          <p>Author: <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)</p>
+          <p>Created: <%= localize(@post.created_at, :format => :default) %></p>
+          <p>Last Revised: <%= localize(@post.updated_at, :format => :default) %></p>
+          <p>Tags: <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %></p>
+          <p class="future">Views: <%= '# views' %><br /></p>
+          <p class='js-comments-count'><%= pluralize(@post.comments.count, 'comment') %></p>
+          <p class="future">Related posts:</p>
         </div>
       </div>
     </div>
 
   </div>
 
-
+    <!-- COMMENTS -->
     <p style="border-top: 1px solid #eee; padding-top: 10px"><strong>Input from The Community:</strong></p>
       <div class='js-comments'>
         <%= render @post.comments %>
@@ -103,9 +97,6 @@
       <% end %>
 
     </div>
-
-
-
 
   </div>
 </div>

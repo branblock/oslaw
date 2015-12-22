@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationController, type: :controller, focus: true do
+RSpec.describe ApplicationController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
 
   describe "user logging in" do
-    login_user
+  login_user
     it "has a current_user" do
       subject.current_user.should_not be_nil
     end
@@ -15,14 +15,14 @@ RSpec.describe ApplicationController, type: :controller, focus: true do
       expect(response).to have_http_status(:success)
     end
 
-    it "redirects to the user's page" do
+    it "renders the #show view" do
       get :show, {id: user.id}
-      expect(response).to_render [current_user_path]
+      expect(response).to render_template :show
     end
   end
 
   describe "admin logging in" do
-    login_admin
+  login_admin
     it "has a current_user" do
       subject.current_user.should_not be_nil
     end

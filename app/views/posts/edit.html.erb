@@ -1,32 +1,28 @@
 <div class="container">
-  <h3 style="border-bottom: 1px solid #e3e3e3; margin-top: 60px">Edit Post</h3>
-  <div class="col-md-4" style="padding-left: 0">
-    <div class="panel panel-default">
-      <div class="panel-heading">Post Guidelines</div>
-      <div class="panel-body">
-        Panel content
-      </div>
+  <div class="row">
+
+    <!-- TITLE -->
+    <div class="page-header">
+      <h3>Edit Post</h3>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">Post Options</div>
-      <div class="panel-body">
-        <p>"Document control will go here"</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8" style="padding: 0">
-    <%= simple_form_for [@post] do |f| %>
-      <div class="form-inputs">
-        <%= f.input :title %>
-        <%= f.input :body, rows: 8 %>
-        <%= f.input :tag_list, :label => "Tags* (seperated by commas)", :input_html => { :class => "css-class", :value => @post.tag_list.join(", ") } %>
+
+    <div class="col-md-12">
+      <!-- GUIDELINES ALERT -->
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Important!</strong> Please review our <span class="future"><%= link_to 'guidelines for posts', '#' %></span>.
       </div>
 
-      <div class="form-actions">
-        <%= button_tag(type: 'submit', class: "btn btn-success") do %>
-         <i class="fa fa-user-plus"></i> Save Post
-        <% end %>
-      </div>
-    <% end %>
+      <!-- FORM -->
+      <%= simple_form_for [@post] do |f| %>
+        <div class="form-inputs">
+          <%= f.input :title %>
+          <%= f.input :body, :as => :text, :input_html => { :rows => 10 } %>
+          <%= f.input :tag_list, :label => "Tags* (seperated by commas)" %>
+          <%= f.button :submit, class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

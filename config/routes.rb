@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   resources :posts
-  resources :tags, only: [:index, :show, :destroy]
+  get 'tags/:tag', to: 'posts#index', as: :tag
+  # resources :tags, only: [:index, :show, :destroy]
 
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
