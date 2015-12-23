@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :delete_word_document, :delete_pdf_document, :delete_plain_document]
 
   def index
     @posts = Post.all
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
 
   def show
     @user = @post.user(params[:id])
+    @current_user = current_user
   end
 
   def new
@@ -71,9 +72,36 @@ class PostsController < ApplicationController
     redirect_to [@post]
   end
 
+  def delete_word
+    @post.word_document = nil
+    @post.save
+      respond_to do |format|
+        format.html { redirect_to @post, notice: 'Word document has been removed.' }
+        format.json { render :show, status: :ok, location: @post }
+    end
+  end
+
+  def delete_pdf
+    @post.pdf_document = nil
+    @post.save
+      respond_to do |format|
+        format.html { redirect_to @post, notice: 'PDF has been removed.' }
+        format.json { render :show, status: :ok, location: @post }
+    end
+  end
+
+  def delete_plain
+    @post.plain_document = nil
+    @post.save
+      respond_to do |format|
+        format.html { redirect_to @post, notice: 'Plain text has been removed.' }
+        format.json { render :show, status: :ok, location: @post }
+    end
+  end
+
   private
   def post_params
-    params.require(:post).permit(:title, :body, :tag_list)
+    params.require(:post).permit(:title, :body, :word_document, :pdf_document, :plain_document, :tag_list)
   end
 
   def ready_post

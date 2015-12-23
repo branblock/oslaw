@@ -29,9 +29,10 @@
 2. Bootstrap Components
   2.1. Buttons
 3. Navigation
-4. Pages
-  4.1 Welcome
-  4.2 posts
+4. Views
+  4.1 Welcome - Index
+  4.2 Sessions - New
+  4.3 Posts - Show
 5. Footer
 */
 
@@ -42,8 +43,9 @@
   /* 1.1 HTML/Body */
 
 html, body {
-  color: #111;
+  color: #757575;
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
 }
 
 body {
@@ -170,32 +172,38 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 .navbar {
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  border-radius: 0;
-  box-shadow: 0px 1px 1px #d0d4d9;
+  background: #2c3e50;
+  border: none;
+  color: #fff;
   margin-bottom: 0;
   padding-bottom: 5px;
   padding-top: 5px;
 }
 
-.navbar-nav {
-  padding-top: 4px;
+.navbar .btn {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.navbar .btn-info, .navbar .btn-info:hover {
+  background: #3498db;
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
   color: #3498db !important;
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
+  margin-top: 4px;
+  padding-left: 15px;
 }
 
 .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:focus {
-  color: #888;
+  color: #fff;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #3498db;
   background: transparent;
+  color: #e74c3c;
   text-decoration: none;
   -webkit-transition-property: color;
   -moz-transition-property: color;
@@ -207,24 +215,19 @@ a:active, a:focus {
   transition-duration: 0.3s;
 }
 
-.navbar .btn {
-  margin-left: 10px;
+.navbar-nav {
+  padding-top: 4px;
 }
 
-.navbar .btn a {
-  color: #fff !important;
-}
-
-
-/* 4. PAGES
+/* 4. VIEWS
 -------------------------------------------------- */
 
-  /* 4.1 Welcome */
+  /* 4.1 Welcome - Index */
 
 .jumbotron {
-  background: #fbfbfb;
+  background: #2c3e50;
   border-bottom: 1px solid #ddd;
-  color: #111;
+  color: #fff;
   padding-top: 40px;
   text-align: center;
 }
@@ -254,7 +257,7 @@ a:active, a:focus {
 }
 
 .jumbotron h2 {
-  color: #3498db;
+  color: #fff;
   font-size: 45px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -270,15 +273,106 @@ a:active, a:focus {
   margin-bottom: 5px;
 }
 
+  /* 4.2 Sessions - New */
 
-  /* 4.2 Posts - Show */
+#page-sign-in {
+  background: #2c3e50;
+}
 
-blockquote {
+#page-sign-in a {
+  color: #fff;
+}
+
+#page-sign-in a:hover {
+  background: transparent;
+  color: #e74c3c;
+  -webkit-transition-property: color;
+  -moz-transition-property: color;
+  -o-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#page-sign-in .col-md-4 {
+  background: #fff;
+  border-radius: 3px;
+  padding: 20px 25px 10px;
+}
+
+#page-sign-in .col-md-4 a {
+  color: #3498db;
+}
+
+#page-sign-in .col-md-4 a:hover {
+  background: transparent;
+  color: #e74c3c;
+  -webkit-transition-property: color;
+  -moz-transition-property: color;
+  -o-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#page-sign-in .col-md-8 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#page-sign-in .container {
+  margin-top: 40px;
+}
+
+#page-sign-in h3 {
+  color: #3498db;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#page-sign-in .navbar, #page-sign-in .footer {
+  display: none;
+}
+
+  /* 4.3 Posts - Show */
+
+#page-post-show blockquote {
   color: #111;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
+#page-post-show .col-md-12 .first a {
+  color: #fff;
+  font-size: 14px;
+}
+
+#page-post-show .col-md-12 .first a:hover {
+  background: transparent;
+  color: #e74c3c;
+  -webkit-transition-property: color;
+  -moz-transition-property: color;
+  -o-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#page-post-show .container-fluid {
+  background: #3498db;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
 
 /* 5. FOOTER
 -------------------------------------------------- */
@@ -295,7 +389,7 @@ body {
 }
 
 footer {
-  background: #3498db;
+  background: #757575;
   bottom: 0;
   color: #fff;
   font-size: 13px;

@@ -25,5 +25,5 @@ en:
 en:
   time:
     formats:
-      default: '%m/%d/%Y'
-      comment_default: '%m/%d/%Y @ %I:%M %p'
+      default: '%m.%d.%Y'
+      comment_default: '%m.%d.%Y @ %I:%M %p'
