@@ -1,102 +1,154 @@
 <!-- POST TITLE -->
-<div class="container-fluid" style="background: #fbfbfb; border-bottom: 1px solid #eee; padding-bottom: 20px; padding-top: 10px;">
+<body id="page-post-show">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="first">
+            <span style="color: #fff"><h3><%= @post.title %>
+              <% if policy(@post).update? %>
+                <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_post_path(@post) %>
+              <% end %></h3>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h3><%= @post.title %></span></h3>
+        <p><span><%= markdown(@post.body) %></span></p>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <p><span style="margin-top: 0"><%= markdown(@post.body) %>
-          <% if policy(@post).update? %>
-            <%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(@post) %>
-          <% end %>
-        </span></p>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6" style="margin-top: 10px">
-        <%= link_to like_post_path(@post), method: :put do %>
-          <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Upvote
-            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-            <span class="badge"><%= @post.get_upvotes.size %></span>
-          </button>
-        <% end %>
-        <%= link_to unlike_post_path(@post), method: :put do %>
-          <button type="button" class="btn btn-info btn-sm" aria-label="Left Align"> Downvote
-            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-            <span class="badge"><%= @post.get_downvotes.size %></span>
-          </button>
-        <% end %>
-        <button type="button" class="btn btn-primary btn-sm future" aria-label="Left Align"> Favorite
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="badge"> # </span>
-        </button>
-      </div>
+    <div class="future">
+      <button type="button" class="btn btn-primary btn-sm future" aria-label="Left Align"> Favorite
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span class="badge"> # </span>
+      </button>
     </div>
   </div>
-</div>
 
 <!-- DOCUMENTS & INFORMATION -->
-<div class="container">
-  <div class="row">
+  <div class="container">
+    <div class="row">
 
-    <!-- DOCUMENTS -->
-    <div class="col-md-8 future" style="margin-top: 15px">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong><i class="fa fa-folder-open"></i> Main Document</strong>
-        </div>
-        <div class="panel-body" style="padding-bottom: 10px;">
-          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
-        </div>
-      </div>
+      <!-- MAIN DOCUMENT -->
+      <div class="col-md-6" style="margin-top: 15px">
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong><i class="fa fa-folder-open"></i> Main Document</strong></div>
+            <table class="table">
+              <tr>
+                <th>MS Word</th>
+                  <td>
+                    <% if @post.word_document? %>
+                      <%= link_to @post.word_document.original_filename, @post.word_document.url, target: "_blank" %>
+                      <small> / <%= link_to 'remove', {action: :delete_word, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
+                    <% else %>
+                      <%= link_to 'Add Word Doc', edit_post_path(@post) %>
+                    <% end %>
+                  </td>
+              </tr>
+              <tr>
+                <th>PDF</th>
+                  <td>
+                    <% if @post.pdf_document? %>
+                      <%= link_to @post.pdf_document.original_filename, @post.pdf_document.url, target: "_blank" %>
+                      <small> / <%= link_to 'remove', {action: :delete_pdf, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
+                    <% else %>
+                      <%= link_to 'Add PDF', edit_post_path(@post) %>
+                    <% end %>
+                  </td>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong><i class="fa fa-folder"></i> Prior Versions</strong>
+              </tr>
+              <tr>
+                <th>Plain Text</th>
+                  <td>
+                    <% if @post.plain_document? %>
+                      <%= link_to @post.plain_document.original_filename, @post.plain_document.url, target: "_blank" %>
+                      <small>(<%= link_to 'remove', {action: :delete_plain, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %>)</small>
+                    <% else %>
+                      <%= link_to 'Add Plain Text', edit_post_path(@post) %>
+                    <% end %>
+                  </td>
+              </tr>
+            </table>
+          </div>
         </div>
-        <div class="panel-body" style="padding-bottom: 10px;">
-          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
-          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
-          Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
+
+
+        <div class="panel panel-default future">
+          <div class="panel-heading">
+            <strong><i class="fa fa-folder"></i> Prior Versions</strong>
+          </div>
+          <div class="panel-body" style="padding-bottom: 10px;">
+            Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
+            Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
+            Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
+          </div>
+        </div>
+
+      <!-- POST INFORMATION - SIDEBAR -->
+      <div class="col-md-6" style="margin-top: 15px">
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong><i class="fa fa-info-circle"></i> Post Information</strong></div>
+          <table class="table">
+            <tr>
+              <th>Author</th>
+                <td><%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)</td>
+            </tr>
+            <tr>
+              <th>History</th>
+                <td>Created on <%= localize(@post.created_at, :format => :default) %> / Last revised on <%= localize(@post.updated_at, :format => :default) %></td>
+            </tr>
+            <tr>
+              <th>Tags</th>
+                <td><%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %></td>
+            </tr>
+            <tr>
+              <th>Upvotes</th>
+              <td><%= @post.get_upvotes.size %> /
+                <% if @current_user.voted_up_on? @post %>
+                  <%= link_to unlike_post_path(@post), method: :put do %>
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                  <% end %> <small>(remove upvote)</small>
+                <% else %>
+                  <%= link_to like_post_path(@post), method: :put do %>
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                  <% end %> <small>(upvote)</small>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th>Comments</th>
+                <td class='js-comments-count'><%= @post.comments.count %></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- POST INFORMATION - SIDEBAR -->
-    <div class="col-md-4" style="margin-top: 15px">
-      <div class="panel panel-default">
-        <div class="panel-heading"><strong><i class="fa fa-info-circle"></i> Post Information</strong></div>
-        <div class="panel-body">
-          <p>Author: <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)</p>
-          <p>Created: <%= localize(@post.created_at, :format => :default) %></p>
-          <p>Last Revised: <%= localize(@post.updated_at, :format => :default) %></p>
-          <p>Tags: <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %></p>
-          <p class="future">Views: <%= '# views' %><br /></p>
-          <p class='js-comments-count'><%= pluralize(@post.comments.count, 'comment') %></p>
-          <p class="future">Related posts:</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
     <!-- COMMENTS -->
-    <p style="border-top: 1px solid #eee; padding-top: 10px"><strong>Input from The Community:</strong></p>
-      <div class='js-comments'>
-        <%= render @post.comments %>
-      </div>
-      <% if current_user %>
-        <div class='new-comment'>
-          <%= render 'comments/form', comment: Comment.new, post: @post %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="comments">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Comments <i class="fa fa-comments"></i></strong></div>
+            <div class="panel-body">
+              <div class='js-comments'><%= render @post.comments %></div>
+              <% if current_user %>
+                <div class='new-comment'><%= render 'comments/form', comment: Comment.new, post: @post %></div>
+              <% end %>
+            </div>
+          </div>
         </div>
-      <% end %>
-
+      </div>
     </div>
 
   </div>
-</div>
+</body>

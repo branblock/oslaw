@@ -28,4 +28,13 @@ class Post < ActiveRecord::Base
   def self.most_recent
     order(created_at: :desc).limit(5)
   end
+
+  # For document uploads via paperclip
+  has_attached_file :word_document
+  validates_attachment :word_document, :content_type => { content_type: ["application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"] }, :size => { :in => 0..5.megabytes }
+  has_attached_file :pdf_document
+  validates_attachment :pdf_document, :content_type => { content_type: ["application/pdf"] }, :size => { :in => 0..5.megabytes }
+  has_attached_file :plain_document
+  validates_attachment :plain_document, :content_type => { content_type: ["text/plain"] }, :size => { :in => 0..5.megabytes }
+
 end
