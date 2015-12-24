@@ -60,10 +60,10 @@ class User < ActiveRecord::Base
   end
 
   # paperclip
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", nav: "28x28>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>", nav: "28x28>" }, default_url: "/images/:style/missing.png"
     # Validate content type
   validates_attachment_content_type :avatar, content_type: /\Aimage/
-  
+
   # act_as_votable
   acts_as_voter
 end
