@@ -1,13 +1,13 @@
 <!-- POST TITLE -->
-<body id="page-post-show">
+<body id="page-posts-show">
   <div class="container-fluid">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="first">
-            <span style="color: #fff"><h3><%= @post.title %>
+            <span><h3><%= @post.title %>
               <% if policy(@post).update? %>
-                <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_post_path(@post) %>
+                <span style="font-size: 14px"><%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_post_path(@post) %></span>
               <% end %></h3>
             </span>
           </div>
@@ -15,12 +15,13 @@
       </div>
     </div>
   </div>
-</div>
 
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <p><span><%= markdown(@post.body) %></span></p>
+        <div class="second">
+          <p><%= markdown(@post.body) %></p>
+        </div>
       </div>
     </div>
 
@@ -40,7 +41,7 @@
       <!-- MAIN DOCUMENT -->
       <div class="col-md-6" style="margin-top: 15px">
         <div class="panel panel-default">
-          <div class="panel-heading"><strong><i class="fa fa-folder-open"></i> Main Document</strong></div>
+          <div class="panel-heading"><i class="fa fa-folder-open"></i> Main Document</div>
             <table class="table table-responsive">
               <tr>
                 <th>MS Word</th>
@@ -48,12 +49,12 @@
                     <% if @post.word_document? %>
                       <%= link_to @post.word_document.original_filename, @post.word_document.url, target: "_blank" %>
                       <% if policy(@post).delete_word? %>
-                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete Word doc'.html_safe, {action: :delete_word, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
+                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, {action: :delete_word, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
                       <% end %>
                     <% else %>
                       <%= 'None added.' %>
                         <% if policy(@post).update? %>
-                          <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add Word doc'.html_safe, edit_post_path(@post) %></small>
+                          <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add'.html_safe, edit_post_path(@post) %></small>
                         <% end %>
                     <% end %>
                   </td>
@@ -64,12 +65,12 @@
                     <% if @post.pdf_document? %>
                       <%= link_to @post.pdf_document.original_filename, @post.pdf_document.url, target: "_blank" %>
                       <% if policy(@post).delete_pdf? %>
-                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete PDF'.html_safe, {action: :delete_pdf, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
+                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, {action: :delete_pdf, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
                       <% end %>
                     <% else %>
                     <%= 'None added.' %>
                       <% if policy(@post).update? %>
-                        <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add PDF'.html_safe, edit_post_path(@post) %></small>
+                        <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add'.html_safe, edit_post_path(@post) %></small>
                       <% end %>
                     <% end %>
                   </td>
@@ -81,12 +82,12 @@
                     <% if @post.plain_document? %>
                       <%= link_to @post.plain_document.original_filename, @post.plain_document.url, target: "_blank" %>
                       <% if policy(@post).delete_plain? %>
-                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete plain text doc'.html_safe, {action: :delete_plain, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
+                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, {action: :delete_plain, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
                       <% end %>
                     <% else %>
                     <%= 'None added.' %>
                       <% if policy(@post).update? %>
-                        <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add plain text doc'.html_safe, edit_post_path(@post) %></small>
+                        <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add'.html_safe, edit_post_path(@post) %></small>
                       <% end %>
                     <% end %>
                   </td>
@@ -110,7 +111,7 @@
       <!-- POST INFORMATION - SIDEBAR -->
       <div class="col-md-6" style="margin-top: 15px">
         <div class="panel panel-default">
-          <div class="panel-heading"><strong><i class="fa fa-info-circle"></i> Post Information</strong></div>
+          <div class="panel-heading"><i class="fa fa-info-circle"></i> Post Information</div>
           <table class="table">
             <tr>
               <th>Author</th>
@@ -153,7 +154,7 @@
       <div class="col-md-12">
         <div class="comments">
           <div class="panel panel-default">
-            <div class="panel-heading"><strong>Comments <i class="fa fa-comments"></i></strong></div>
+            <div class="panel-heading">Discussion <i class="fa fa-comments"></i></div>
             <div class="panel-body">
               <div class='js-comments'><%= render @post.comments %></div>
               <% if current_user %>

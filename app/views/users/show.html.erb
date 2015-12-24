@@ -1,25 +1,27 @@
-<div class="container">
-  <div class="row">
+<!-- POST TITLE -->
+<body id="page-users-show">
 
-    <div class="col-md-4">
-      <div style="margin-top: 40px">
-        <h3><%= @user.first_name %> <%= @user.last_name %></h3>
-        <p><%= image_tag @user.avatar.url(:thumb) %></p>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="first">
+            <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+          </div>
+        </div>
       </div>
-      <div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <p><%= image_tag @user.avatar.url(:thumb) %></p>
         <p><%= link_to "Edit your profile", edit_user_registration_path %></p>
         <p><%= link_to 'Create A New Post', new_post_path %></p>
-        <div class="future">
-          <p><strong><u>Info</strong></u></p>
-          <p>Jurisdiction:</p>
-          <p>Date joined:</p>
-          <p>Website:</p>
-          <p><strong><u>Social</strong></u><br />
-          <p>LinkedIn:</p>
-          <p>Twitter:</p>
-          <p>Facebook:</p>
-        </div>
-        <p><strong><u>Oslaw Stats</strong></u></p>
+
+        <p><u>Oslaw Stats</u></p>
         <p>Posts: <%= @user.posts.count %></p>
         <p>Last Post:
           <% if @user.posts.empty? %>
@@ -39,11 +41,41 @@
         <p>Upvoted Comments: <%= (@user.votes.up.for_type(Comment).votables).size %></p>
         <p>Downvoted Comments: <%= (@user.votes.down.for_type(Comment).votables).size %></p>
       </div>
-    </div>
-    <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
-    </div>
-    <div class="col-md-4" style="margin-top: 40px; padding-left: 0">
-    </div>
 
+      <div class="col-md-8">
+
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>Post Statistics</strong></div>
+
+            <p style="margin-top: 10px; padding: 0 10px"><strong>Most Recent Posts</strong></p>
+              <p><% @recent_posts.each do |post| %>
+                <ul style="list-style: none; margin: 0; padding: 0 10px;">
+                  <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small>created on <%= localize(post.created_at, :format => :default) %></small></li>
+                </ul>
+            <% end %></p>
+            <div class="future">
+            <p style="margin-top: 10px; padding: 0 10px"><strong>Recently Updated Posts</strong></p>
+              <p><% @updated_posts.each do |post| %>
+                <ul style="list-style: none; margin: 0; padding: 0 10px">
+                  <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small>updated on <%= localize(post.updated_at, :format => :default) %></small></li>
+                </ul>
+              <% end %></p>
+            </div>
+            <p style="margin-top: 10px; padding: 0 10px"><strong>Most Upvoted Posts</strong></p>
+              <p><% @popular_posts.each do |post| %>
+                <% if post.get_upvotes.count > 0 %>
+                  <ul style="list-style: none; margin: 0; padding: 0 10px">
+                    <li style="border-bottom: 1px solid #f2f2f2"><%= link_to post.title, post_path(post) %> - <small><%= pluralize(post.get_upvotes.count, 'upvote') %></small></li>
+                  </ul>
+                <% end %>
+              <% end %></p>
+
+
+          </div>
+
+        </div>
+
+    </div>
   </div>
-</div>
+
+</body>

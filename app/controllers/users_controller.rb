@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    @posts = Post.all
+    @popular_posts = @posts.most_liked
+    @recent_posts = @posts.most_recent
+    @updated_posts = @posts.updated
   end
 
   def destroy

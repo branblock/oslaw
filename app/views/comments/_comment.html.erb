@@ -7,7 +7,7 @@
         <% end %>
       <blockquote><%= markdown(comment.body) %></blockquote>
     </div>
-    <%= comment.get_upvotes.size %> /
+    <%= pluralize (comment.get_upvotes.size), 'upvote' %> /
       <% if @current_user.voted_up_on? comment %>
         <%= link_to unlike_post_comment_path(@post, comment), method: :put do %>
           <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
