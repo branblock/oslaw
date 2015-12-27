@@ -27,10 +27,9 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      flash[:notice] = "Post has been saved."
+      flash[:alert] = "Post has been saved."
       redirect_to [@post]
     else
-      flash[:alert] = "There was an error saving the post."
       render :new
     end
   end
@@ -45,7 +44,6 @@ class PostsController < ApplicationController
       flash[:notice] = "Post has been updated."
       redirect_to [@post]
     else
-      flash[:alert] = "There was an error updating the post."
       render :edit
     end
   end

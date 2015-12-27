@@ -31,10 +31,13 @@
 3. Navigation
 4. Views
   4.1 Posts - Index
-  4.2 Posts - Show
-  4.3 Sessions - New
-  4.4 Users - Show
-  4.5 Welcome - Index
+  4.2 Posts - Edit
+  4.3 Posts - New
+  4.4 Posts - Show
+  4.5 Registrations - New
+  4.6 Sessions - New
+  4.7 Users - Show
+  4.8 Welcome - Index
 5. Footer
 */
 
@@ -47,13 +50,14 @@
 html, body {
   color: #77797c;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 300;
 }
 
 body {
+  background: #fff;
   overflow-x: hidden;
-  padding-top: 60px;
+  padding-top: 70px;
   height: 100%;
   width: 100%;
 }
@@ -82,19 +86,12 @@ a:active, a:focus {
   text-decoration: none;
 }
 
-.center-block {
-  display: block;
-  float: none !important;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .future {
   display: none;
 }
 
 label {
-  color: #4f4f52;
+  color: #000;
   font-weight: 400;
 }
 
@@ -107,6 +104,18 @@ label {
     }
 }
 
+@media (max-width: 1200px) {
+  .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #000;
+    float: left !important;
+  }
+
+  .navbar-default .navbar-nav > li a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+    color: #2098f5;
+    float: left !important;
+  }
+}
+
   /* 1.4 Messages */
 
 .alert {
@@ -114,27 +123,22 @@ label {
   border-radius: 0;
   color: #fff;
   margin-bottom: 0;
-  padding-top: 20px;
+  margin-top: 10px;
+  padding-bottom: 15px;
   text-align: center;
 }
 
-.alert-danger, .alter-error {
+.alert-danger, .alert-error, .alert-alert {
   background: #e74c3c;
 }
 
-.alert-success, .notice-success {
+.alert-success, .alert-notice {
   background: #27ae60;
 }
 
-.alert button.close, .notice button.close {
-  display: none;
+.flash {
+  margin-bottom: 0;
 }
-
-.alert-dismissible {
-  color: #000;
-  margin-bottom: 15px;
-}
-
 
 /* 2. Bootstrap Components
 -------------------------------------*/
@@ -202,7 +206,6 @@ label {
   background: #fff;
   border-bottom: none;
   margin-bottom: 0;
-  opacity: .95;
   padding-bottom: 10px;
   padding-top: 5px;
 }
@@ -228,13 +231,13 @@ label {
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
   color: #2098f5 !important;
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 400;
   padding-left: 15px;
 }
 
 .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:focus {
-  color: #77797c;
-  font-weight: 300;
+  color: #000;
+  font-weight: 400;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -251,6 +254,31 @@ label {
   transition-duration: 0.3s;
 }
 
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background: #fff;
+}
+
+.navbar-default .navbar-nav .open > .dropdown-menu {
+  width: 200px;
+}
+
+.navbar-default .navbar-nav .open > .dropdown-menu li a {
+  color: #2098f5;
+}
+
+.navbar-default .navbar-nav .open > .dropdown-menu li a:hover {
+  background: #f0f9ff;
+  color: #2098f5;
+}
+
+.navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:focus {
+  background: #fff;
+}
+
+.navbar-default .navbar-nav > li a:hover {
+  color: #2098f5;
+}
+
 .navbar-nav {
   padding-top: 5px;
 }
@@ -261,27 +289,59 @@ label {
   /* 4.1 Posts - Index */
 
 #page-posts-index .container-fluid {
-  background: #f0f2f3;
+  background: #2098f5;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  padding-top: 10px;
 }
 
 #page-posts-index .container-fluid h3 {
-  color: #000;
-  font-weight: 400;
+  color: #fff;
+  font-weight: 300;
 }
 
+#page-posts-index #second {
+  margin-top: 30px;
+}
 
 #page-posts-index .table th {
   color: #000;
   font-weight: 400;
 }
 
-  /* 4.2 Posts - Show */
+
+/* 4.3 Posts - Edit */
+
+#page-posts-edit .container-fluid {
+background: #2098f5;
+margin-bottom: 20px;
+padding-bottom: 10px;
+}
+
+#page-posts-edit .container-fluid h3 {
+color: #fff;
+font-weight: 300;
+}
+
+
+/* 4.3 Posts - New */
+
+#page-posts-new .container-fluid {
+background: #2098f5;
+margin-bottom: 20px;
+padding-bottom: 10px;
+}
+
+#page-posts-new .container-fluid h3 {
+color: #fff;
+font-weight: 300;
+}
+
+
+  /* 4.4 Posts - Show */
 
 #page-posts-show blockquote {
-  font-size: 15px;
+  color: #000;
+  font-size: 14px;
   margin-bottom: 5px;
 }
 
@@ -289,9 +349,13 @@ label {
   font-weight: 300;
 }
 
-#page-posts-show .col-md-12 .first a:hover {
+#page-posts-show .col-md-12 #first a {
+  color: #eee;
+}
+
+#page-posts-show .col-md-12 #first a:hover {
   background: transparent;
-  color: #e74c3c;
+  color: #000;
   -webkit-transition-property: color;
   -moz-transition-property: color;
   -o-transition-property: color;
@@ -302,17 +366,20 @@ label {
   transition-duration: 0.3s;
 }
 
+#page-posts-show .col-md-12 #second p {
+  font-size: 16px;
+  color: #000;
+}
 
 #page-posts-show .container-fluid {
-  background: #f0f2f3;
+  background: #2098f5;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  padding-top: 10px;
 }
 
 #page-posts-show .container-fluid h3 {
-  color: #000;
-  font-weight: 400;
+  color: #fff;
+  font-weight: 300;
 }
 
 #page-posts-show .panel-heading {
@@ -332,77 +399,79 @@ label {
   width: 100px;
 }
 
-  /* 4.2 Sessions - New */
+  /* 4.5 Registrations - New */
+
+#page-registrations-new {
+  background: #2098f5;
+  margin-bottom: 50px;
+}
+
+#page-registrations-new a {
+  color: #fff !important;
+  text-decoration: underline;
+}
+
+#page-registrations-new h3 {
+  color: #000;
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#page-registrations-new p {
+  color: #fff !important;
+  text-align: center;
+}
+
+#page-registrations-new .panel-default {
+  padding-bottom: 30px;
+}
+
+#page-registrations-new .navbar, #page-registrations-new .footer {
+  display: none;
+}
+
+  /* 4.6 Sessions - New */
 
 #page-sessions-new {
-background: #f0f2f3;
+  background: #2098f5;
+  margin-bottom: 50px;
 }
 
 #page-sessions-new a {
-color: #000;
-}
-
-#page-sessions-new a:hover {
-background: transparent;
-color: #2098f5;
--webkit-transition-property: color;
--moz-transition-property: color;
--o-transition-property: color;
-transition-property: color;
--webkit-transition-duration: 0.3s;
--moz-transition-duration: 0.3s;
--o-transition-duration: 0.3s;
-transition-duration: 0.3s;
-}
-
-#page-sessions-new .col-md-4 {
-background: #fff;
-border: 1px solid #ddd;
-border-radius: 3px;
-padding: 20px 25px 10px;
-}
-
-#page-sessions-new .col-md-4 a {
-color: #2098f5;
-}
-
-#page-sessions-new .col-md-4 a:hover {
-background: transparent;
-color: #000;
--webkit-transition-property: color;
--moz-transition-property: color;
--o-transition-property: color;
-transition-property: color;
--webkit-transition-duration: 0.3s;
--moz-transition-duration: 0.3s;
--o-transition-duration: 0.3s;
-transition-duration: 0.3s;
-}
-
-#page-sessions-new .col-md-12 {
-margin-top: 20px;
-text-align: center;
+  color: #fff !important;
+  text-decoration: underline;
 }
 
 #page-sessions-new h3 {
-color: #2098f5;
-font-size: 28px;
-font-weight: 300;
-margin-bottom: 20px;
-text-align: center;
+  color: #000;
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#page-sessions-new p {
+  color: #fff !important;
+  text-align: center;
+}
+
+#page-sessions-new .panel-default {
+  padding-bottom: 30px;
 }
 
 #page-sessions-new .navbar, #page-sessions-new .footer {
-display: none;
+  display: none;
 }
 
-  /* 4.3 Users - Show */
+  /* 4.7 Users - Show */
 
 #page-users-show .container-fluid {
-  background: #f0f2f3;
+  background: #2098f5;
   margin-bottom: 10px;
+  margin-top: 0;
   padding-bottom: 10px;
-  padding-top: 10px;
 }
 
 #page-users-show .container-fluid h3 {
@@ -411,33 +480,32 @@ display: none;
 }
 
 
-  /* 4.4 Welcome - Index */
+  /* 4.8 Welcome - Index */
 
 #page-welcome-index .jumbotron {
-background: #f0f2f3;
-padding-top: 30px;
-text-align: center;
+  background: #2098f5;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
 }
 
 #page-welcome-index .jumbotron .btn {
+  font-size: 24px;
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
-#page-welcome-index .jumbotron .btn a {
-  color: #fff;
-}
-
 #page-welcome-index .jumbotron h2 {
-  color: #2d2d2d;
-  font-size: 45px;
+  color: #fff;
+  font-size: 52px;
   font-weight: 300;
   margin-bottom: 15px;
-  padding-top: 45px;
+  padding-top: 30px;
 }
 
 #page-welcome-index .jumbotron p {
-  font-size: 24px;
+  color: #000;
+  font-size: 28px;
 }
 
 #page-welcome-index .jumbotron .form-group {
@@ -466,7 +534,6 @@ footer {
   font-size: 13px;
   /* Set the fixed height of the footer here */
   height: 160px;
-  margin-left: 15px;
   padding: 40px 0 20px;
   position: absolute;
   text-align: center;

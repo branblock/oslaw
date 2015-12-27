@@ -30,7 +30,6 @@
             <%= link_to "#{@user.posts.last.title}", post_path(@user.posts.last) %> <small>(created on <%= localize(@user.posts.last.created_at, :format => :default) %>)</small>
           <% end %></p>
         <p>Upvoted Posts: <%= (@user.votes.up.for_type(Post).votables).size %></p>
-        <p>Downvoted Posts: <%= (@user.votes.down.for_type(Post).votables).size %></p>
         <p>Comments: <%= @user.comments.count %></p>
         <p>Last Comment:
           <% if @user.comments.empty? %>
@@ -39,7 +38,6 @@
             <%= localize(@user.comments.last.created_at, :format => :default) %>
           <% end %></p>
         <p>Upvoted Comments: <%= (@user.votes.up.for_type(Comment).votables).size %></p>
-        <p>Downvoted Comments: <%= (@user.votes.down.for_type(Comment).votables).size %></p>
       </div>
 
       <div class="col-md-8">

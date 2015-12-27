@@ -1,24 +1,32 @@
 <body id="page-sessions-new">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h3><span class="glyphicon glyphicon-share" aria-hidden="true" style="font-size: 20px; opacity: .75"></span>Oslaw</h3>
-      </div>
-      <div class="col-md-4 col-md-offset-4">
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="form-inputs">
-            <%= f.input :login, placeholder: "username or email address", required: true, autofocus: true %>
-            <%= f.input :password, required: true %>
-            <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-            <%= f.button :submit, "Sign in", class: 'btn btn-success' %>
+
+      <div class="col-md-offset-3 col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="col-md-offset-2 col-md-8">
+              <h3>Sign In to Oslaw</h3>
+              <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="form-inputs">
+                  <%= f.input :login, placeholder: "username or email address", required: true, autofocus: true %>
+                <%= f.input :password, required: true %>
+                <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                <%= f.button :submit, "Sign in", class: 'btn btn-success' %>
+                </div>
+              <% end %>
+            </div>
           </div>
-        <% end %>
-        <p style="line-height: 1.2; margin-top: 15px;">Need an account? <%= link_to "Sign Up", new_registration_path(resource_name) %><br />
-        <%= link_to "Resend confirmation instructions?", new_confirmation_path(resource_name) %></p>
+        </div>
+
+        <div>
+          <p>Need an account? <%= link_to "Sign Up", new_registration_path(resource_name) %></p>
+          <p><%= link_to "Resend confirmation instructions", new_confirmation_path(resource_name) %></p>
+          <p>← <%= link_to 'Welcome Page', root_path %></p>
+        </div>
+
       </div>
-      <div class="col-md-12">
-        <%= link_to '← Welcome Page', root_path %>
-      </div>
+
     </div>
   </div>
 </body>

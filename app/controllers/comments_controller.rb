@@ -7,12 +7,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @new_comment = Comment.new
 
-    if @comment.save
-      flash.now[:notice] = "Comment was added."
-    else
-      flash.now[:alert] = "Comment was not added."
-    end
-
+    @comment.save
+    
     respond_to do |format|
       format.html
       format.js
