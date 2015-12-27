@@ -1,30 +1,33 @@
-<div class="container">
-  <div class="row">
-
-    <!-- TITLE -->
-    <div class="page-header">
-      <h3>Edit Post</h3>
-    </div>
-
-    <div class="col-md-12">
-      <!-- GUIDELINES ALERT -->
-      <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Important!</strong> Please review our <span class="future"><%= link_to 'guidelines for posts', '#' %></span>.
-      </div>
-
-      <!-- FORM -->
-      <%= simple_form_for [@post] do |f| %>
-        <div class="form-inputs">
-          <%= f.input :title %>
-          <%= f.input :body, as: :text, input_html: { :rows => 10 } %>
-          <%= f.input :word_document, as: :file, label: "Upload a Word document" %>
-          <%= f.input :pdf_document, as: :file, label: "Upload a PDF document" %>
-          <%= f.input :tag_list, label: "Tags* (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
-          <%= f.button :submit, class: 'btn btn-success' %>
+<!-- POST TITLE -->
+<body id="page-posts-new">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="first">
+            <h3>Edit Page</h3>
+          </div>
         </div>
-      <% end %>
+      </div>
     </div>
-
   </div>
-</div>
+
+  <!-- FORM -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <%= simple_form_for [@post] do |f| %>
+          <div class="form-inputs">
+            <%= f.input :title %>
+            <%= f.input :body, as: :text, input_html: {rows: 10 } %>
+            <%= f.input :word_document, as: :file, label: "Upload a Word document" %>
+            <%= f.input :pdf_document, as: :file, label: "Upload a PDF document" %>
+            <%= f.input :tag_list, label: "Tags* (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
+            <%= f.button :submit, class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</body>

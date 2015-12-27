@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="first">
+          <div id="first">
             <h3>Index of Public Pages</h3>
           </div>
         </div>
@@ -12,9 +12,10 @@
     </div>
   </div>
 
-  <div class="container" style="margin-top: 30px">
+  <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div id="second">
         <% if params[:tag].present? %>
           <p><%= "These are posts with the '#{(params[:tag])}' tag" %>. <%= link_to 'See all posts', posts_path %>.</p>
         <% end %>
@@ -23,13 +24,13 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th style="width: 25%">Title</th>
+                  <th style="width: 30%">Title</th>
                   <th style="width: 12.5%">Author</th>
-                  <th style="width: 12.5%">Tags</th>
-                  <th style="width: 12.5%">Date Created</th>
-                  <th style="width: 12.5%">Last Revised</th>
-                  <th style="width: 12.5%">Upvotes</th>
-                  <th style="width: 12.5%">Comments</th>
+                  <th style="width: 17.5%">Tags</th>
+                  <th style="text-align: center; width: 10%">Date Created</th>
+                  <th style="text-align: center; width: 10%">Last Revised</th>
+                  <th style="text-align: center; width: 10%">Upvotes</th>
+                  <th style="text-align: center; width: 10%">Comments</th>
                 </tr>
               </thead>
               <tbody>
@@ -38,16 +39,16 @@
                   <td><%= link_to post.title, post_path(post) %></td>
                   <td><%= link_to post.user.username, user_path(post.user) %></td>
                   <td><%= raw post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %></td>
-                  <td><%= localize(post.created_at, :format => :default) %></td>
-                  <td><%= localize(post.updated_at, :format => :default) %></td>
-                  <td><%= pluralize(post.get_upvotes.count, 'upvote') %></td>
-                  <td><%= pluralize(post.comments.count, 'comment') %></td>
+                  <td style="text-align: center"><%= localize(post.created_at, :format => :default) %></td>
+                  <td style="text-align: center"><%= localize(post.updated_at, :format => :default) %></td>
+                  <td style="text-align: center"><%= post.get_upvotes.count %></td>
+                  <td style="text-align: center"><%= post.comments.count %></td>
                 </tr>
               <% end %>
               </tbody>
             </table>
           <% end %>
-
+        </div>
       </div>
     </div>
   </div>

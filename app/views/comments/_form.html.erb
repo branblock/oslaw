@@ -1,18 +1,5 @@
-<p style="margin-top: 20px;"><span style="color: #000; font-weight: 400">Add a Comment</span><small> (<a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Markdown&oldid=694169869">markdown</a> supported)</small></p>
-  <% if @post.comments.empty? %>
-    <%= form_for [post, comment], remote: true do |f| %>
-      <div class="form-group">
-        <%= f.label :body, class: 'sr-only' %>
-        <%= f.text_area :body, rows: 5, class: 'form-control', placeholder: "Be the first to comment on this post." %>
-      </div>
-        <%= f.submit "Save Comment", class: 'btn btn-success btn-sm' %>
-    <% end %>
-  <% else %>
-    <%= form_for [post, comment], remote: true do |f| %>
-      <div class="form-group">
-        <%= f.label :body, class: 'sr-only' %>
-        <%= f.text_area :body, rows: 5, class: 'form-control', placeholder: "Enter a comment." %>
-      </div>
-        <%= f.submit "Save Comment", class: 'btn btn-success btn' %>
-    <% end %>
+<p style="margin-top: 10px;"><span style="color: #000; font-weight: 400">Add your thoughts/comments</span><small> (<a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Markdown&oldid=694169869">markdown</a> supported)</small></p>
+  <%= simple_form_for [post, comment], remote: true do |f| %>
+    <%= f.input :body, as: :text, input_html: { :rows => 5 }, placeholder: "What do you think?", label: false %>
+    <%= f.submit :Post, class: 'btn btn-success btn' %>
   <% end %>

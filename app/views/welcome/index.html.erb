@@ -2,10 +2,13 @@
   <div class="jumbotron">
     <div class="container">
       <div class="col-md-12">
-        <h2>A secure site for sharing and collaborating on legal documents. Created by a lawyer, for lawyers.</h2>
-        <p>Oslaw is 100% free to join and use the public database. Create private pages for only $4.99/month.
-        </p> <p>Join Oslaw and start collaborating.</p>
-        <p><button type="button" class="btn btn-success btn-lg"><%= link_to '<i class="fa fa-user-plus"></i> Create An Oslaw Account'.html_safe,new_user_registration_path %></button></p>
+        <h2>Securely share and collaborate on legal documents. Created by a lawyer, for lawyers.</h2>
+        <p>✓ Free to join and use the public database.</p>
+        <p>✓ Create private pages for only $4.99/month.</p>
+        <p>Join Oslaw and start collaborating today.</p>
+        <%= link_to new_user_registration_path, class: "btn btn-success btn-lg" do %>
+          <i class="fa fa-user-plus"></i> Create An Oslaw Account</i>
+        <% end %>
       </div>
     </div>
   </div>

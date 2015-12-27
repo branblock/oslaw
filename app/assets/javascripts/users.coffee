@@ -7,11 +7,11 @@ $ ->
     $(".alert").fadeOut()
   $(".alert").bind 'click', (ev) =>
     $(".alert").fadeOut()
-  setTimeout flashCallback, 5000
+  setTimeout flashCallback, 4000
 
 $ ->
   flashCallback = ->
     $(".notice").fadeOut()
   $(".notice").bind 'click', (ev) =>
     $(".notice").fadeOut()
-  setTimeout flashCallback, 5000
+  setTimeout flashCallback, 4000
