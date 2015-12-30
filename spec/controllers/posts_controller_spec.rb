@@ -2,6 +2,32 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   let(:my_post) { FactoryGirl.create(:post) }
+  let(:my_tagged_post) { FactoryGirl.create(:post, tag_list: true) }
+  let(:my_untagged_post) { FactoryGirl.create(:post, tag_list: false) }
+
+
+  describe "GET index" do
+    login_user
+    it "returns http success" do
+      get :index
+      expect(response).to have_http_status(:success)
+    end
+
+    context "entire index" do
+      it "assigns Post.all to post" do
+        get :index
+        expect(assigns(:posts)).to eq([my_post])
+      end
+    end
+
+    context "tagged posts" do
+      it "includes only the tagged posts in @post" do
+        get :index
+        expect(assigns(:posts)).to include(my_tagged_post)
+        expect(assigns(:posts)).to_not include(my_untagged_post)
+      end
+    end
+  end
 
   describe "POST create" do
     login_user
@@ -28,7 +54,6 @@ RSpec.describe PostsController, type: :controller do
       it "redirects to the #new view" do
         post :create, post: {title: "", body: ""}
         expect(response).to render_template :new
-        expect(flash[:alert]).to be_present
       end
     end
   end
@@ -120,7 +145,6 @@ RSpec.describe PostsController, type: :controller do
       it "renders to the #edit view" do
         put :update, id: my_post.id, post: {title: "", body: ""}
         expect(response).to render_template :edit
-        expect(flash[:alert]).to be_present
       end
     end
   end
@@ -180,6 +204,39 @@ RSpec.describe PostsController, type: :controller do
     it "redirects to the post" do
       put :downvote, id: my_post.id
       expect(response).to redirect_to [my_post]
+    end
+  end
+
+  describe "PUT delete word document" do
+    login_user
+    it "deletes the attached word document" do
+      put :delete_word, id: my_post.id
+      expect(my_post.word_document_file_name).to be_nil
+      expect(my_post.word_document_content_type).to be_nil
+      expect(my_post.word_document_file_size).to be_nil
+      expect(my_post.word_document_updated_at).to be_nil
+      expect(response).to redirect_to [my_post]
+      expect(flash[:notice]).to be_present
+    end
+
+    it "deletes the attached pdf document" do
+      put :delete_pdf, id: my_post.id
+      expect(my_post.pdf_document_file_name).to be_nil
+      expect(my_post.pdf_document_content_type).to be_nil
+      expect(my_post.pdf_document_file_size).to be_nil
+      expect(my_post.pdf_document_updated_at).to be_nil
+      expect(response).to redirect_to [my_post]
+      expect(flash[:notice]).to be_present
+    end
+
+    it "deletes the attached plain text document" do
+      put :delete_plain, id: my_post.id
+      expect(my_post.plain_document_file_name).to be_nil
+      expect(my_post.plain_document_content_type).to be_nil
+      expect(my_post.plain_document_file_size).to be_nil
+      expect(my_post.plain_document_updated_at).to be_nil
+      expect(response).to redirect_to [my_post]
+      expect(flash[:notice]).to be_present
     end
   end
 end

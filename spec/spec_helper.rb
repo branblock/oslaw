@@ -24,6 +24,9 @@ SimpleCov.start
 # Pundit gem (used for authorization)
 require 'pundit/rspec'
 
+# Paperclip gem (used for file uploads)
+require "paperclip/matchers"
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
