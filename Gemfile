@@ -52,3 +52,5 @@ gem 'paperclip', '~> 4.3'
 gem 'acts-as-taggable-on', '~> 3.4'
 # Use ckeditor for WYSIWYG editing
 gem 'ckeditor'
+# For ckeditor/heroku fix
+gem 'non-stupid-digest-assets', '~> 1.0.4'
