@@ -26,30 +26,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Oslaw</a>
+          <a class="navbar-brand" href="#"><i class="fa fa-share-alt"></i> Oslaw</a>
         </div>
         <div class="collapse navbar-collapse">
       	  <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><u><%= current_user.username %></u> <span class="caret"></span></a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <% if current_user.admin? %>
-                    <li><%= link_to 'Your Home Page'.html_safe, users_path, :class => 'navbar-link' %></li>
-                  <% else %>
-                    <li><%= link_to 'Your Home Page'.html_safe, user_path(current_user), :class => 'navbar-link' %></li>
-                  <% end %>
-                  <li><%= link_to 'Pages'.html_safe, posts_path, :class => 'navbar-link' %></li>
-                  <li><%= link_to 'Sign Out'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
-                </ul>
-              </li>
+              <% if current_user.admin? %>
+                <li><%= link_to '<i class="fa fa-home"></i> '.html_safe + current_user.first_name + current_user.last_name, users_path, :class => 'navbar-link' %></li>
+              <% else %>
+                <li><%= link_to '<i class="fa fa-home"></i> '.html_safe + current_user.first_name + current_user.last_name, user_path(current_user), :class => 'navbar-link' %></li>
+              <% end %>
+              <li><%= link_to '<i class="fa fa-files-o"></i> Index of Pages'.html_safe, posts_path, :class => 'navbar-link' %></li>
+              <li><%= link_to '<i class="fa fa-sign-out"></i> Sign Out'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
             <% else %>
-              <button type="button" class="btn btn-success"><%= link_to 'Sign Up', new_user_registration_path %></button>
-              <button type="button" class="btn btn-info"><%= link_to 'Sign In', new_user_session_path %></button>
+              <button type="button" class="btn btn-success"><%= link_to '<i class="fa fa-user-plus"></i> Sign Up'.html_safe, new_user_registration_path %></button>
+              <button type="button" class="btn btn-info"><%= link_to '<i class="fa fa-sign-in"></i> Sign In'.html_safe, new_user_session_path %></button>
             <% end %>
           </ul>
-          </li>
-        </div>
+          </div>
       </div>
     </div>
 

@@ -24,6 +24,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.word_document = params[:post][:word_document]
+    @post.pdf_document = params[:post][:pdf_document]
+    @post.plain_document = params[:post][:plain_document]
     @post.user = current_user
 
     if @post.save
@@ -66,6 +69,7 @@ class PostsController < ApplicationController
     redirect_to [@post]
   end
 
+  #delete attachments
   def delete_word
     @post.word_document = nil
     @post.save

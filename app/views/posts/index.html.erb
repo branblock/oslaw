@@ -17,7 +17,7 @@
       <div class="col-md-12">
         <div id="second">
         <% if params[:tag].present? %>
-          <p><%= "These are posts with the '#{(params[:tag])}' tag" %>. <%= link_to 'See all posts', posts_path %>.</p>
+          <p><%= "These are the pages with the '#{(params[:tag])}' tag." %>. <%= link_to 'See all pages', posts_path %>.</p>
         <% end %>
         <% @alphabetical_posts.each do |letter, posts| %>
           <p style="text-decoration: underline"><%= letter.capitalize %></p>

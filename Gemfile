@@ -50,3 +50,5 @@ gem 'simple_form'
 gem 'paperclip', '~> 4.3'
 # Use Acts_As_Taggable_On for tagging
 gem 'acts-as-taggable-on', '~> 3.4'
+# Use ckeditor for WYSIWYG editing
+gem 'ckeditor'

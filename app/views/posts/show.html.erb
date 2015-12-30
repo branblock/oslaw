@@ -1,133 +1,88 @@
-<!-- POST TITLE -->
 <body id="page-posts-show">
-  <div class="container-fluid">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div id="first">
-            <span><h3><%= @post.title %>
-              <% if policy(@post).update? %>
-                <span style="font-size: 14px">[<%= link_to 'Edit Post', edit_post_path(@post) %>]</span>
-              <% end %>
-              <% if policy(@post).destroy? %>
-                <span style="font-size: 14px">[<%= link_to 'Delete Post', @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>]</span>
-              <% end %></h3></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- POST BODY -->
   <div class="container">
+
+    <!-- Post Body -->
     <div class="row">
-      <div class="col-md-12">
-        <div id="second">
-          <p><%= markdown(@post.body) %></p>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="future">
-      <button type="button" class="btn btn-primary btn-sm future" aria-label="Left Align"> Favorite
-        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-        <span class="badge"> # </span>
-      </button>
-    </div>
-  </div>
-
-<!-- DOCUMENTS & INFORMATION -->
-  <div class="container">
-    <div class="row">
-
-      <!-- MAIN DOCUMENT -->
-      <div class="col-md-6" style="margin-top: 15px">
+      <div class="col-md-8" style="margin-top: 30px">
         <div class="panel panel-default">
-          <div class="panel-heading"><i class="fa fa-folder-open"></i> Main Document</div>
-            <table class="table table-responsive">
-              <tr>
-                <th>MS Word</th>
-                  <td>
-                    <% if @post.word_document? %>
-                      <%= link_to @post.word_document.original_filename, @post.word_document.url, target: "_blank" %>
-                      <% if policy(@post).delete_word? %>
-                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, {action: :delete_word, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
-                      <% end %>
-                    <% else %>
-                      <%= 'None added.' %>
-                        <% if policy(@post).update? %>
-                          <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add'.html_safe, edit_post_path(@post) %></small>
-                        <% end %>
-                    <% end %>
-                  </td>
-              </tr>
-              <tr>
-                <th>PDF</th>
-                  <td>
-                    <% if @post.pdf_document? %>
-                      <%= link_to @post.pdf_document.original_filename, @post.pdf_document.url, target: "_blank" %>
-                      <% if policy(@post).delete_pdf? %>
-                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, {action: :delete_pdf, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
-                      <% end %>
-                    <% else %>
-                    <%= 'None added.' %>
-                      <% if policy(@post).update? %>
-                        <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add'.html_safe, edit_post_path(@post) %></small>
-                      <% end %>
-                    <% end %>
-                  </td>
-
-              </tr>
-              <tr>
-                <th>Plain Text</th>
-                  <td>
-                    <% if @post.plain_document? %>
-                      <%= link_to @post.plain_document.original_filename, @post.plain_document.url, target: "_blank" %>
-                      <% if policy(@post).delete_plain? %>
-                        <small> - <%= link_to '<i class="fa fa-trash"></i> Delete'.html_safe, {action: :delete_plain, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %></small>
-                      <% end %>
-                    <% else %>
-                    <%= 'None added.' %>
-                      <% if policy(@post).update? %>
-                        <small> - <%= link_to '<i class="fa fa-plus-square-o"></i> Add'.html_safe, edit_post_path(@post) %></small>
-                      <% end %>
-                    <% end %>
-                  </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-
-        <div class="panel panel-default future">
           <div class="panel-heading">
-            <strong><i class="fa fa-folder"></i> Prior Versions</strong>
+            <h3><%= @post.title %></h3>
           </div>
-          <div class="panel-body" style="padding-bottom: 10px;">
-            Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
-            Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
-            Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
-          </div>
+          <div class="panel-body"><%= @post.body.html_safe %></div>
         </div>
+      </div>
 
-      <!-- POST INFORMATION - SIDEBAR -->
-      <div class="col-md-6" style="margin-top: 15px">
+      <!-- Post Information -->
+      <div class="col-md-4" style="margin-top: 30px">
         <div class="panel panel-default">
-          <div class="panel-heading"><i class="fa fa-info-circle"></i> Post Information</div>
           <table class="table">
             <tr>
               <th>Author</th>
-                <td><%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)</td>
+                <td>
+                  <span>
+                    <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)
+                    <% if policy(@post).update? %>
+                      <br />[<%= link_to 'Edit Post', edit_post_path(@post) %>]
+                    <% end %>
+                    <% if policy(@post).destroy? %>
+                       [<%= link_to 'Delete Post', @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>]
+                    <% end %>
+                  </span>
+                </td>
             </tr>
             <tr>
-              <th>History</th>
-                <td>Created on <%= localize(@post.created_at, :format => :default) %> / Last revised on <%= localize(@post.updated_at, :format => :default) %></td>
+              <th>Created On</th>
+                <td><%= localize(@post.created_at, :format => :default) %></td>
+            </tr>
+            <tr>
+              <th>Last Updated</th>
+                <td><%= localize(@post.updated_at, :format => :default) %></td>
             </tr>
             <tr>
               <th>Tags</th>
                 <td><%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %></td>
+            </tr>
+            <tr>
+              <th>Word Doc</th>
+              <td><% if @post.word_document? %>
+                <%= link_to @post.word_document.original_filename, @post.word_document.url(:original, false) %>
+                <% if policy(@post).delete_word? %>
+                   [<%= link_to 'Delete', {action: :delete_word, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %>]
+                <% end %>
+              <% else %>
+                <% if policy(@post).update? %>
+                  <%= simple_form_for [@post] do |f| %>
+                    <div class="form-inputs">
+                      <%= f.input :word_document, as: :file, label: false %>
+                      <%= f.button :submit, value: "Upload", class: 'btn btn-success btn-sm' %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= 'None added.' %>
+                <% end %>
+              <% end %></td>
+            </tr>
+            <tr>
+              <th>PDF</th>
+              <td>
+              <% if @post.pdf_document? %>
+                <%= link_to @post.pdf_document.original_filename, @post.pdf_document.url, target: "_blank" %>
+                <% if policy(@post).delete_pdf? %>
+                   [<%= link_to 'Delete', {action: :delete_pdf, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %>]
+                <% end %>
+              <% else %>
+                <% if policy(@post).update? %>
+                  <%= simple_form_for [@post] do |f| %>
+                    <div class="form-inputs">
+                      <%= f.input :pdf_document, as: :file, label: false %>
+                      <%= f.button :submit, value: "Upload", class: 'btn btn-success btn-sm' %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= 'None added.' %>
+                <% end %>
+              <% end %>
+              </td>
             </tr>
             <tr>
               <th>Upvotes</th>
@@ -152,25 +107,39 @@
       </div>
     </div>
 
-
-    <!-- COMMENTS -->
+    <!-- Comments -->
     <div class="row">
       <div class="col-md-12">
         <div class="comments">
-          <div class="panel panel-default">
-            <div class="panel-heading">Discussion <i class="fa fa-comments"></i></div>
-            <div class="panel-body">
-              <div class='js-comments'>
-                <%= render @post.comments %>
-              </div>
-              <div class='new-comment'>
-                <%= render 'comments/form', comment: Comment.new, post: @post %>
-              </div>
-            </div>
+          <p style="font-weight: 400; margin-bottom: 10px; text-decoration: underline">Discuss <i class="fa fa-comments"></i></p>
+          <div class='js-comments'>
+            <%= render @post.comments %>
+          </div>
+          <div class='new-comment'>
+            <%= render 'comments/form', comment: Comment.new, post: @post %>
           </div>
         </div>
       </div>
     </div>
+
+              <!-- FUTURE STUFF -->
+              <div class="future">
+                <button type="button" class="btn btn-primary btn-sm future" aria-label="Left Align"> Favorite
+                  <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                  <span class="badge"> # </span>
+                </button>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <strong><i class="fa fa-folder"></i> Prior Versions</strong>
+                  </div>
+                  <div class="panel-body" style="padding-bottom: 10px;">
+                    Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
+                    Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %><br />
+                    Version #:<%= link_to "Word", "#" %> • <%= link_to "PDF", "#" %>
+                  </div>
+                </div>
+              </div>
 
   </div>
 </body>
