@@ -11,9 +11,7 @@ Rails.application.routes.draw do
     member do
       put "like" => "posts#upvote"
       put "unlike" => "posts#downvote"
-      put "delete_word" => "posts#delete_word"
-      put "delete_pdf" => "posts#delete_pdf"
-      put "delete_plain" => "posts#delete_plain"
+      put "delete_document" => "posts#delete_document"
     end
   end
 

@@ -1,27 +1,29 @@
-<!-- POST TITLE -->
-<body id="page-posts-new">
-  <div class="container">
+<body id="page-posts-edit" data-no-turbolink>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div id="first">
-          <h3>Edit Page</h3>
-        </div>
-      </div>
+  <div class="row">
+    <div id="first">
+      <h3>Edit Page</h3>
     </div>
+  </div>
 
-    <!-- FORM -->
-    <div class="row">
-      <div class="col-md-12">
-        <%= simple_form_for [@post] do |f| %>
-          <div class="form-inputs">
-            <%= f.input :title %>
-            <%= f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'} } %>
-            <%= f.input :tag_list, label: "Tags* (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
-            <%= f.button :submit, class: 'btn btn-success' %>
-          </div>
-        <% end %>
-      </div>
+  <!-- FORM -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= simple_form_for [@post] do |f| %>
+        <div class="form-inputs">
+          <%= f.input :title %>
+          <%= f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'} } %>
+          <%= f.input :tag_list, label: "Tags (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
+            <% if @post.document? %>
+              <p><strong>Document associated with this page:</strong> <%= @post.document.original_filename %></p>
+              <%= f.input :document, as: :file, label: "Change the associated document:" %>
+            <% else %>
+              <%= f.input :document, as: :file, label: "Associate a document with this page:" %>
+            <% end %>
+          <%= link_to "Cancel", url_for(@post), class: 'btn btn-info' %>
+          <%= f.submit "Update Page", class: 'btn btn-success' %>
+        </div>
+      <% end %>
     </div>
   </div>
 

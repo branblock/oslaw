@@ -35,5 +35,8 @@ module Oslaw
     # ckeditor
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
+    # custom Devise failures
+    config.autoload_paths += %W(#{config.root}/lib)
+
   end
 end
