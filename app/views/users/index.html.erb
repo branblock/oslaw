@@ -1,69 +1,72 @@
-<div class="container">
+<body id="page-users-index">
 
-  <div class="col-md-12" style="padding-left: 0">
-    <p style="font-size: 18px; font-weight: bold; margin-top: 40px;">Manage Users</p>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Manage</th>
-            </tr>
-          </thead>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Manage Users</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.first_name %> <%= user.last_name %></td>
+                <td><%= link_to "#{user.username}", user_path(user) %></td>
+                <td><%= mail_to(user.email) %></td>
+                <td>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Manage Posts</h3>
+        <div class="table-responsive" style="table-layout: fixed; word-wrap: break-word;">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th style="text-align: center">Id</th>
+                <th>Name</th>
+                <th>Tags</th>
+                <th style="text-align: center">Created</th>
+                <th style="text-align: center">Revised</th>
+                <th style="text-align: center">Comments</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
           <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= user.id %></td>
-              <td><%= user.first_name %> <%= user.last_name %></td>
-              <td><%= link_to "#{user.username}", user_path(user) %></td>
-              <td><%= mail_to(user.email) %></td>
-              <td>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+            <% @posts.each do |post| %>
+              <tr>
+                <td style="text-align: center; width: 5%"><%= post.id %></td>
+                <td style="width: 35%"><%= link_to "#{post.title}", post_path(post) %></td>
+                <td style="width: 20%">
+                  <% post.tags.each do |tag| %>
+                    <%= link_to tag, tag_path(tag) %><br />
+                  <% end %>
+                </td>
+                <td style="text-align: center; width: 5%"><%= localize(post.created_at, :format => :default) %></td>
+                <td style="text-align: center; width: 5%"><%= localize(post.updated_at, :format => :default) %></td>
+                <td style="text-align: center; width: 5%"><%= pluralize (post.comments.count), '' %></td>
+                <td style="width: 25%"><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(post) %> ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, post, method: :delete, data: {confirm: "THIS DELETES THE POST! Are you sure? Please confirm the deletion of '#{post.title}'."} %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-  <div class="col-md-12" style="padding-left: 0">
-    <p style="font-size: 18px; font-weight: bold">Manage Posts</p>
-      <div class="table-responsive" style="table-layout: fixed;
-    word-wrap: break-word;">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th style="text-align: center">Id</th>
-              <th>Name</th>
-              <th>Tags</th>
-              <th style="text-align: center">Created</th>
-              <th style="text-align: center">Revised</th>
-              <th style="text-align: center">Comments</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-        <tbody>
-          <% @posts.each do |post| %>
-            <tr>
-              <td style="text-align: center; width: 5%"><%= post.id %></td>
-              <td style="width: 35%"><%= link_to "#{post.title}", post_path(post) %></td>
-              <td style="width: 20%">
-                <% post.tags.each do |tag| %>
-                  <%= link_to tag, tag_path(tag) %><br />
-                <% end %>
-              </td>
-              <td style="text-align: center; width: 5%"><%= localize(post.created_at, :format => :default) %></td>
-              <td style="text-align: center; width: 5%"><%= localize(post.updated_at, :format => :default) %></td>
-              <td style="text-align: center; width: 5%"><%= pluralize (post.comments.count), '' %></td>
-              <td style="width: 25%"><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Post'.html_safe, edit_post_path(post) %> ⎜ <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, post, method: :delete, data: {confirm: "THIS DELETES THE POST! Are you sure? Please confirm the deletion of '#{post.title}'."} %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div>
+</body>

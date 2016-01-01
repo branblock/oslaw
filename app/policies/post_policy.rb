@@ -19,15 +19,7 @@ class PostPolicy < ApplicationPolicy
     user.present? && user.admin?
   end
 
-  def delete_word?
-    create?
-  end
-
-  def delete_pdf?
-    create?
-  end
-
-  def delete_plain?
+  def delete_document?
     create?
   end
 end

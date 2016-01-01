@@ -1,13 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :delete_word, :delete_pdf, :delete_plain]
+  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :delete_document]
 
   def index
     @posts = Post.all
 
     if params[:tag].present?
-      @tagged_posts = @posts.tagged_with(params[:tag])
-      @alphabetical_posts = @tagged_posts.order("title ASC").group_by{|u| u.title[0]}
+      @tagged_posts = @posts.tagged_with(params[:tag]).order("title ASC").group_by{|u| u.title[0]}
     else
       @alphabetical_posts = @posts.order("title ASC").group_by{|u| u.title[0]}
     end
@@ -20,13 +19,11 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.user = current_user
   end
 
   def create
     @post = Post.new(post_params)
-    @post.word_document = params[:post][:word_document]
-    @post.pdf_document = params[:post][:pdf_document]
-    @post.plain_document = params[:post][:plain_document]
     @post.user = current_user
 
     if @post.save
@@ -42,6 +39,7 @@ class PostsController < ApplicationController
 
   def update
     @post.assign_attributes(post_params)
+    @post.document = params[:post][:document]
 
     if @post.save
       flash[:notice] = "Post has been updated."
@@ -70,36 +68,18 @@ class PostsController < ApplicationController
   end
 
   #delete attachments
-  def delete_word
-    @post.word_document = nil
+  def delete_document
+    @post.document = nil
     @post.save
       respond_to do |format|
-        format.html { redirect_to @post, notice: 'Word document has been removed.' }
-        format.json { render :show, status: :ok, location: @post }
-    end
-  end
-
-  def delete_pdf
-    @post.pdf_document = nil
-    @post.save
-      respond_to do |format|
-        format.html { redirect_to @post, notice: 'PDF has been removed.' }
-        format.json { render :show, status: :ok, location: @post }
-    end
-  end
-
-  def delete_plain
-    @post.plain_document = nil
-    @post.save
-      respond_to do |format|
-        format.html { redirect_to @post, notice: 'Plain text has been removed.' }
+        format.html { redirect_to @post, notice: 'Document has been removed.' }
         format.json { render :show, status: :ok, location: @post }
     end
   end
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :word_document, :pdf_document, :plain_document, :tag_list)
+    params.require(:post).permit(:title, :body, :document, :tag_list)
   end
 
   def ready_post
