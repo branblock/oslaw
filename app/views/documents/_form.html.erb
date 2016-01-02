@@ -1,0 +1,4 @@
+<%= simple_form_for [post, document] do |f| %>
+  <%= f.file_field :upload, label: false %>
+  <%= f.submit :Upload, class: 'btn btn-success btn btn-sm' %>
+<% end %>

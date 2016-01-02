@@ -1,14 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :delete_document]
+  before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
-    @posts = Post.all
-
     if params[:tag].present?
-      @tagged_posts = @posts.tagged_with(params[:tag]).order("title ASC").group_by{|u| u.title[0]}
+      @tagged_posts = Post.all.tagged_with(params[:tag]).alphabetical.group_by{ |post| post.title[0].downcase }
     else
-      @alphabetical_posts = @posts.order("title ASC").group_by{|u| u.title[0]}
+      @alphabetical_posts = Post.all.alphabetical.group_by { |post| post.title[0].downcase }
     end
   end
 
@@ -27,7 +25,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      flash[:alert] = "Post has been saved."
+      flash[:notice] = "Page has been saved."
       redirect_to [@post]
     else
       render :new
@@ -39,10 +37,9 @@ class PostsController < ApplicationController
 
   def update
     @post.assign_attributes(post_params)
-    @post.document = params[:post][:document]
 
     if @post.save
-      flash[:notice] = "Post has been updated."
+      flash[:notice] = "Page has been updated."
       redirect_to [@post]
     else
       render :edit
@@ -51,7 +48,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    flash[:notice] = "Post has been deleted."
+    flash[:notice] = "Page has been deleted."
     redirect_to action: :index
   end
 
@@ -67,19 +64,9 @@ class PostsController < ApplicationController
     redirect_to [@post]
   end
 
-  #delete attachments
-  def delete_document
-    @post.document = nil
-    @post.save
-      respond_to do |format|
-        format.html { redirect_to @post, notice: 'Document has been removed.' }
-        format.json { render :show, status: :ok, location: @post }
-    end
-  end
-
   private
   def post_params
-    params.require(:post).permit(:title, :body, :document, :tag_list)
+    params.require(:post).permit(:title, :body, :upload, :tag_list)
   end
 
   def ready_post

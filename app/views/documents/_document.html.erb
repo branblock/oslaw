@@ -1,0 +1,6 @@
+<% @post.documents.each do |document| %>
+  <%= link_to document.upload_file_name, document.upload.url, target: "_blank" %>
+<% if policy(@post).delete_document? %>
+   [<%= link_to '<i class="fa fa-trash-o"></i> Remove Document', [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>]
+<% end %>
+<% end %>

@@ -7,45 +7,53 @@
         <u>Upvotes:</u>
          <%= @post.get_upvotes.size %>
         <% if @current_user.voted_up_on? @post %>
-          <%= link_to unlike_post_path(@post), method: :put do %>
-            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-          <% end %> <small>(remove upvote)</small>
+          <%= '/ You upvoted this page.' %>
         <% else %>
           <%= link_to like_post_path(@post), method: :put do %>
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-          <% end %> <small>(upvote)</small>
+          <% end %>
         <% end %>
-        / Favorite:
+      </p>
+      <p>
+        <% if policy(@post).update? %>
+          <%= link_to '<i class="fa fa-pencil"></i> Edit Post'.html_safe, edit_post_path(@post) %>
+        <% end %>
+        <% if policy(@post).destroy? %>
+           / <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>]
+        <% end %></span>
       </p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <div id="page-posts-show-second">
-        <p><i class="fa fa-file-text-o"></i> <u>Associated Document:</u>
-        <% if @post.document? %>
-          <%= link_to @post.document.original_filename, @post.document.url(:original, false) %>
-          <% if policy(@post).delete_document? %>
-             [<%= link_to 'Delete', {action: :delete_document, id: @post.id}, method: :put, data: { confirm: 'Are you sure?' } %>]
-          <% end %>
-        <% else %>
-          <%= 'None' %>
-            <% if policy(@post).update? %>
-               [<%= link_to 'Add one', edit_post_path %>]
+    <div id="page-posts-show-second">
+      <div class="col-md-6">
+        <p>
+          <u>Author:</u> <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)<br />
+          <u>Created On:</u> <%= localize(@post.created_at, :format => :default) %><br />
+          <u>Last Updated:</u> <%= localize(@post.updated_at, :format => :default) %><br />
+          <u>Tags:</u> <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %><br />
+          <u>Comments:</u> <span class='js-comments-count'><%= @post.comments.count %></span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p><i class="fa fa-file-text-o"></i> <u>Associated Documents:</u>
+          <% if @post.documents.count > 0 %>
+          <br />
+            <% @post.documents.each do |document| %>
+              <%= link_to document.upload_file_name, document.upload.url, target: "_blank" %>
+              <% if policy(@post).update? %>
+               / <%= link_to '<i class="fa fa-trash-o"></i> Remove Document'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
+              <% end %>
+              <br />
             <% end %>
-        <% end %></p>
-        <p><u>Author:</u> <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)
+            <%= render 'documents/form', document: Document.new, post: @post %>
+        <% else %>
+          <br /><%= 'None' %>
           <% if policy(@post).update? %>
-             [<%= link_to 'Edit Post', edit_post_path(@post) %>]
+            <%= render 'documents/form', document: Document.new, post: @post %>
           <% end %>
-          <% if policy(@post).destroy? %>
-             [<%= link_to 'Delete Post', @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>]
-          <% end %><br />
-        <u>Created On:</u> <%= localize(@post.created_at, :format => :default) %>
-        <u>Last Updated:</u> <%= localize(@post.updated_at, :format => :default) %><br />
-        <u>Tags:</u> <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %><br />
-        <u>Comments:</u> <span class='js-comments-count'><%= @post.comments.count %></span></p>
+        <% end %></span></p>
       </div>
     </div>
   </div>
