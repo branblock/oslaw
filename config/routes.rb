@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  resources :posts, only: [] do
+    resources :documents, only: [:create, :destroy]
+  end
+
   resources :posts do
     member do
       put "like" => "posts#upvote"
