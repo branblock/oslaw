@@ -3,10 +3,12 @@ class PostsController < ApplicationController
   before_action :ready_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
+    @posts = Post.all
+
     if params[:tag].present?
-      @tagged_posts = Post.all.tagged_with(params[:tag]).alphabetical.group_by{ |post| post.title[0].downcase }
+      @tagged_posts = @posts.tagged_with(params[:tag]).alphabetical.group_by{ |post| post.title[0].downcase }
     else
-      @alphabetical_posts = Post.all.alphabetical.group_by { |post| post.title[0].downcase }
+      @alphabetical_posts = @posts.alphabetical.group_by { |post| post.title[0].downcase }
     end
   end
 

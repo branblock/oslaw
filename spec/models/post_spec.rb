@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Post, type: :model, focus: true do
+RSpec.describe Post, type: :model do
   let(:user) { FactoryGirl.create(:user) }
   let(:post) { FactoryGirl.create(:post, user: user) }
 
   it { should have_many(:comments) }
+  it { should have_many(:documents) }
 
   it { should belong_to(:user) }
 
@@ -15,27 +16,6 @@ RSpec.describe Post, type: :model, focus: true do
   it { should validate_length_of(:title).is_at_least(5) }
   it { should validate_length_of(:body).is_at_least(5) }
 
-  it { should have_attached_file(:word_document) }
-  it { should validate_attachment_content_type(:word_document).
-    allowing('application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document').
-    rejecting('application/pdf', 'text/plain', 'text/xml', 'image/jpeg', 'image/gif', 'image/png') }
-  it { should validate_attachment_size(:word_document).
-    less_than(5.megabytes) }
-
-  it { should have_attached_file(:pdf_document) }
-  it { should validate_attachment_content_type(:pdf_document).
-    allowing('application/pdf').
-    rejecting('application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'text/xml', 'image/jpeg', 'image/gif', 'image/png') }
-  it { should validate_attachment_size(:pdf_document).
-    less_than(5.megabytes) }
-
-  it { should have_attached_file(:plain_document) }
-  it { should validate_attachment_content_type(:plain_document).
-    allowing('text/plain').
-    rejecting('application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/xml', 'image/jpeg', 'image/gif', 'image/png') }
-  it { should validate_attachment_size(:plain_document).
-    less_than(5.megabytes) }
-
   describe "attributes" do
     it "should respond to title" do
       expect(post).to respond_to(:title)
@@ -43,18 +23,6 @@ RSpec.describe Post, type: :model, focus: true do
 
     it "should respond to body" do
       expect(post).to respond_to(:body)
-    end
-
-    it "should respond to word_document" do
-      expect(post).to respond_to(:word_document)
-    end
-
-    it "should respond to pdf_document" do
-      expect(post).to respond_to(:pdf_document)
-    end
-
-    it "should respond to plain_document" do
-      expect(post).to respond_to(:plain_document)
     end
   end
 

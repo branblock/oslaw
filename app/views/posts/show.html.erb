@@ -2,6 +2,8 @@
 
   <div class="row">
     <div id="first">
+
+      <!-- post title, with upvotes, and edit and delete functions -->
       <h3><%= @post.title %></h3>
       <p>
         <u>Upvotes:</u>
@@ -16,17 +18,20 @@
       </p>
       <p>
         <% if policy(@post).update? %>
-          <%= link_to '<i class="fa fa-pencil"></i> Edit Post'.html_safe, edit_post_path(@post) %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_post_path(@post) %>
         <% end %>
         <% if policy(@post).destroy? %>
-           / <%= link_to '<i class="fa fa-trash-o"></i> Delete Post'.html_safe, @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>]
+           | <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>
         <% end %></span>
       </p>
+
     </div>
   </div>
 
   <div class="row">
     <div id="page-posts-show-second">
+
+      <!-- post information -->
       <div class="col-md-6">
         <p>
           <u>Author:</u> <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)<br />
@@ -36,14 +41,20 @@
           <u>Comments:</u> <span class='js-comments-count'><%= @post.comments.count %></span>
         </p>
       </div>
+
+      <!-- associated documents -->
       <div class="col-md-6">
         <p><i class="fa fa-file-text-o"></i> <u>Associated Documents:</u>
           <% if @post.documents.count > 0 %>
           <br />
             <% @post.documents.each do |document| %>
-              <%= link_to document.upload_file_name, document.upload.url, target: "_blank" %>
+              <%= document.upload_file_name %>
+              <%= link_to '<i class="fa fa-download"></i>'.html_safe, download_post_document_path(@post, document) %>
+              <% if document.upload_content_type == "application/pdf" %>
+               | <%= link_to '<i class="fa fa-external-link"></i>'.html_safe, document.upload.url, target: "_blank" %>
+              <% end %>
               <% if policy(@post).update? %>
-               / <%= link_to '<i class="fa fa-trash-o"></i> Remove Document'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
+               | <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
               <% end %>
               <br />
             <% end %>
@@ -55,15 +66,19 @@
           <% end %>
         <% end %></span></p>
       </div>
+
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
+
+      <!-- post body -->
       <div class="panel panel-default">
         <div class="panel-body"><%= @post.body.html_safe %></div>
       </div>
 
+      <!-- comments -->
       <div class="comments">
         <p style="font-weight: 400; margin-bottom: 10px; text-decoration: underline">Discuss <i class="fa fa-comments"></i></p>
         <div class='js-comments'>
@@ -73,6 +88,7 @@
           <%= render 'comments/form', comment: Comment.new, post: @post %>
         </div>
       </div>
+
     </div>
   </div>
 

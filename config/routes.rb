@@ -15,9 +15,16 @@ Rails.application.routes.draw do
     member do
       put "like" => "posts#upvote"
       put "unlike" => "posts#downvote"
-      put "delete_document" => "posts#delete_document"
     end
   end
+
+resources :posts, only: [] do
+  resources :documents do
+    member do
+      get "download" => "documents#download"
+    end
+  end
+end
 
   resources :posts, only: [] do
     resources :comments do

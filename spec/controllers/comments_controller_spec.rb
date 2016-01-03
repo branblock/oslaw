@@ -16,7 +16,6 @@ RSpec.describe CommentsController, type: :controller do
       it "returns http success" do
         post :create, format: :js, post_id: my_post.id, comment: FactoryGirl.build(:comment).attributes
         expect(response).to have_http_status(:success)
-        expect(flash[:notice]).to be_present
       end
     end
 
@@ -30,7 +29,6 @@ RSpec.describe CommentsController, type: :controller do
       it "returns http success" do
         post :create, format: :js, post_id: my_post.id, comment: {body: ""}
         expect(response).to have_http_status(:success)
-        expect(flash[:alert]).to be_present
       end
     end
   end
