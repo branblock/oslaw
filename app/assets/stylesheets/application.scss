@@ -274,10 +274,7 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 /* 4.1 Posts - Edit */
-#page-posts-edit input[type="file"] {
-  display: inline-flex;
-  padding-left: 5px;
-}
+
 
 /* 4.2 Posts - Index */
 #page-posts-index .col-md-12 h3 {
@@ -306,15 +303,18 @@ a:active, a:focus {
   text-decoration: underline;
 }
 
-#page-posts-new input[type="file"] {
-  display: inline-flex;
-  padding-left: 5px;
-}
-
 /* 4.4 Posts - Show */
 #page-posts-show blockquote {
   font-size: 14px;
   margin-bottom: 5px;
+}
+
+#page-posts-show input[type="file"] {
+  display: flex;
+}
+
+#page-posts-show input[type="submit"] {
+  margin-top: 5px;
 }
 
 #page-posts-show #page-posts-show-second {
@@ -358,12 +358,35 @@ a:active, a:focus {
 
 /* 4.5 Registrations - New */
 #page-registrations-new .col-md-4 {
-  padding-top: 15px;
+  background: #3591d5;
+  border-radius: 0;
+  color: #fff;margin-left: 0;
+  margin: 15px 15px 0 15px;
+  padding: 10px 15px;
+}
+
+#page-registrations-new .col-md-4 h3 {
+  font-weight: 300;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#page-registrations-new .col-md-4 h4 {
+  font-weight: 300;
 }
 
 #page-registrations-new .col-md-6 {
   margin-top: 15px;
-  text-align: center;
+}
+
+#page-registrations-new .col-md-6 .btn {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 940px) {
+  #page-registrations-new .col-md-6 .form-control {
+    width: 75%;
+  }
 }
 
 /* 4.6 Sessions - New */

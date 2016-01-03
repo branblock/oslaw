@@ -5,7 +5,7 @@ FactoryGirl.define do
     user
 
     trait :tags do
-      after(:create) { |post| post.update_attributes(tag_list: Faker::Lorem.words(4)) }
+      after(:create) { |post| post.update_attributes(tag_list: 'tags') }
     end
 
   end

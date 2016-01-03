@@ -18,8 +18,4 @@ class PostPolicy < ApplicationPolicy
   def destroy?
     user.present? && user.admin?
   end
-
-  def delete_document?
-    create?
-  end
 end
