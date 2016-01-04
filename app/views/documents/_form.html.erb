@@ -1,4 +1,4 @@
 <%= simple_form_for [post, document] do |f| %>
   <%= f.file_field :upload, label: false %>
-  <%= f.submit :Upload, class: 'btn btn-success btn btn-sm' %>
+  <%= f.button :button, "Upload".html_safe, class: 'btn btn-success btn-sm', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Uploading..."} %>
 <% end %>

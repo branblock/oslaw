@@ -1,5 +1,4 @@
 <% if @comment.destroyed? %>
-  $('.flash').prepend("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= flash.now[:notice] %></div>");
   $('#comment-' +<%= @comment.id %>).hide();
   $('.js-comments-count').html("<%= pluralize(@post.comments.count, 'comment') %>");
 <% else %>

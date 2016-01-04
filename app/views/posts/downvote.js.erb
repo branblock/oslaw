@@ -1,0 +1,2 @@
+$('#post-downvote').html("<%= j render partial: 'votes/vote', locals: { post: @post } %>");
+$('#post-points').html("<%= pluralize (@post.points), 'upvote' %>");

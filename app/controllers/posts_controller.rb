@@ -58,12 +58,22 @@ class PostsController < ApplicationController
   #downvote_from user
   def upvote
     @post.upvote_from current_user
-    redirect_to [@post]
+    @post.points
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+      format.js
+    end
   end
 
   def downvote
     @post.downvote_from current_user
-    redirect_to [@post]
+    @post.points
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+      format.js
+    end
   end
 
   private

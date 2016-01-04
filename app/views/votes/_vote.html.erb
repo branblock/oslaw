@@ -1,0 +1,5 @@
+<% if current_user.voted_up_on? @post %>
+  <span id="post-downvote"><%= link_to '<i class="fa fa-thumbs-o-down"></i>&nbsp;Downvote'.html_safe, unlike_post_path(@post), method: :put, class: 'btn btn-default btn-xs', remote: true %></span>
+<% else %>
+  <span id="post-upvote"><%= link_to '<i class="fa fa-thumbs-o-up"></i>&nbsp;Upvote'.html_safe, like_post_path(@post), method: :put, class: 'btn btn-default btn-xs', remote: true %></span>
+<% end %>

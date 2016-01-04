@@ -7,4 +7,8 @@ class Comment < ActiveRecord::Base
   validates :body, length: { minimum: 5 }, presence: true
 
   default_scope { order('updated_at ASC') }
+
+  def points
+    get_upvotes.size
+  end
 end

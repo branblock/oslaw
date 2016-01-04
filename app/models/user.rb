@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
+  has_many :favorites
+  has_many :favorite_posts, through: :favorites, source: :post
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -65,4 +67,9 @@ class User < ActiveRecord::Base
 
   # act_as_votable
   acts_as_voter
+
+  # favorites
+  def favorite(post)
+    favorites.where(post_id: post.id).first
+  end
 end
