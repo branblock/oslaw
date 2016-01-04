@@ -174,8 +174,13 @@ a:active, a:focus {
   background: #239e57;
 }
 
-.btn-danger, .btn-danger:hover {
+.btn-danger {
   background: #e74c3c;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #d62c1a;
 }
 
 .btn-info {
@@ -313,12 +318,12 @@ a:active, a:focus {
   display: flex;
 }
 
-#page-posts-show input[type="submit"] {
+#page-posts-show #page-posts-show-second .btn-success {
+  margin-bottom: 10px;
   margin-top: 5px;
 }
 
 #page-posts-show #page-posts-show-second {
-  margin-bottom: 20px;
   margin-top: 10px;
 }
 
@@ -417,12 +422,7 @@ a:active, a:focus {
 }
 
 /* 4.7 Users - Show */
-#page-users-show .container-fluid {
-  background: #2098f5;
-  margin-bottom: 10px;
-  margin-top: 0;
-  padding-bottom: 10px;
-}
+
 
 /* 4.8 Welcome - Index */
 #page-welcome-index .alert {

@@ -10,17 +10,25 @@
     <div class="col-md-4">
       <p><%= image_tag @user.avatar.url(:thumb) %></p>
       <p><%= link_to "Edit your profile", edit_user_registration_path %></p>
-      <p><%= link_to 'Create A New Post', new_post_path %></p>
+      <p><%= link_to 'Create A New Page', new_post_path %></p>
 
       <p><u>Oslaw Stats</u></p>
-      <p>Posts: <%= @user.posts.count %></p>
-      <p>Last Post:
+      <p>Pages: <%= @user.posts.count %></p>
+      <p>Latest Page:<br/>
         <% if @user.posts.empty? %>
-          <%= "No posts" %>
+          <%= "No pages" %>
         <% else %>
           <%= link_to "#{@user.posts.last.title}", post_path(@user.posts.last) %> <small>(created on <%= localize(@user.posts.last.created_at, :format => :default) %>)</small>
         <% end %></p>
-      <p>Upvoted Posts: <%= (@user.votes.up.for_type(Post).votables).size %></p>
+      <p>Upvoted Pages: <%= (@user.votes.up.for_type(Post).votables).size %></p>
+      <p>Favorites:<br />
+        <% if @user.favorite_posts.empty? %>
+          <%= "No favorited pages" %>
+        <% else %>
+          <% @user.favorite_posts.each do |post| %>
+            <%= link_to post.title, post_path(post) %><br />
+          <% end %>
+        <% end %>
       <p>Comments: <%= @user.comments.count %></p>
       <p>Last Comment:
         <% if @user.comments.empty? %>

@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :documents, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   acts_as_taggable_on :tags
   acts_as_votable
@@ -14,4 +15,8 @@ class Post < ActiveRecord::Base
   scope :most_liked, -> { order("cached_votes_up DESC").limit(5) }
   scope :updated, -> { order(updated_at: :desc).limit(5) }
   scope :most_recent, -> { order(created_at: :desc).limit(5) }
+
+  def points
+    get_upvotes.size
+  end
 end

@@ -16,7 +16,7 @@
           <%= f.input :email, required: true %>
           <%= f.input :password, required: true, placeholder: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
           <%= f.input :password_confirmation, required: true %>
-          <%= f.submit "Sign up", class: 'btn btn-success' %>
+          <%= f.button :button, "Sign Up".html_safe, class: 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating Account..."} %>
         </div>
       <% end %>
       <p>By signing up, I agree to Oslaws's <%= link_to 'Terms of Service', '#' %>.</p>

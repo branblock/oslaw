@@ -6,22 +6,18 @@
       <!-- post title, with upvotes, and edit and delete functions -->
       <h3><%= @post.title %></h3>
       <p>
-        <u>Upvotes:</u>
-         <%= @post.get_upvotes.size %>
-        <% if @current_user.voted_up_on? @post %>
-          <%= '/ You upvoted this page.' %>
-        <% else %>
-          <%= link_to like_post_path(@post), method: :put do %>
-            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-          <% end %>
-        <% end %>
+        <%= render partial: 'votes/vote', locals: { post: @post } %>
+        &nbsp;<%= render partial: 'favorites/favorite', locals: { post: @post } %>
       </p>
       <p>
+        <span id="post-points"><%= pluralize (@post.points), 'upvote' %></span>&nbsp;|&nbsp;
+        <span class='js-comments-count'><%= pluralize (@post.comments.count), 'comment' %></span>
+      <p>
         <% if policy(@post).update? %>
-          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_post_path(@post) %>
+          <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_post_path(@post),class: 'btn btn-info btn-xs' %>
         <% end %>
         <% if policy(@post).destroy? %>
-           | <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, @post, method: :delete, data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>
+          &nbsp;<%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, @post, method: :delete, class: 'btn btn-danger btn-xs', data: {confirm: "Are you sure? Please confirm the deletion of this post."} %>
         <% end %></span>
       </p>
 
@@ -34,11 +30,15 @@
       <!-- post information -->
       <div class="col-md-6">
         <p>
-          <u>Author:</u> <%= link_to "#{@post.user.username}", user_path(@post.user) %> (<%= pluralize (@user.posts.count), 'post' %>)<br />
-          <u>Created On:</u> <%= localize(@post.created_at, :format => :default) %><br />
-          <u>Last Updated:</u> <%= localize(@post.updated_at, :format => :default) %><br />
-          <u>Tags:</u> <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %><br />
-          <u>Comments:</u> <span class='js-comments-count'><%= @post.comments.count %></span>
+          <u>Author:</u>&nbsp;<%= link_to "#{@post.user.username}", user_path(@post.user) %>&nbsp;(<%= pluralize (@user.posts.count), 'post' %>)<br />
+          <u>Created On:</u>&nbsp;<%= localize(@post.created_at, :format => :default) %><br />
+          <u>Last Updated:</u>&nbsp;<%= localize(@post.updated_at, :format => :default) %><br />
+          <u>Tags:</u>&nbsp;
+            <% if @post.tag_list.size == 0 %>
+              <%= 'No tags' %>
+            <% else %>
+              <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %>
+            <% end %><br />
         </p>
       </div>
 
@@ -51,10 +51,10 @@
               <%= document.upload_file_name %>
               <%= link_to '<i class="fa fa-download"></i>'.html_safe, download_post_document_path(@post, document) %>
               <% if document.upload_content_type == "application/pdf" %>
-               | <%= link_to '<i class="fa fa-external-link"></i>'.html_safe, document.upload.url, target: "_blank" %>
+                &nbsp;|&nbsp;<%= link_to '<i class="fa fa-external-link"></i>'.html_safe, document.upload.url, target: "_blank" %>
               <% end %>
               <% if policy(@post).update? %>
-               | <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
+                &nbsp;|&nbsp;<%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
               <% end %>
               <br />
             <% end %>
