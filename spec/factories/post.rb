@@ -4,9 +4,8 @@ FactoryGirl.define do
     body { Faker::Lorem.sentence(word_count = 5) }
     user
 
-    trait :tags do
-      after(:create) { |post| post.update_attributes(tag_list: 'tags') }
+    trait :tagged do
+      after(:create) { |post| post.update_attributes(tag_list: 'tag') }
     end
-
   end
 end

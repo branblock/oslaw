@@ -6,11 +6,15 @@ class DocumentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @document = @post.documents.new(document_params)
 
-    if @document.save
-      redirect_to [@post]
+    if params[:document]
+      if @document.save
+        redirect_to [@post]
+      else
+        flash[:alert] = "Document not added."
+        redirect_to [@post]
+      end
     else
-      flash[:alert] = "Document not added."
-      redirect_to [@post]
+      redirect_to [@post], alert: "No file detected."
     end
   end
 
@@ -29,7 +33,7 @@ class DocumentsController < ApplicationController
 
   private
   def document_params
-    params.require(:document).permit(:upload)
+    params.require(:document).permit(:upload) if params[:document]
   end
 
   def set_document

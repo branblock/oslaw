@@ -1,5 +1,0 @@
-<% if favorite = current_user.favorite(post) %>
-  <span id="destroy"><%= link_to '<i class="fa fa-star"></i>&nbsp;Unfavorite'.html_safe, [post, favorite], method: :delete, class: 'btn btn-default btn-xs', remote: true %></span>
-<% else %>
-  <span id="create"><%= link_to '<i class="fa fa-star-o"></i>&nbsp;Favorite'.html_safe, [post, Favorite.new], method: :post, class: 'btn btn-default btn-xs', remote: true %></span>
-<% end %>

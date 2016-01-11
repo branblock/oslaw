@@ -6,7 +6,7 @@ RSpec.describe Post, type: :model do
 
   it { should have_many(:comments) }
   it { should have_many(:documents) }
-  it { should have_many(:favorites) }
+  it { should have_many(:bookmarks) }
 
   it { should belong_to(:user) }
 

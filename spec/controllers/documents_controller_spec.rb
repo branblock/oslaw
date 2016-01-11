@@ -1,20 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe DocumentsController, type: :controller do
-  let(:my_post) { FactoryGirl.create(:post) }
-  let(:document) { FactoryGirl.create(:document, post: my_post) }
+  let(:my_post) { create(:post) }
+  let(:document) { create(:document, post: my_post) }
 
   describe "POST create" do
     login_user
     context "with valid params" do
       it "creates a new document" do
         expect {
-          post :create, post_id: my_post.id, document: FactoryGirl.create(:document).attributes
+          post :create, post_id: my_post.id, document: create(:document).attributes
         }.to change(Document, :count).by(1)
       end
 
       it "redirects to the post" do
-        post :create, post_id: my_post.id, document: FactoryGirl.build(:document).attributes
+        post :create, post_id: my_post.id, document: build(:document).attributes
         expect(response).to redirect_to [my_post]
       end
     end

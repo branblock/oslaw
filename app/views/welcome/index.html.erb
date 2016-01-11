@@ -1,32 +1,39 @@
 <body id="page-welcome-index">
+  <div class="container-fluid">
 
-  <!-- jumbotron -->
-  <div class="row">
+    <!-- jumbotron -->
     <div class="jumbotron text-center">
-      <h2>A secure and easy way to share and collaborate on legal documents.</h2>
-      <p>Started by a lawyer, Oslaw allows you to create and discuss legal documents online. It's 100% free to join and use the public database. Make your pages and information private for only $9.99/month.</p>
-      <p>Create a free Oslaw account and start collaborating today.</p>
-      <%= link_to new_user_registration_path, class: "btn btn-success btn-lg" do %>
-        Try Oslaw Now
-      <% end %>
-      <h2>PNG WILL GO HERE!</h2>
+      <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <h2>Secure and simple collaboration on legal documents.</h2>
+            <p>Create & discuss documents online.<br />Public database is 100% free.<br />Privatize your work for only $9.99/month.</p>
+            <p>Create a free account and start collaborating today.</p>
+            <%= link_to new_user_registration_path, class: "btn btn-success btn-lg" do %>
+              Try Oslaw Now
+            <% end %>
+            <h2>PNG HERE!</h2>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- text area -->
-  <div class="row">
-    <div class="col-md-6">
-      <h2>The days of emailing documents back and forth are over.</h2>
-      <p>Use Oslaw's simple online text editor to create, update and store the text of your legal documents. When you are done, simply download the text to the appropriate format.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>The days of emailing documents back and forth are over.</h2>
+        <p>Use Oslaw's simple online text editor to create, update and store the text of your legal documents. When you are done, simply download the text to the appropriate format.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Top-notch security for your documents.</h2>
-      <p>Discuss security here.</p>
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Top-notch security for your documents.</h2>
+        <p>Discuss security here.</p>
+      </div>
     </div>
+
   </div>
-
-
 </body>

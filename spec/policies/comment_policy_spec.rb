@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe CommentPolicy do
-  subject { described_class }
+  subject { CommentPolicy }
 
   let(:visitor) { nil }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:admin) }
-  let(:comment) { FactoryGirl.create(:comment, user: user) }
+  let(:user) { create(:user) }
+  let(:admin) { create(:admin) }
+  let(:comment) { create(:comment, user: user) }
 
   permissions :new?, :create? do
     it "does not permit a visitor" do

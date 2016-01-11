@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :favorite do
-    user
+  factory :bookmark do
+    user 
     post
   end
 

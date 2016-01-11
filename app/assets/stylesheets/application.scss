@@ -22,23 +22,9 @@
 
 /* TABLE OF CONTENTS
 1. General
-  1.1. Body/HTML
-  1.2. ckeditor
-  1.2. Links
-  1.3. Mobile Issues
-  1.4. Messages
 2. Bootstrap Components
-  2.1. Buttons
 3. Navigation
 4. Views
-  4.1 Posts - Edit
-  4.2 Posts - Index
-  4.3 Posts - New
-  4.4 Posts - Show
-  4.5 Registrations - New
-  4.6 Sessions - New
-  4.7 Users - Show
-  4.8 Welcome - Index
 5. Footer
 -------------------------------------*/
 
@@ -50,20 +36,21 @@
 /* 1. General
 -------------------------------------*/
 
-/* 1.1 Body/HTML */
+/* Body/HTML */
 body, html {
   color: #444;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
 
 body {
-  background: #f6f6f6;
+  background: #fff;
   border: none;
   height: 100%;
   overflow-x: hidden;
-  padding-bottom: 0;
+  padding-bottom: 20px;
+  padding-top: 55px;
   margin-top: 0;
   width: 100%;
 }
@@ -73,24 +60,28 @@ body {
   min-height:0px !important;
   margin: 0 auto;
   max-width: 960px;
-  padding-bottom: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #first {
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 10px;
-  margin-left: -10px;
-  margin-right: -10px;
-  padding: 2px 0 10px 25px;
+  border: none;
 }
 
-/* 1.2 ckeditor/simple_form */
+#first h3 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ckeditor/simple_form */
 #cke_post_body {
   border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: none;
+}
+
+.cke_chrome {
+  box-shadow: none !important;
 }
 
 .cke_top, .cke_bottom {
@@ -102,22 +93,15 @@ label {
   font-weight: 700;
 }
 
-/* 1.3 Links */
+/* Links */
 a {
   color: #3591d5;
 }
 
 a:hover {
-  color: #2576b2;
+  color: #444;
   text-decoration: none;
-  -webkit-transition-property: color;
-  -moz-transition-property: color;
-  -o-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
+  transition: all 0.3s ease 0s;
 }
 
 a:active, a:focus {
@@ -125,7 +109,7 @@ a:active, a:focus {
   text-decoration: none;
 }
 
-/* 1.4 Mobile Issues */
+/* Media Queries */
 
 /* to address pull-right class on mobile devices */
 @media (max-width: 1200px) {
@@ -134,7 +118,20 @@ a:active, a:focus {
   }
 }
 
-/* 1.5 Messages */
+@media screen and (min-width: 768px) {
+  .container-fluid .jumbotron {
+      padding-left: 120px;
+      padding-right: 120px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron {
+      padding-top: 30px;
+  }
+}
+
+/* Messages */
 .alert {
   border: none;
   border-radius: 0;
@@ -163,11 +160,23 @@ a:active, a:focus {
 /* 2. Bootstrap Components
 -------------------------------------*/
 
-/* 2.1 Buttons */
+/* Buttons */
+
+.btn-default {
+  background-color: transparent;
+  color: #444;
+  border: 1px solid #444;
+}
+
+.btn-default:hover {
+  background-color: transparent;
+  color: #3591d5;
+  border: 1px solid #3591d5;
+}
 
 .btn-success {
   background: #27ae60;
-  border: none;
+  border: 1px solid #239e57;
 }
 
 .btn-success:hover {
@@ -176,7 +185,7 @@ a:active, a:focus {
 
 .btn-danger {
   background: #e74c3c;
-  border: none;
+  border: 1px solid #d62c1a;
 }
 
 .btn-danger:hover {
@@ -185,7 +194,7 @@ a:active, a:focus {
 
 .btn-info {
   background: #3591d5;
-  border: none;
+  border: 1px solid #2576b2;
 }
 
 .btn-info:hover {
@@ -201,93 +210,127 @@ a:active, a:focus {
 -------------------------------------------------- */
 
 .navbar {
-  background: #f6f6f6;
+  background: #fbfbfb;
   border: none;
-  margin-bottom: 0;
+  border-radius: 0;
+  opacity: .9;
 }
 
 .navbar .container {
-  border-bottom: 1px solid #ddd;
-  border-top: 10px solid #2c3e50;
-  font-size: 14px;
-  padding-bottom: 5px;
+  background: #fbfbfb;
+  border: none;
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
   color: #3591d5 !important;
   font-size: 28px;
-  font-weight: 400;
-  padding-top: 20px;
+  font-weight: 700;
 }
 
 .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:active, .navbar-default .navbar-nav > li a:focus {
   color: #444;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 1;
   text-decoration: none;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
   background: transparent;
   color: #3591d5;
-  text-decoration: none;
-  -webkit-transition-property: color;
-  -moz-transition-property: color;
-  -o-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-}
-
-.navbar .dropdown-menu {
-  min-width: 300px;
-  padding: 20px;
-}
-
-.navbar .dropdown-menu a {
-  color: #3591d5 !important;
-}
-
-.navbar .dropdown-menu a:hover {
-  color: #2576b2 !important;
-  text-decoration: none;
-  -webkit-transition-property: color;
-  -moz-transition-property: color;
-  -o-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
 }
 
 .navbar-nav {
   padding-top: 5px;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus {
-  background: #fff;
-  color: #444;
+  /* hamburger */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #444;
+  border: none;
 }
 
-.navbar-default .navbar-nav > .open > a:hover {
-  background: #fff;
-  color: #3591d5;
+.navbar-default .navbar-toggle {
+  border: none;
+}
+
+.navbar-default .navbar-toggle:active, .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+  background: inherit;
 }
 
 /* 4. VIEWS
 -------------------------------------------------- */
 
-/* 4.1 Posts - Edit */
-
-
-/* 4.2 Posts - Index */
-#page-posts-index .col-md-12 h3 {
-  margin-bottom: 10px;
-  margin-top: 30px;
-  text-decoration: underline;
+/* Confirmations - New */
+#page-confirmations-new {
+  background: #f1f1f1;
+  margin-bottom: 50px;
 }
 
+#page-confirmations-new .btn {
+  margin-bottom: 20px;
+}
+
+#page-confirmations-new .container {
+  background: #f1f1f1;
+}
+
+#page-confirmations-new #page-confirmations-new-first {
+  margin-bottom: 40px;
+}
+
+#page-confirmations-new h3 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#page-confirmations-new .navbar, #page-confirmations-new footer {
+  display: none;
+}
+
+#page-confirmations-new .panel-default {
+  max-width: 480px;
+  padding: 10px 60px 30px;
+}
+
+/* Passwords - New */
+#page-passwords-new {
+  background: #f1f1f1;
+  margin-bottom: 50px;
+}
+
+#page-passwords-new .btn {
+  margin-bottom: 20px;
+}
+
+#page-passwords-new .container {
+  background: #f1f1f1;
+}
+
+#page-passwords-new #page-passwords-new-first {
+  margin-bottom: 40px;
+}
+
+#page-passwords-new h3 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#page-passwords-new .navbar, #page-passwords-new footer {
+  display: none;
+}
+
+#page-passwords-new .panel-default {
+  max-width: 480px;
+  padding: 10px 60px 30px;
+}
+
+/* Posts - Edit */
+
+
+/* Posts - Index */
 #page-posts-index .panel-default {
   background: #fff;
   border: none;
@@ -302,13 +345,8 @@ a:active, a:focus {
 }
 
 /* 4.3 Posts - New */
-#page-posts-new .col-md-12 h3 {
-  margin-bottom: 10px;
-  margin-top: 30px;
-  text-decoration: underline;
-}
 
-/* 4.4 Posts - Show */
+/* Posts - Show */
 #page-posts-show blockquote {
   font-size: 14px;
   margin-bottom: 5px;
@@ -318,150 +356,154 @@ a:active, a:focus {
   display: flex;
 }
 
-#page-posts-show #page-posts-show-second .btn-success {
-  margin-bottom: 10px;
+#page-posts-show .btn-default {
   margin-top: 5px;
-}
-
-#page-posts-show #page-posts-show-second {
-  margin-top: 10px;
 }
 
 #page-posts-show .col-md-12 .comments {
   border-top: 1px solid #ddd;
-  padding-top: 10px;
+  margin-top: 25px;
+  padding-top: 25px;
+}
+
+#page-posts-show .col-md-12 #page-posts-show-info {
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+#page-posts-show .col-md-12 #page-posts-show-body {
+  background: #f8f8f8;
+  padding: 25px 20px;
+}
+
+#page-posts-show .col-md-12 #page-posts-show-documents {
+  padding-top: 15px;
+}
+
+#page-posts-show #page-posts-show-documents .col-md-8 {
+  margin-top: 10px;
+}
+
+#page-posts-show #page-posts-show-documents .col-md-4 {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-top: 10px;
+  padding: 10px;
 }
 
 #page-posts-show .form-group {
   margin-bottom: 5px;
 }
 
-#page-posts-show .panel-body {
-  padding: 15px;
+/* Registrations - Edit */
+#page-registrations-edit .btn {
+  margin-bottom: 20px;
 }
 
-#page-posts-show #page-posts-show-side > .panel {
-  border-left: 1px solid #ddd;
-  border-top: none;
-  border-bottom: none;
-  border-right: none;
-  padding: 0;
-}
-
-#page-posts-show .table td {
-  border: none;
-  text-align: left;
-}
-
-#page-posts-show .table th {
-  background: #fff;
-  border: none;
-  font-weight: 400;
-  text-align: right;
-  text-decoration: underline;
-}
-
-/* 4.5 Registrations - New */
-#page-registrations-new .col-md-4 {
-  background: #3591d5;
-  border-radius: 0;
-  color: #fff;margin-left: 0;
-  margin: 15px 15px 0 15px;
-  padding: 10px 15px;
-}
-
-#page-registrations-new .col-md-4 h3 {
-  font-weight: 300;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-#page-registrations-new .col-md-4 h4 {
-  font-weight: 300;
-}
-
-#page-registrations-new .col-md-6 {
-  margin-top: 15px;
-}
-
-#page-registrations-new .col-md-6 .btn {
-  margin-bottom: 10px;
-}
-
-@media (min-width: 940px) {
-  #page-registrations-new .col-md-6 .form-control {
-    width: 75%;
-  }
-}
-
-/* 4.6 Sessions - New */
-#page-sessions-new {
+/* Registrations - New */
+#page-registrations-new {
+  background: #f1f1f1;
   margin-bottom: 50px;
 }
 
-#page-sessions-new .container > .row {
-  background: #3591d5;
-
+#page-registrations-new .btn {
+  margin-bottom: 20px;
 }
-#page-sessions-new a {
-   text-align: center;
+
+#page-registrations-new .container {
+  background: #f1f1f1;
+}
+
+#page-registrations-new #page-registrations-new-first {
+  margin-bottom: 40px;
+}
+
+#page-registrations-new h3 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#page-registrations-new .navbar, #page-registrations-new footer {
+  display: none;
+}
+
+#page-registrations-new .panel-default {
+  max-width: 480px;
+  padding: 10px 60px 30px;
+}
+
+/* Sessions - New */
+#page-sessions-new {
+  background: #f1f1f1;
+  margin-bottom: 50px;
+}
+
+#page-sessions-new .btn {
+  margin-bottom: 20px;
+}
+
+#page-sessions-new .container {
+  background: #f1f1f1;
 }
 
 #page-sessions-new h3 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 40px;
   text-align: center;
 }
 
-#page-sessions-new p {
-  text-align: center;
+#page-sessions-new .navbar, #page-sessions-new footer {
+  display: none;
 }
 
 #page-sessions-new .panel-default {
-  padding-bottom: 30px;
+  max-width: 480px;
+  padding: 10px 60px 30px;
 }
 
-/* 4.7 Users - Show */
+/* Users - Show */
 
 
-/* 4.8 Welcome - Index */
-#page-welcome-index .alert {
-  margin-top: 0;
-  margin-left: -25px;
-  margin-right: -25px;
-}
+/* Welcome - Index */
 
-#page-welcome-index .container > .row > .jumbotron {
+#page-welcome-index .container-fluid {
   background: #3591d5;
   border-radius: 0;
   color: #fff;
   margin-top: 0;
-  margin-left: -10px;
-  margin-right: -10px;
-  padding-top: 20px;
+}
+
+#page-welcome-index .jumbotron.text-center {
+  background: #3591d5;
+}
+
+#page-welcome-index .jumbotron.text-center .container {
+  background: #3591d5;
+  margin: 0;
 }
 
 #page-welcome-index h2 {
-  font-weight: 300;
+  font-weight: 400;
 }
+
 #page-welcome-index .jumbotron .btn {
-  font-weight: 300;
   margin-top: 10px;
 }
 
 #page-welcome-index .jumbotron h2 {
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 15px;
-  padding-top: 20px;
 }
 
 #page-welcome-index .jumbotron p {
   font-size: 20px;
-}
-
-#page-welcome-index .navbar .container {
-  border-bottom: none;
+  font-weight: 400;
+  padding: 0 20px;
 }
 
 /* 5. FOOTER
@@ -474,20 +516,18 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
 
 footer {
-  font-size: 13px;
-  height: 120px;
-  padding: 0;
+  background-color: #444;
+  bottom: 0;
+  height: 60px;
   position: absolute;
-  text-align: center;
   width: 100%;
 }
 
 footer .container {
-  background: #2C3E50;
-  color: #fff;
+  background: #444;
   padding: 20px 0 20px;
 }

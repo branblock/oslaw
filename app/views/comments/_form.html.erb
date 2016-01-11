@@ -1,5 +1,5 @@
-<p style="margin-top: 10px;"><span style="color: #000; font-weight: 400">Add your thoughts/comments</span><small> (<a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Markdown&oldid=694169869">markdown</a> supported)</small></p>
+<p style="margin-top: 10px;">Add your thoughts/comments:</p>
   <%= simple_form_for [post, comment], remote: true do |f| %>
-    <%= f.input :body, as: :text, input_html: { :rows => 5 }, placeholder: "What do you think?", label: false %>
-    <%= f.submit :Post, class: 'btn btn-success btn' %>
+    <%= f.input :body, as: :text, input_html: { rows: 5 }, placeholder: "What do you think?", label: false %>
+    <%= f.submit :Post, class: 'btn btn-default btn-sm' %>
   <% end %>

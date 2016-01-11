@@ -1,49 +1,50 @@
 <body id="page-users-show">
-
-  <div class="row">
-    <div class="col-md-12">
-      <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+  <div class="container">
+    <div class="row">
+      <div id="first">
+        <div class="col-md-12">
+          <!-- page title -->
+          <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <p><%= image_tag @user.avatar.url(:thumb) %></p>
-      <p><%= link_to "Edit your profile", edit_user_registration_path %></p>
-      <p><%= link_to 'Create A New Page', new_post_path %></p>
+    <div class="row">
+      <div class="col-md-4">
+        <p><%= image_tag @user.avatar.url(:thumb) %></p>
+        <p><%= link_to "Edit your profile", edit_user_registration_path %></p>
+        <p><%= link_to 'Create A New Page', new_post_path %></p>
 
-      <p><u>Oslaw Stats</u></p>
-      <p>Pages: <%= @user.posts.count %></p>
-      <p>Latest Page:<br/>
-        <% if @user.posts.empty? %>
-          <%= "No pages" %>
-        <% else %>
-          <%= link_to "#{@user.posts.last.title}", post_path(@user.posts.last) %> <small>(created on <%= localize(@user.posts.last.created_at, :format => :default) %>)</small>
-        <% end %></p>
-      <p>Upvoted Pages: <%= (@user.votes.up.for_type(Post).votables).size %></p>
-      <p>Favorites:<br />
-        <% if @user.favorite_posts.empty? %>
-          <%= "No favorited pages" %>
-        <% else %>
-          <% @user.favorite_posts.each do |post| %>
-            <%= link_to post.title, post_path(post) %><br />
+        <p><u>Oslaw Stats</u></p>
+        <p>Pages: <%= @user.posts.count %></p>
+        <p>Latest Page:<br/>
+          <% if @user.posts.empty? %>
+            <%= "No pages" %>
+          <% else %>
+            <%= link_to "#{@user.posts.last.title}", post_path(@user.posts.last) %> <small>(created on <%= localize(@user.posts.last.created_at, :format => :default) %>)</small>
+          <% end %></p>
+        <p>Upvoted Pages: <%= (@user.votes.up.for_type(Post).votables).size %></p>
+        <p>Bookmarked pages:<br />
+          <% if @user.bookmark_posts.empty? %>
+            <%= "No pages" %>
+          <% else %>
+            <% @user.bookmark_posts.each do |post| %>
+              <%= link_to post.title, post_path(post) %><br />
+            <% end %>
           <% end %>
-        <% end %>
-      <p>Comments: <%= @user.comments.count %></p>
-      <p>Last Comment:
-        <% if @user.comments.empty? %>
-          <%= "No comments" %>
-        <% else %>
-          <%= localize(@user.comments.last.created_at, :format => :default) %>
-        <% end %></p>
-      <p>Upvoted Comments: <%= (@user.votes.up.for_type(Comment).votables).size %></p>
-    </div>
+        <p>Comments: <%= @user.comments.count %></p>
+        <p>Last Comment:
+          <% if @user.comments.empty? %>
+            <%= "No comments" %>
+          <% else %>
+            <%= localize(@user.comments.last.created_at, :format => :default) %>
+          <% end %></p>
+        <p>Upvoted Comments: <%= (@user.votes.up.for_type(Comment).votables).size %></p>
+      </div>
 
-    <div class="col-md-8">
-
-      <div class="panel panel-default">
-        <div class="panel-heading"><strong>Post Statistics</strong></div>
-
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>Post Statistics</strong></div>
           <p style="margin-top: 10px; padding: 0 10px"><strong>Most Recent Posts</strong></p>
             <p><% @recent_posts.each do |post| %>
               <ul style="list-style: none; margin: 0; padding: 0 10px;">
@@ -66,12 +67,9 @@
                 </ul>
               <% end %>
             <% end %></p>
-
-
+          </div>
         </div>
-
       </div>
 
-    </div>
-
+  </div>
 </body>

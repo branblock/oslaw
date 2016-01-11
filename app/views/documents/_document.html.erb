@@ -1,6 +1,14 @@
 <% @post.documents.each do |document| %>
-  <%= link_to document.upload_file_name, document.upload.url, target: "_blank" %>
-<% if policy(@post).delete_document? %>
-  &nbsp;|&nbsp;<%= link_to '<i class="fa fa-trash-o"></i> Remove Document', [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
+  <i class="fa fa-file-text"></i>&nbsp;</i><%= document.upload_file_name %><br />
+  Uploaded on <%= localize(document.updated_at, :format => :default) %>
+  &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
+  <%= link_to '<i class="fa fa-download"></i>'.html_safe, download_post_document_path(@post, document) %>
+    <% if document.upload_content_type == "application/pdf" %>
+      &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
+      <%= link_to '<i class="fa fa-external-link"></i>'.html_safe, document.upload.url, target: "_blank" %>
+    <% end %>
+    <% if policy(@post).update? %>
+      &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
+      <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
 <% end %>

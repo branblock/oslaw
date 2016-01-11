@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe PostPolicy, type: :policy do
-  subject { described_class }
+  subject { PostPolicy }
 
   let(:visitor) { nil }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:admin) }
-  let(:post) { FactoryGirl.create(:post, user: user) }
+  let(:user) { create(:user) }
+  let(:admin) { create(:admin) }
+  let(:post) { create(:post, user: user) }
 
   permissions :index?, :show?, :new?, :create?, :update?, :edit? do
     it "does not permit a visitor" do

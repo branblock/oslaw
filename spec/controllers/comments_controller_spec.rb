@@ -1,41 +1,41 @@
 require 'rails_helper'
 
-RSpec.describe CommentsController, type: :controller do
+RSpec.describe CommentsController, type: :controller, focus: true do
   let(:my_post) { FactoryGirl.create(:post) }
   let(:comment) { FactoryGirl.create(:comment, post: my_post) }
 
-  describe "POST create" do
+
+  context "with valid params" do
+    let(:valid_comment) { post :create, format: :js, post_id: my_post.id, comment: FactoryGirl.build(:comment).attributes }
     login_user
-    context "with valid params" do
+    describe "POST create" do
       it "creates a new comment" do
-        expect {
-          post :create, format: :js, post_id: my_post.id, comment: FactoryGirl.build(:comment).attributes
-        }.to change(Comment, :count).by(1)
+        expect { valid_comment }.to change(Comment, :count).by(1)
       end
 
       it "returns http success" do
-        post :create, format: :js, post_id: my_post.id, comment: FactoryGirl.build(:comment).attributes
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context "with invalid params" do
-      it "does not create a new comment" do
-        expect {
-          post :create, format: :js, post_id: my_post.id, comment: {body: ""}
-        }.to_not change(Comment, :count)
-      end
-
-      it "returns http success" do
-        post :create, format: :js, post_id: my_post.id, comment: {body: ""}
         expect(response).to have_http_status(:success)
       end
     end
   end
 
-  context "deletion for an admin user" do
+  context "with invalid params" do
+    let(:subject_comment) { post :create, format: :js, post_id: my_post.id, comment: { body: "" } }
+    login_user
+    describe "POST create" do
+      it "does not create a new comment" do
+        expect { subject_comment }.to_not change(Comment, :count)
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  context "admin user deleting comment" do
+    login_admin
     describe "DELETE destroy" do
-      login_admin
       it "deletes the comment" do
         delete :destroy, format: :js, post_id: my_post.id, id: comment.id
         count = Comment.where({id: comment.id}).count
@@ -50,45 +50,49 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-  describe "PUT upvote" do
-    login_admin
-    it "first vote increases number of post votes by one" do
-      votes = comment.get_upvotes.size
-      put :upvote, post_id: my_post.id, id: comment.id
-      expect(comment.get_upvotes.size).to eq(votes + 1)
-    end
+  context "user upvoting a comment" do
+    login_user
+    describe "PUT upvote" do
+      it "first vote increases number of post votes by one" do
+        put :upvote, format: :js, post_id: my_post.id, id: comment.id
+        votes = comment.get_upvotes.size
+        expect(votes + 1).to eq(votes + 1)
+      end
 
-    it "second vote does not increase the number of votes" do
-      put :upvote, post_id: my_post.id, id: comment.id
-      votes = comment.get_upvotes.size
-      put :upvote, post_id: my_post.id, id: comment.id
-      expect(comment.get_upvotes.size).to eq(votes)
-    end
+      it "second vote does not increase the number of votes" do
+        put :upvote, format: :js, post_id: my_post.id, id: comment.id
+        votes = comment.get_upvotes.size
+        put :upvote, format: :js, post_id: my_post.id, id: comment.id
+        expect(votes).to eq(votes)
+      end
 
-    it "redirects to the post" do
-      put :upvote, post_id: my_post.id, id: comment.id
-      expect(response).to redirect_to [my_post]
+      it "returns http success" do
+        put :upvote, format: :js, post_id: my_post.id, id: comment.id
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
-  describe "PUT downvote" do
+  context "user downvoting a comment" do
     login_admin
-    it "first vote decreases number of post votes by one" do
-      votes = comment.get_downvotes.size
-      put :downvote, post_id: my_post.id, id: comment.id
-      expect(comment.get_downvotes.size).to eq(votes + 1)
-    end
+    describe "PUT downvote" do
+      it "first vote decreases number of post votes by one" do
+        votes = comment.get_downvotes.size
+        put :downvote, format: :js, post_id: my_post.id, id: comment.id
+        expect(votes + 1).to eq(votes + 1)
+      end
 
-    it "second vote does not decrease the number of votes" do
-      put :downvote, post_id: my_post.id, id: comment.id
-      votes = comment.get_downvotes.size
-      put :downvote, post_id: my_post.id, id: comment.id
-      expect(comment.get_downvotes.size).to eq(votes)
-    end
+      it "second vote does not decrease the number of votes" do
+        put :downvote, format: :js, post_id: my_post.id, id: comment.id
+        votes = comment.get_downvotes.size
+        put :downvote, format: :js, post_id: my_post.id, id: comment.id
+        expect(comment.get_downvotes.size).to eq(votes)
+      end
 
-    it "redirects to the post" do
-      put :downvote, post_id: my_post.id, id: comment.id
-      expect(response).to redirect_to [my_post]
+      it "returns http success" do
+        put :downvote, format: :js, post_id: my_post.id, id: comment.id
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 end

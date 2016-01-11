@@ -1,11 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RegistrationsController, type: :controller do
-  let(:user) { FactoryGirl.create(:user, email: 'old@example.com') }
-
-  before do
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-  end
+  let(:user) { create(:user, email: 'old@example.com') }
 
   describe "successfully updates a user" do
     login_user
