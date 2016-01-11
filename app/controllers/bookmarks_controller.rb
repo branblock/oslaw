@@ -1,10 +1,10 @@
-class FavoritesController < ApplicationController
+class BookmarksController < ApplicationController
   before_action :authenticate_user!
   before_action :ready_post
 
   def create
-    favorite = current_user.favorites.build(post: @post)
-    favorite.save
+    bookmark = current_user.bookmarks.build(post: @post)
+    bookmark.save
 
     respond_to do |format|
       format.html { redirect_to @post }
@@ -13,8 +13,8 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    favorite = current_user.favorites.find(params[:id])
-    favorite.destroy
+    bookmark = current_user.bookmarks.find(params[:id])
+    bookmark.destroy
 
     respond_to do |format|
       format.html { redirect_to @post }

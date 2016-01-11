@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
-  has_many :favorites
-  has_many :favorite_posts, through: :favorites, source: :post
+  has_many :bookmarks
+  has_many :bookmark_posts, through: :bookmarks, source: :post
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -62,14 +62,16 @@ class User < ActiveRecord::Base
   end
 
   # paperclip
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "60x60>", nav: "28x28>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar,
+    styles: { medium: "300x300>", thumb: "100x100>", nav: "28x28>" },
+    default_url: "/images/:style/missing.png"
   validates_attachment :avatar, content_type: { content_type: /\Aimage/ }
 
   # act_as_votable
   acts_as_voter
 
-  # favorites
-  def favorite(post)
-    favorites.where(post_id: post.id).first
+  # bookmarks
+  def bookmark(post)
+    bookmarks.where(post_id: post.id).first
   end
 end

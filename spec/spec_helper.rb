@@ -17,15 +17,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-# Simplecov gem (used for testing)
 require 'simplecov'
-SimpleCov.start
-
-# Pundit gem (used for authorization)
+  SimpleCov.start
 require 'pundit/rspec'
-
-# Paperclip gem (used for file uploads)
-require "paperclip/matchers"
+require 'paperclip/matchers'
+require 'capybara/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -58,6 +54,7 @@ RSpec.configure do |config|
 
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

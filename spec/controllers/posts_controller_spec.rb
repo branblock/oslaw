@@ -3,24 +3,31 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:my_post) { FactoryGirl.create(:post, user: user) }
-  let(:tagged_post) { FactoryGirl.create(:post, :tags, user: user) }
+  let(:tagged_post) { FactoryGirl.create(:post, :tagged, user: user) }
 
-
-  describe "GET index" do
+  context "all posts index" do
     login_user
-    it "returns http success" do
-      get :index
+    describe "GET index" do
+      it "returns http success" do
+        get :index
       expect(response).to have_http_status(:success)
-    end
+      end
 
-    context "entire index" do
       it "assigns @posts to all posts" do
         get :index
         expect(assigns(:posts)).to eq([my_post])
       end
     end
+  end
 
-    context "tagged posts" do
+  context "tagged posts index" do
+    login_user
+    describe "GET index" do
+      it "returns http success" do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+
       it "assigns @posts to only the tagged posts" do
         get :index
         expect(assigns(:posts)).to include(tagged_post)
@@ -29,33 +36,33 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe "POST create" do
+  context "with valid attributes" do
+    let(:valid_post) { post :create, post: FactoryGirl.build(:post).attributes }
     login_user
-    context "with valid params" do
+    describe "POST create" do
       it "creates a new post" do
-        expect {
-          post :create, post: FactoryGirl.build(:post).attributes
-        }.to change(Post, :count).by(1)
+        expect { valid_post }.to change(Post, :count).by(1)
       end
 
-      it "redirects to the new post" do
-        post :create, post: FactoryGirl.build(:post).attributes
-        expect(response).to redirect_to [Post.last]
+      it "returns http status success" do
+        expect(response).to have_http_status(:success)
       end
     end
+  end
 
-    context "with invalid params" do
-      it "does not create a new post" do
-        expect {
-          post :create, post: {title: "", body: ""}
-        }.to_not change(Post, :count)
-      end
-
-      it "redirects to the #new view" do
+  context "with invalid attributes" do
+    login_user
+    it "does not create a new post" do
+      expect {
         post :create, post: {title: "", body: ""}
-        expect(response).to render_template :new
-      end
+      }.to_not change(Post, :count)
     end
+
+    it "redirects to the #new view" do
+      post :create, post: {title: "", body: ""}
+      expect(response).to render_template :new
+    end
+
   end
 
   describe "GET show" do
@@ -116,9 +123,9 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe "PUT update" do
+  context "update post with valid attributes" do
     login_user
-    describe "successfully updates post" do
+    describe "PUT update" do
       it "updates post with expected attributes" do
         new_title = "New Title"
         new_body = "New Body"
@@ -140,28 +147,30 @@ RSpec.describe PostsController, type: :controller do
         expect(flash[:notice]).to be_present
       end
     end
+  end
 
-    describe "unsuccessfully updates post" do
-      it "renders to the #edit view" do
-        put :update, id: my_post.id, post: {title: "", body: ""}
-        expect(response).to render_template :edit
-      end
+  context "try to update post with invalid attributes" do
+    login_user
+    it "renders to the #edit view" do
+      put :update, id: my_post.id, post: {title: "", body: ""}
+      expect(response).to render_template :edit
     end
   end
 
-  describe "DELETE destroy" do
+  context "admin deleting post" do
     login_admin
-    it "destroys the post" do
-      delete :destroy, id: my_post.id
-      count = Post.where({id: my_post.id}).size
-      expect(count).to eq 0
-    end
+    describe "DELETE destroy" do
+      it "destroys the post" do
+        delete :destroy, id: my_post.id
+        count = Post.where({id: my_post.id}).size
+        expect(count).to eq 0
+      end
 
-
-    it "redirects to posts index" do
-      delete :destroy, {id: my_post.id}
-      expect(response).to redirect_to posts_path
-      expect(flash[:notice]).to be_present
+      it "redirects to posts index" do
+        delete :destroy, {id: my_post.id}
+        expect(response).to redirect_to posts_path
+        expect(flash[:notice]).to be_present
+      end
     end
   end
 
@@ -169,20 +178,20 @@ RSpec.describe PostsController, type: :controller do
     login_user
     it "first vote increases number of post votes by one" do
       votes = my_post.get_upvotes.size
-      put :upvote, id: my_post.id
+      put :upvote, format: :js, id: my_post.id
       expect(my_post.get_upvotes.size).to eq(votes + 1)
     end
 
     it "second vote does not increase the number of votes" do
-      put :upvote, id: my_post.id
+      put :upvote, format: :js, id: my_post.id
       votes = my_post.get_upvotes.size
-      put :upvote, id: my_post.id
+      put :upvote, format: :js, id: my_post.id
       expect(my_post.get_upvotes.size).to eq(votes)
     end
 
-    it "redirects to the post" do
-      put :upvote, id: my_post.id
-      expect(response).to redirect_to [my_post]
+    it "returns http success" do
+      put :upvote, format: :js, id: my_post.id
+      expect(response).to have_http_status(:success)
     end
   end
 
@@ -190,20 +199,20 @@ RSpec.describe PostsController, type: :controller do
     login_user
     it "first vote decreases number of post votes by one" do
       votes = my_post.get_downvotes.size
-      put :downvote, id: my_post.id
+      put :downvote, format: :js, id: my_post.id
       expect(my_post.get_downvotes.size).to eq(votes + 1)
     end
 
     it "second vote does not decrease the number of votes" do
-      put :downvote, id: my_post.id
+      put :downvote, format: :js, id: my_post.id
       votes = my_post.get_downvotes.size
-      put :downvote, id: my_post.id
+      put :downvote, format: :js, id: my_post.id
       expect(my_post.get_downvotes.size).to eq(votes)
     end
 
-    it "redirects to the post" do
-      put :downvote, id: my_post.id
-      expect(response).to redirect_to [my_post]
+    it "returns http success" do
+      put :downvote, format: :js, id: my_post.id
+      expect(response).to have_http_status(:success)
     end
   end
 end

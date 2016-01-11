@@ -1,23 +1,26 @@
 <body id="page-posts-new" data-no-turbolink>
-
-  <div class="row">
-    <div id="first">
-      <h3>Create A New Page</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <%= simple_form_for [@post] do |f| %>
-        <div class="form-inputs">
-          <%= f.input :title %>
-          <%= f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'} } %>
-          <%= f.input :tag_list, label: "Tags (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
-          <%= link_to "Cancel", url_for(@post.user), class: 'btn btn-info' %>
-          <%= f.button :button, "Create Page".html_safe, class: 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating..."} %>
+  <div class="container">
+    <div class="row">
+      <div id="first">
+        <div class="col-md-12">
+          <!-- page title -->
+          <h3>Create a New Page</h3>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
 
+    <div class="row">
+      <div class="col-md-12">
+        <%= simple_form_for [@post] do |f| %>
+          <div class="form-inputs">
+            <%= f.input :title %>
+            <%= f.input :body, as: :ckeditor, input_html: { ckeditor: { toolbar: 'Post'} } %>
+            <%= f.input :tag_list, label: "Tags (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
+            <%= f.button :button, "Create Page".html_safe, class: 'btn btn-default', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating..."} %>&nbsp;<%= link_to "Cancel", url_for(@post.user) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </body>

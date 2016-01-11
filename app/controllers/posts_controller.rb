@@ -61,7 +61,7 @@ class PostsController < ApplicationController
     @post.points
 
     respond_to do |format|
-      format.html { redirect_to @post }
+      format.html
       format.js
     end
   end
@@ -71,7 +71,7 @@ class PostsController < ApplicationController
     @post.points
 
     respond_to do |format|
-      format.html { redirect_to @post }
+      format.html
       format.js
     end
   end

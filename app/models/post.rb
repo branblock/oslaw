@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :documents, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   acts_as_taggable_on :tags
   acts_as_votable

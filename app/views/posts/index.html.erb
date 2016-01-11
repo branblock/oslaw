@@ -1,40 +1,43 @@
 <body id="page-posts-index">
-
-  <div class="row">
-    <div id="first">
-      <h3>Pages</h3>
+  <div class="container">
+    <div class="row">
+      <div id="first">
+        <div class="col-md-12">
+          <h3>Pages</h3>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
 
-      <% if params[:tag].present? %>
-        <%= "These are the pages with the '#{(params[:tag])}' tag" %>.<br /><%= link_to 'See all pages <i class="fa fa-angle-double-right"></i>'.html_safe, posts_path %>
-        <% @tagged_posts.each do |letter, posts| %>
-          <div style="background: #f6f6f6; font-weight: 700; margin-bottom: 5px; margin-top: 5px; padding-left: 5px; width: 100%;"><%= letter.capitalize %></div>
-          <% posts.each do |post| %>
-            <p><%= link_to post.title, post_path(post) %><br />
-              <small>Created by <%= link_to post.user.username, user_path(post.user) %>, on <%= localize(post.created_at, :format => :default) %>; last updated on <%= localize(post.updated_at, :format => :default) %>; <%= pluralize (post.get_upvotes.count), 'upvote' %>; <%= pluralize (post.comments.count), 'comment' %></small></p>
+        <% if params[:tag].present? %>
+          <%= "These are the pages with the '#{(params[:tag])}' tag" %>.<br /><%= link_to 'See all pages <i class="fa fa-angle-double-right"></i>'.html_safe, posts_path %>
+          <% @tagged_posts.each do |letter, posts| %>
+            <div style="background: #f6f6f6; font-weight: 700; margin-bottom: 5px; margin-top: 5px; padding-left: 5px; width: 100%;"><%= letter.capitalize %></div>
+            <% posts.each do |post| %>
+              <p><%= link_to post.title, post_path(post) %><br />
+                <small>Created by <%= link_to post.user.username, user_path(post.user) %>, on <%= localize(post.created_at, :format => :default) %>; last updated on <%= localize(post.updated_at, :format => :default) %>; <%= pluralize (post.get_upvotes.count), 'upvote' %>; <%= pluralize (post.comments.count), 'comment' %></small></p>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% @alphabetical_posts.each do |letter, posts| %>
+            <div style="background: #f6f6f6; font-weight: 700; margin-bottom: 5px; margin-top: 5px; padding-left: 5px; width: 100%;"><%= letter.capitalize %></div>
+            <% posts.each do |post| %>
+              <p><u><%= link_to post.title, post_path(post) %></u><br />
+                <small>
+                  <% if post.tag_list.count > 0 %>
+                    Tags: <%= raw post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %>
+                  <% else %>
+                    Tags: None
+                  <% end %><br />
+                Created by <%= link_to post.user.username, user_path(post.user) %>, on <%= localize(post.created_at, :format => :default) %>; last updated on <%= localize(post.updated_at, :format => :default) %>; <%= pluralize (post.get_upvotes.count), 'upvote' %>; <%= pluralize (post.comments.count), 'comment' %></small></p>
+            <% end %>
           <% end %>
         <% end %>
-      <% else %>
-        <% @alphabetical_posts.each do |letter, posts| %>
-          <div style="background: #f6f6f6; font-weight: 700; margin-bottom: 5px; margin-top: 5px; padding-left: 5px; width: 100%;"><%= letter.capitalize %></div>
-          <% posts.each do |post| %>
-            <p><u><%= link_to post.title, post_path(post) %></u><br />
-              <small>
-                <% if post.tag_list.count > 0 %>
-                  Tags: <%= raw post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %>
-                <% else %>
-                  Tags: None
-                <% end %><br />
-              Created by <%= link_to post.user.username, user_path(post.user) %>, on <%= localize(post.created_at, :format => :default) %>; last updated on <%= localize(post.updated_at, :format => :default) %>; <%= pluralize (post.get_upvotes.count), 'upvote' %>; <%= pluralize (post.comments.count), 'comment' %></small></p>
-          <% end %>
-        <% end %>
-      <% end %>
 
+      </div>
     </div>
-  </div>
 
+  </div>
 </body>

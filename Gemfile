@@ -22,6 +22,7 @@ end
 group :test do
   gem 'simplecov', :require => false
   gem 'capybara'
+  gem 'database_cleaner'
 end
 
 # Use Bootstrap for CSS
@@ -54,3 +55,5 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'ckeditor'
 # For ckeditor/heroku fix
 gem 'non-stupid-digest-assets', '~> 1.0.4'
+# Amazon s3
+gem 'aws-sdk'

@@ -1,0 +1,5 @@
+<% if bookmark = current_user.bookmark(post) %>
+  <span id="destroy"><%= link_to '<i class="fa fa-bookmark"></i>&nbsp;Bookmark'.html_safe, [post, bookmark], method: :delete, remote: true %></span>
+<% else %>
+  <span id="create"><%= link_to '<i class="fa fa-bookmark-o"></i>&nbsp;Bookmark'.html_safe, [post, Bookmark.new], method: :post, remote: true %></span>
+<% end %>
