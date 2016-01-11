@@ -17,3 +17,6 @@
 /tmp
 
 coverage
+
+# Ignore application configuration
+/config/aws.yml

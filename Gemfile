@@ -56,4 +56,4 @@ gem 'ckeditor'
 # For ckeditor/heroku fix
 gem 'non-stupid-digest-assets', '~> 1.0.4'
 # Amazon s3
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'

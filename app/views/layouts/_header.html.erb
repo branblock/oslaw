@@ -25,7 +25,7 @@
               <% end %>
             </li>
           <% end %>
-            <li><%= link_to '<i class="fa fa-sign-out fa-fw"></i>&nbsp;Sign out'.html_safe, destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
+            <li><%= link_to '<i class="fa fa-sign-out fa-fw"></i>Sign out'.html_safe, destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
         <% else %>
           <li><%= link_to '<i class="fa fa-user-plus"></i>&nbsp;Sign up'.html_safe, new_user_registration_path, class: 'navbar-link' %></li>
           <li><%= link_to '<i class="fa fa-sign-in"></i>&nbsp;Sign in'.html_safe, new_user_session_path, class: 'navbar-link' %></li>

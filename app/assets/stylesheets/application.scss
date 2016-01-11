@@ -229,7 +229,6 @@ a:active, a:focus {
 
 .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:active, .navbar-default .navbar-nav > li a:focus {
   color: #444;
-  font-weight: 700;
   text-transform: uppercase;
   opacity: 1;
   text-decoration: none;
@@ -375,6 +374,7 @@ a:active, a:focus {
 
 #page-posts-show .col-md-12 #page-posts-show-body {
   background: #f8f8f8;
+  margin-bottom: 20px;
   padding: 25px 20px;
 }
 
@@ -382,14 +382,9 @@ a:active, a:focus {
   padding-top: 15px;
 }
 
-#page-posts-show #page-posts-show-documents .col-md-8 {
-  margin-top: 10px;
-}
-
 #page-posts-show #page-posts-show-documents .col-md-4 {
   border: 1px solid #ddd;
   border-radius: 3px;
-  margin-top: 10px;
   padding: 10px;
 }
 

@@ -64,7 +64,9 @@ class User < ActiveRecord::Base
   # paperclip
   has_attached_file :avatar,
     styles: { medium: "300x300>", thumb: "100x100>", nav: "28x28>" },
-    default_url: "/images/:style/missing.png"
+    default_url: "/images/:style/missing.png",
+    :path => "/images/:id/:style.:extension",
+    :url => ":s3_domain_url"
   validates_attachment :avatar, content_type: { content_type: /\Aimage/ }
 
   # act_as_votable

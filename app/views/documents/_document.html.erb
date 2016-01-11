@@ -2,7 +2,7 @@
   <i class="fa fa-file-text"></i>&nbsp;</i><%= document.upload_file_name %><br />
   Uploaded on <%= localize(document.updated_at, :format => :default) %>
   &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
-  <%= link_to '<i class="fa fa-download"></i>'.html_safe, download_post_document_path(@post, document) %>
+  <%= link_to '<i class="fa fa-download"></i>'.html_safe, document.download_url %>
     <% if document.upload_content_type == "application/pdf" %>
       &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
       <%= link_to '<i class="fa fa-external-link"></i>'.html_safe, document.upload.url, target: "_blank" %>
@@ -10,5 +10,5 @@
     <% if policy(@post).update? %>
       &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
       <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, [document.post, document], method: :delete, data: {confirm: "Are you sure?"} %>
-    <% end %>
+    <% end %><br />
 <% end %>
