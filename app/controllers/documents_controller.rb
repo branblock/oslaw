@@ -28,7 +28,7 @@ class DocumentsController < ApplicationController
   end
 
   def download
-    send_file(@document.upload.path)
+    @document.download_url
   end
 
   private

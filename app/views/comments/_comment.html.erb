@@ -1,8 +1,12 @@
 <%= content_tag :div, class: 'media', id: "comment-#{comment.id}" do %>
   <div class="media">
     <div class="media-body">
-      <%= link_to "#{comment.user.username}", user_path(comment.user) %> said on <%= localize(comment.created_at, :format => :comment_default) %>:
+
+      <!-- comment body -->
       <blockquote><%= markdown(comment.body) %></blockquote>
+
+      <!-- commenter info, voting, admin controls -->
+      <%= link_to "#{comment.user.username}", user_path(comment.user) %>&nbsp;<%= localize(comment.created_at, :format => :comment_default) %>
         <% if @current_user.voted_up_on? comment %>
           <%= link_to unlike_post_comment_path(@post, comment), method: :put, remote: true do %>
             <i class="fa fa-chevron-down"></i>&nbsp;Downvote
@@ -17,6 +21,7 @@
         &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
         <%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, [comment.post, comment], method: :delete, remote: true, data: {confirm: "Are you sure? Please confirm the deletion of this comment."} %>
       <% end %>
+
     </div>
   </div>
 <% end %>
