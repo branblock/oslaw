@@ -12,9 +12,10 @@
     <div class="row">
       <div class="col-md-4">
         <p><%= image_tag @user.avatar.url(:thumb) %></p>
-        <p><%= link_to "Edit your profile", edit_user_registration_path %></p>
-        <p><%= link_to 'Create A New Page', new_post_path %></p>
-
+        <% if @user == current_user %>
+          <p><%= link_to "Edit your profile", edit_user_registration_path %></p>
+          <p><%= link_to 'Create A New Page', new_post_path %></p>
+        <% end %>
         <p><u>Oslaw Stats</u></p>
         <p>Pages: <%= @user.posts.count %></p>
         <p>Latest Page:<br/>

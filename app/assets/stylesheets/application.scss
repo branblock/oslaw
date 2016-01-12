@@ -39,7 +39,7 @@
 /* Body/HTML */
 body, html {
   color: #444;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
@@ -229,6 +229,7 @@ a:active, a:focus {
 
 .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:active, .navbar-default .navbar-nav > li a:focus {
   color: #444;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 1;
   text-decoration: none;
@@ -416,8 +417,9 @@ a:active, a:focus {
 }
 
 #page-registrations-new h3 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 40px;
   text-align: center;
 }
 
