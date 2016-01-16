@@ -1,6 +1,5 @@
 <% if current_user.voted_up_on? @post %>
-  <span id="post-downvote"><%= link_to '<i class="fa fa-chevron-down"></i>&nbsp;Downvote'.html_safe, unlike_post_path(@post), method: :put, remote: true %>
+  <span id="post-downvote"><i class="fa fa-chevron-down"></i>&nbsp;<%= link_to 'Remove upvote', unlike_post_path(@post), method: :put, remote: true %>&nbsp;•&nbsp;<%= pluralize (@post.points), 'upvote' %></span>
 <% else %>
-  <span id="post-upvote"><%= link_to '<i class="fa fa-chevron-up"></i>&nbsp;Upvote'.html_safe, like_post_path(@post), method: :put, remote: true %>
+  <span id="post-upvote"><i class="fa fa-chevron-up"></i>&nbsp;<%= link_to 'Upvote', like_post_path(@post), method: :put, remote: true %>&nbsp;•&nbsp;<%= pluralize (@post.points), 'upvote' %></span>
 <% end %>
-∙<%= @post.points %></span>

@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
   # paperclip
   has_attached_file :avatar,
-    styles: { medium: "300x300>", thumb: "100x100>", nav: "28x28>" },
+    styles: { medium: "300x300>", thumb: "100x100>", nav: "48x48>" },
     default_url: "/images/:style/missing.png",
     :path => "/images/:id/:style.:extension",
     :url => ":s3_domain_url"

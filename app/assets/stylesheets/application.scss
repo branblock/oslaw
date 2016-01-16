@@ -38,8 +38,8 @@
 
 /* Body/HTML */
 body, html {
-  color: #444;
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: #000;
+  font-family: 'Helvetica',Arial,sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
@@ -50,7 +50,6 @@ body {
   height: 100%;
   overflow-x: hidden;
   padding-bottom: 20px;
-  padding-top: 55px;
   margin-top: 0;
   width: 100%;
 }
@@ -59,34 +58,18 @@ body {
   background: #fff;
   min-height:0px !important;
   margin: 0 auto;
-  max-width: 960px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 #first {
   border: none;
+  margin-bottom: 20px;
 }
 
 #first h3 {
   font-size: 26px;
-  font-weight: 700;
-}
-
-/* ckeditor/simple_form */
-#cke_post_body {
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  box-shadow: none;
-}
-
-.cke_chrome {
-  box-shadow: none !important;
-}
-
-.cke_top, .cke_bottom {
-  background: #fff !important;
-  background-image: none !important;
+  font-weight: 400;
 }
 
 label {
@@ -99,9 +82,8 @@ a {
 }
 
 a:hover {
-  color: #444;
+  color: #000;
   text-decoration: none;
-  transition: all 0.3s ease 0s;
 }
 
 a:active, a:focus {
@@ -160,93 +142,74 @@ a:active, a:focus {
 /* 2. Bootstrap Components
 -------------------------------------*/
 
-/* Buttons */
-
-.btn-default {
-  background-color: transparent;
-  color: #444;
-  border: 1px solid #444;
-}
-
-.btn-default:hover {
-  background-color: transparent;
-  color: #3591d5;
-  border: 1px solid #3591d5;
-}
-
-.btn-success {
-  background: #27ae60;
-  border: 1px solid #239e57;
-}
-
-.btn-success:hover {
-  background: #239e57;
-}
-
-.btn-danger {
-  background: #e74c3c;
-  border: 1px solid #d62c1a;
-}
-
-.btn-danger:hover {
-  background: #d62c1a;
-}
-
-.btn-info {
-  background: #3591d5;
-  border: 1px solid #2576b2;
-}
-
-.btn-info:hover {
-  background: #2576b2;
-}
-
 .form-control, .panel {
+  border: 1px solid #ddd;
   border-radius: 3px;
   box-shadow: none;
+  color: #000;
 }
 
 /* 3. NAVIGATION
 -------------------------------------------------- */
 
 .navbar {
-  background: #fbfbfb;
-  border: none;
+  background: #fff;
+  border-top: none;
   border-radius: 0;
-  opacity: .9;
+  margin-bottom: 0;
 }
 
 .navbar .container {
-  background: #fbfbfb;
+  background: #fff;
   border: none;
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:active {
   color: #3591d5 !important;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
 }
 
-.navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:active, .navbar-default .navbar-nav > li a:focus {
-  color: #444;
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:active, .navbar-nav > li a:focus {
+  color: #000;
   font-size: 13px;
-  text-transform: uppercase;
-  opacity: 1;
+  font-weight: 400;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
-.navbar-default .navbar-nav > li > a:hover {
+.navbar-nav li a:hover {
+  color: #3591d5 !important;
+}
+
+  /* dropdown-menu */
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background: transparent;
-  color: #3591d5;
+  color: #000;
 }
 
-.navbar-nav {
-  padding-top: 5px;
+.navbar-nav .dropdown-menu > li > a {
+  color: #000;
+}
+
+.navbar-nav .dropdown-menu > li > a:hover {
+  background: #f7f7f7;
+  color: #000;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #000;
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+    color: #e0f1fe;
+  }
 }
 
   /* hamburger */
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #444;
+  background-color: #000;
   border: none;
 }
 
@@ -263,8 +226,7 @@ a:active, a:focus {
 
 /* Confirmations - New */
 #page-confirmations-new {
-  background: #f1f1f1;
-  margin-bottom: 50px;
+  background: #fff;
 }
 
 #page-confirmations-new .btn {
@@ -272,32 +234,48 @@ a:active, a:focus {
 }
 
 #page-confirmations-new .container {
-  background: #f1f1f1;
+  background: #fff;
+  margin: 50px auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 320px;
+  height: 280px;
 }
 
-#page-confirmations-new #page-confirmations-new-first {
-  margin-bottom: 40px;
-}
-
-#page-confirmations-new h3 {
-  font-size: 28px;
+#page-confirmations-new h3 a {
+  color: #3591d5;
+  font-size: 24px;
   font-weight: 700;
   text-align: center;
+}
+
+#page-confirmations-new h3 .fa {
+  font-size: 20px;
 }
 
 #page-confirmations-new .navbar, #page-confirmations-new footer {
   display: none;
 }
 
-#page-confirmations-new .panel-default {
-  max-width: 480px;
-  padding: 10px 60px 30px;
+#page-confirmations-new .panel {
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+#page-confirmations-new .panel-heading {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#page-confirmations-new .panel-body {
+  padding: 20px 20px 10px;
 }
 
 /* Passwords - New */
 #page-passwords-new {
-  background: #f1f1f1;
-  margin-bottom: 50px;
+  background: #fff;
 }
 
 #page-passwords-new .btn {
@@ -305,30 +283,51 @@ a:active, a:focus {
 }
 
 #page-passwords-new .container {
-  background: #f1f1f1;
+  background: #fff;
+  margin: 50px auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 320px;
+  height: 280px;
 }
 
-#page-passwords-new #page-passwords-new-first {
-  margin-bottom: 40px;
-}
-
-#page-passwords-new h3 {
-  font-size: 28px;
+#page-passwords-new h3 a {
+  color: #3591d5;
+  font-size: 24px;
   font-weight: 700;
   text-align: center;
+}
+
+#page-passwords-new h3 .fa {
+  font-size: 20px;
 }
 
 #page-passwords-new .navbar, #page-passwords-new footer {
   display: none;
 }
 
-#page-passwords-new .panel-default {
-  max-width: 480px;
-  padding: 10px 60px 30px;
+#page-passwords-new .panel {
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+#page-passwords-new .panel-heading {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#page-passwords-new .panel-body {
+  padding: 20px 20px 10px;
 }
 
 /* Posts - Edit */
 
+#live-preview {
+  margin-bottom: 20px;
+}
+// also applies to new view 
 
 /* Posts - Index */
 #page-posts-index .panel-default {
@@ -356,37 +355,32 @@ a:active, a:focus {
   display: flex;
 }
 
-#page-posts-show .btn-default {
+#page-posts-show .btn-success {
+  margin-bottom: 10px;
   margin-top: 5px;
 }
 
 #page-posts-show .col-md-12 .comments {
   border-top: 1px solid #ddd;
-  margin-top: 25px;
   padding-top: 25px;
 }
 
-#page-posts-show .col-md-12 #page-posts-show-info {
-  border-top: 1px solid #ddd;
-  margin-top: 10px;
-  padding-bottom: 20px;
-  padding-top: 20px;
-}
-
-#page-posts-show .col-md-12 #page-posts-show-body {
+#page-posts-show .col-md-8 #page-posts-show-body {
   background: #f8f8f8;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding: 25px 20px;
 }
 
-#page-posts-show .col-md-12 #page-posts-show-documents {
+#page-posts-show .col-md-4 #page-posts-show-sidebar {
+  margin-top: 20px;
+}
+
+#page-posts-show #page-posts-show-documents {
   padding-top: 15px;
 }
 
-#page-posts-show #page-posts-show-documents .col-md-4 {
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  padding: 10px;
+#page-posts-show #page-posts-show-documents .panel-heading {
+  background: #f8f8f8;
 }
 
 #page-posts-show .form-group {
@@ -400,7 +394,7 @@ a:active, a:focus {
 
 /* Registrations - New */
 #page-registrations-new {
-  background: #f1f1f1;
+  background: #fff;
   margin-bottom: 50px;
 }
 
@@ -409,33 +403,49 @@ a:active, a:focus {
 }
 
 #page-registrations-new .container {
-  background: #f1f1f1;
+  background: #fff;
+  margin: 50px auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 320px;
+  height: 280px;
 }
 
-#page-registrations-new #page-registrations-new-first {
-  margin-bottom: 40px;
-}
-
-#page-registrations-new h3 {
+#page-registrations-new h3 a {
+  color: #3591d5;
   font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 40px;
+  font-weight: 700;
   text-align: center;
+}
+
+#page-registrations-new h3 .fa {
+  font-size: 24px;
 }
 
 #page-registrations-new .navbar, #page-registrations-new footer {
   display: none;
 }
 
-#page-registrations-new .panel-default {
-  max-width: 480px;
-  padding: 10px 60px 30px;
+#page-registrations-new .panel {
+  border: 1px solid #ddd;
+  margin-top: 20px;
 }
+
+#page-registrations-new .panel-heading {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#page-registrations-new .panel-body {
+  padding: 20px 20px 10px;
+}
+
 
 /* Sessions - New */
 #page-sessions-new {
-  background: #f1f1f1;
-  margin-bottom: 50px;
+  background: #fff;
 }
 
 #page-sessions-new .btn {
@@ -443,23 +453,44 @@ a:active, a:focus {
 }
 
 #page-sessions-new .container {
-  background: #f1f1f1;
+  background: #fff;
+  margin: 50px auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 320px;
+  height: 280px;
 }
 
-#page-sessions-new h3 {
+#page-sessions-new h3 a {
+  color: #3591d5;
   font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 40px;
+  font-weight: 700;
+  margin-top: 50px;
   text-align: center;
+}
+
+#page-sessions-new h3 .fa {
+  font-size: 24px;
 }
 
 #page-sessions-new .navbar, #page-sessions-new footer {
   display: none;
 }
 
-#page-sessions-new .panel-default {
-  max-width: 480px;
-  padding: 10px 60px 30px;
+#page-sessions-new .panel {
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+#page-sessions-new .panel-heading {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#page-sessions-new .panel-body {
+  padding: 20px 20px 10px;
 }
 
 /* Users - Show */
@@ -468,20 +499,19 @@ a:active, a:focus {
 /* Welcome - Index */
 
 #page-welcome-index .container-fluid {
-  background: #3591d5;
+  background: #091c2a;
   border-radius: 0;
   color: #fff;
   margin-top: 0;
 }
 
 #page-welcome-index .jumbotron.text-center {
-  background: #3591d5;
+  background: #091c2a;
 }
 
-#page-welcome-index .jumbotron.text-center .container {
-  background: #3591d5;
-  margin: 0;
-}
+// #page-welcome-index .jumbotron.text-center .container {
+//   margin: 0;
+// }
 
 #page-welcome-index h2 {
   font-weight: 400;
@@ -491,16 +521,29 @@ a:active, a:focus {
   margin-top: 10px;
 }
 
-#page-welcome-index .jumbotron h2 {
-  font-size: 28px;
-  font-weight: 400;
+#page-welcome-index .jumbotron .fa {
+  color: #3591d5;
+  font-size: 32px;
+  vertical-align: bottom;
+}
+
+#page-welcome-index .jumbotron h1 {
+  color: #3591d5;
+  font-size: 48px;
+  font-weight: 700;
   margin-bottom: 15px;
 }
 
 #page-welcome-index .jumbotron p {
-  font-size: 20px;
+  font-size: 32px;
   font-weight: 400;
-  padding: 0 20px;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding-bottom: 10px;
+  }
 }
 
 /* 5. FOOTER
@@ -517,7 +560,7 @@ body {
 }
 
 footer {
-  background-color: #444;
+  background-color: #f1f1f1;
   bottom: 0;
   height: 60px;
   position: absolute;
@@ -525,6 +568,6 @@ footer {
 }
 
 footer .container {
-  background: #444;
+  background: #f1f1f1;
   padding: 20px 0 20px;
 }

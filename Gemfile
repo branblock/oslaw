@@ -51,9 +51,9 @@ gem 'simple_form'
 gem 'paperclip', '~> 4.3'
 # Use Acts_As_Taggable_On for tagging
 gem 'acts-as-taggable-on', '~> 3.4'
-# Use ckeditor for WYSIWYG editing
-gem 'ckeditor'
-# For ckeditor/heroku fix
+# Use tinymce for WYSIWYG editing
+gem 'tinymce-rails'
+# For editor/heroku fix
 gem 'non-stupid-digest-assets', '~> 1.0.4'
 # Amazon s3
 gem 'aws-sdk', '< 2.0'

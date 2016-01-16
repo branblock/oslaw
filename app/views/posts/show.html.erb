@@ -2,93 +2,65 @@
   <div class="container">
 
     <div class="row">
-      <div id="first">
-        <div class="col-md-12">
-          <!-- page title -->
+
+      <div class="col-md-8">
+        <!-- post title -->
+        <div id="first">
           <h3><%= @post.title %></h3>
+          <p>by&nbsp;<%= link_to "#{@post.user.username}", user_path(@post.user) %>&nbsp;(<%= pluralize (@user.posts.count), 'post' %>)</p>
+        <!-- history -->
+        <p>Last updated&nbsp;<%= time_ago_in_words(@post.updated_at) %>&nbsp;ago&nbsp;•&nbsp;
+        <span class='js-comments-count'>
+          <%= pluralize (@post.comments.count), 'comment' %>
+        </span>&nbsp;<%= link_to '<i class="fa fa-caret-down"></i>'.html_safe, post_path(:anchor => "comments") %></p>
+      </div>
+        <!-- post body -->
+        <div id="page-posts-show-body">
+          <%= markdown(@post.body) %>
           <!-- author/admin controls -->
-          <p>
             <% if policy(@post).update? %>
               <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_post_path(@post) %>
             <% end %>
             <% if policy(@post).destroy? %>
-              &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
-              <%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, @post, method: :delete, data: {confirm: "Are you sure?"} %>
+              &nbsp;•&nbsp;<%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, @post, method: :delete, data: {confirm: "Are you sure?"} %>
             <% end %>
-          </p>
         </div>
       </div>
-    </div>
 
-    <!-- information -->
-    <div class="row">
-      <div class="col-md-12">
-        <div id="page-posts-show-info">
-
-          <!-- author -->
-          <p>by&nbsp;<%= link_to "#{@post.user.username}", user_path(@post.user) %></p>
-
-          <!-- created, updated -->
-          <p>Created:&nbsp;<%= localize(@post.created_at, :format => :default) %>;&nbsp; Last updated:&nbsp;<%= localize(@post.updated_at, :format => :default) %></p>
-
-          <!-- tags -->
-          <p>
-            <i class="fa fa-tags"></i>&nbsp;
-            <% if @post.tag_list.size == 0 %>
-              <%= 'No tags' %>
-            <% else %>
-              <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %>
-            <% end %><br />
-          </p>
-
-          <!-- voting, bookmarking, comment anchor -->
-          <p>
-            <%= render partial: 'votes/vote', locals: { post: @post } %>
-            &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
-            <%= render partial: 'bookmarks/bookmark', locals: { post: @post } %>
-            &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
-            <span class='js-comments-count'>
-              <%= pluralize (@post.comments.count), 'comment' %>
-            </span>
-            &nbsp;<%= link_to '<i class="fa fa-caret-down"></i>'.html_safe, post_path(:anchor => "comments") %>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- post body -->
-    <div class="row">
-      <div class="col-md-12">
-        <div id="page-posts-show-body">
-          <%= @post.body.html_safe %>
-          <% if policy(@post).update? %>
-            &nbsp;<%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_post_path(@post) %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <!-- documents -->
-    <div class="row">
-      <div class="col-md-12">
+    <!-- voting, bookmarking & tags -->
+    <div class="col-md-4">
+      <div id="page-posts-show-sidebar">
+        <p>
+          <%= render partial: 'bookmarks/bookmark', locals: { post: @post } %>
+          &nbsp;<i class="fa fa-ellipsis-v"></i>&nbsp;
+          <%= render partial: 'votes/vote', locals: { post: @post } %></p>
+        <p>
+          <i class="fa fa-tags"></i>&nbsp;
+          <% if @post.tag_list.size == 0 %>
+            <%= 'No tags' %>
+          <% else %>
+            <%= raw @post.tag_list.map {|tag| link_to tag, tag_path(tag) }.join(', ') %>
+          <% end %><br />
+        </p>
+        <!-- documents panel -->
         <div id="page-posts-show-documents">
-          <div class="col-md-8" style="padding-left: 0;">
-            <% if @post.documents.count > 0 %>
-              <%= render 'documents/document', document: @document, post: @post %>
-            <% else %>
-              <i class="fa fa-file-text"></i>&nbsp;<%= 'No documents are associated with this page.' %>
-            <% end %>
-          </div>
-
-          <!-- document upload form -->
-          <% if policy(@post).update? %>
-            <div class="col-md-4">
-              <%= render 'documents/form', document: Document.new, post: @post %>
+          <div class="panel panel-default">
+            <div class="panel-heading"><%= '<i class="fa fa-file-text"></i>&nbsp;Associated Documents'.html_safe %></div>
+              <div class="panel-body">
+                <% if @post.documents.count > 0 %>
+                  <%= render 'documents/document', document: @document, post: @post %>
+                <% else %>
+                  <p><%= 'No documents are associated with this page.' %></p>
+                <% end %>
+                <% if policy(@post).update? %>
+                  <br /><%= render 'documents/form', document: Document.new, post: @post %>
+                <% end %>
+              </div>
             </div>
-          <% end %>
-
+          </div>
         </div>
       </div>
+
     </div>
 
     <!-- comments -->

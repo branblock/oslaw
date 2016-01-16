@@ -1,6 +1,5 @@
-<p style="text-decoration: underline;">Add a document:</p>
 <%= simple_form_for [post, document] do |f| %>
   <%= f.file_field :upload %>
   <%= f.error :upload_content_type %>
-  <%= f.button :button, '<i class="fa fa-upload"></i>&nbsp;Upload'.html_safe, class: 'btn btn-default btn-xs', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Uploading..."} %>
+  <%= f.button :button, '<i class="fa fa-upload"></i>&nbsp;Upload'.html_safe, class: 'btn btn-success btn-sm', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Uploading..."} %>
 <% end %>

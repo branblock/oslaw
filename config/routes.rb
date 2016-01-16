@@ -36,7 +36,7 @@ end
   devise_for :users, :controllers => { :registrations => :registrations }
     resources :users, :only => [:index, :show, :destroy]
 
-  mount Ckeditor::Engine => '/ckeditor'
+  post 'preview', to: 'previews#show', as: :preview
 
   get 'about' => 'welcome#about'
 

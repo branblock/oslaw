@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -7,28 +7,44 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Oslaw", '#', class: "navbar-brand" %>
+      <%= link_to 'Oslaw', root_path, class: "navbar-brand" %>
     </div>
     <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
         <% if user_signed_in? %>
           <% if current_user.admin? %>
             <li>
               <%= link_to users_path, class: 'navbar-link' do %>
-                <i class="fa fa-user">&nbsp;</i><%= current_user.first_name %>&nbsp<%= current_user.last_name %>
+                <i class="fa fa-home"></i>
               <% end %>
             </li>
           <% else %>
             <li>
               <%= link_to user_path(current_user), class: 'navbar-link' do %>
-                <i class="fa fa-user">&nbsp;</i><%= current_user.first_name %>&nbsp<%= current_user.last_name %>
+                <i class="fa fa-home fa"></i>
               <% end %>
             </li>
           <% end %>
-            <li><%= link_to '<i class="fa fa-sign-out fa-fw"></i>Sign out'.html_safe, destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
+          <li><%= link_to 'Index', posts_path, class: 'navbar-link'  %></li>
+          <li><%= link_to 'New Page', new_post_path, class: 'navbar-link'  %></li>
         <% else %>
-          <li><%= link_to '<i class="fa fa-user-plus"></i>&nbsp;Sign up'.html_safe, new_user_registration_path, class: 'navbar-link' %></li>
-          <li><%= link_to '<i class="fa fa-sign-in"></i>&nbsp;Sign in'.html_safe, new_user_session_path, class: 'navbar-link' %></li>
+          <li><%= link_to 'Features', '#', class: 'navbar-link'  %></li>
+          <li><%= link_to 'Pricing', '#', class: 'navbar-link'  %></li>
+          <li><%= link_to 'Resources', '#', class: 'navbar-link'  %></li>
+          <li><%= link_to 'About', '#', class: 'navbar-link'  %></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="text-transform: none"><%= current_user.first_name %>&nbsp;<%= current_user.last_name %>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to '<i class="fa fa-user-plus"></i>&nbsp;Join'.html_safe, new_user_registration_path, class: 'navbar-link' %></li>
+          <li><%= link_to '<i class="fa fa-sign-in"></i>&nbsp;Log in'.html_safe, new_user_session_path %></li>
         <% end %>
       </ul>
     </div>
