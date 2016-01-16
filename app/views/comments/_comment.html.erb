@@ -6,17 +6,12 @@
       <blockquote><%= markdown(comment.body) %></blockquote>
 
       <!-- commenter info, voting, admin controls -->
-      <%= link_to "#{comment.user.username}", user_path(comment.user) %>&nbsp;<%= localize(comment.created_at, :format => :comment_default) %>
-        <% if @current_user.voted_up_on? comment %>
-          <%= link_to unlike_post_comment_path(@post, comment), method: :put, remote: true do %>
-            <i class="fa fa-chevron-down"></i>&nbsp;Downvote
-          <% end %>
-        <% else %>
-          <%= link_to like_post_comment_path(@post, comment), method: :put, remote: true do %>
-            <i class="fa fa-chevron-up"></i>&nbsp;Upvote
-          <% end %>
-        <% end %>
-          ∙<%= comment.points %>
+      <%= link_to "#{comment.user.username}", user_path(comment.user) %>&nbsp;<%= localize(comment.created_at, :format => :comment_default) %>&nbsp;<i class="fa fa-ellipsis-v"></i>&nbsp;
+        <% if current_user.voted_up_on? comment %>
+          <i class="fa fa-chevron-down"></i>&nbsp;<%= link_to 'Remove upvote', unlike_post_comment_path(@post, comment), method: :put, remote: true %>&nbsp;•&nbsp;<%= pluralize (comment.points), 'upvote' %>
+      <% else %>
+          <i class="fa fa-chevron-up"></i>&nbsp;<%= link_to 'Upvote', like_post_comment_path(@post, comment), method: :put, remote: true %>&nbsp;•&nbsp;<%= pluralize (comment.points), 'upvote' %>
+      <% end %>
       <% if policy(comment).destroy? %>
         &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
         <%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, [comment.post, comment], method: :delete, remote: true, data: {confirm: "Are you sure? Please confirm the deletion of this comment."} %>

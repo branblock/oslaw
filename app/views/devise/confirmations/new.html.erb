@@ -1,26 +1,19 @@
 <body id="page-confirmations-new">
   <div class="container">
-
     <div class="row">
-      <div id="page-confirmations-new-first">
-          <h3><%= link_to "Oslaw", root_path %></h3>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <div class="panel panel-default">
-          <h3>Confirmation Instructions</h3>
+      <h3 style="text-align: center;"><%= link_to 'Oslaw', root_path %></h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">Resend confirmation instructions</div>
+          <div class="panel-body">
           <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
             <%= f.full_error :confirmation_token %>
             <div class="form-inputs">
               <%= f.input :username, required: true, autofocus: true %>
-              <%= f.button :button, "Resend".html_safe, class: 'btn btn-default', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating Account..."} %>
+              <%= f.button :button, '<i class="fa fa-envelope-o"></i>&nbsp;Resend'.html_safe, class: 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Resending..."} %>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-
   </div>
 </body>

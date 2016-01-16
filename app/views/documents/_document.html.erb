@@ -1,6 +1,6 @@
 <% @post.documents.each do |document| %>
-  <i class="fa fa-file-text"></i>&nbsp;</i><%= document.upload_file_name %><br />
-  Uploaded on <%= localize(document.updated_at, :format => :default) %>
+  <%= document.upload_file_name %><br />
+  uploaded on <%= localize(document.updated_at, :format => :default) %>
   &nbsp<i class="fa fa-ellipsis-v"></i>&nbsp;
   <%= link_to '<i class="fa fa-download"></i>'.html_safe, document.download_url %>
     <% if document.upload_content_type == "application/pdf" %>

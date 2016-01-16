@@ -1,25 +1,18 @@
 <body id="page-passwords-new">
   <div class="container">
-
     <div class="row">
-      <div id="page-passwords-new-first">
-          <h3><%= link_to "Oslaw", root_path %></h3>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <div class="panel panel-default">
-          <h3>Reset Password</h3>
+      <h3 style="text-align: center"><%= link_to 'Oslaw', root_path %></h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">Reset your password</div>
+          <div class="panel-body">
           <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
             <div class="form-inputs">
               <%= f.input :username, required: true, autofocus: true %>
-              <%= f.button :button, "Send instructions".html_safe, class: 'btn btn-default', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating Account..."} %>
+              <%= f.button :button, '<i class="fa fa-envelope-o"></i>&nbsp;Send instructions'.html_safe, class: 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Sending..."} %>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-
   </div>
 </body>

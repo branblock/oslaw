@@ -1,26 +1,24 @@
 <body id="page-sessions-new">
   <div class="container">
-
-    <!-- sign in panel -->
     <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <div class="panel panel-default">
-          <h3>Sign in to Oslaw</h3>
-          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="form-inputs">
-              <%= f.input :login, placeholder: "username or email address", required: true, autofocus: true %>
-              <%= f.input :password, required: true %>
-              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-              <%= f.button :button, '<i class="fa fa-sign-in"></i> Sign in'.html_safe, class: 'btn btn-default', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Signing in..."} %>
-            </div>
-            <p><%= link_to "I forgot my password", new_password_path(resource_name) %></p>
-            <p><%= link_to "I didn't get my confirmation instructions", new_confirmation_path(resource_name) %></p>
-            <p>New to Oslaw? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
-          <% end %>
+      <h3 style="text-align: center;"><%= link_to 'Oslaw', root_path %></h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">Sign in</div>
+          <div class="panel-body">
+            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-inputs">
+                <%= f.error_notification %>
+                <%= f.input :login, placeholder: "username or email address", required: true, autofocus: true %>
+                <%= f.input :password, required: true %>
+                <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                <%= f.button :button, '<i class="fa fa-sign-in"></i> Sign in'.html_safe, class: 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Signing in..."} %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <p style="text-align: center;"><%= link_to '<i class="fa fa-long-arrow-left"></i>&nbsp;go back'.html_safe, root_path %></p>
-      </div>
+      <p><%= link_to "I forgot my password", new_password_path(resource_name) %></p>
+      <p><%= link_to "I need account confirmation instructions again", new_confirmation_path(resource_name) %></p>
+      <p>New to Oslaw? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
     </div>
-
   </div>
 </body>

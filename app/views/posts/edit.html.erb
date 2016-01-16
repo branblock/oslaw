@@ -1,27 +1,27 @@
-<body id="page-posts-edit" data-no-turbolink>
+<body id="page-posts-edit">
   <div class="container">
     <div class="row">
-      <div id="first">
-        <div class="col-md-12">
-          <!-- page title -->
-          <h3>Edit&nbsp;<%= @post.title %></h3>
-        </div>
-      </div>
-    </div>
 
-    <!-- form -->
-    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
+        <h3>Editing&nbsp;<%= @post.title %></h3>
         <%= simple_form_for [@post] do |f| %>
           <div class="form-inputs">
             <%= f.input :title %>
-            <%= f.input :body, as: :ckeditor, input_html: { ckeditor: { toolbar: 'Post'} } %>
-            <%= f.input :tag_list, label: "Tags (seperated by commas)", input_html: {value: @post.tag_list.to_s} %>
-            <%= f.button :button, "Save Page".html_safe, class: 'btn btn-default', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>&nbsp;<%= link_to "Cancel", url_for(@post) %>
+            <%= f.input :body, as: :text, input_html: { rows: 10 } %>
+            <p style="font-style: italic; margin-top: 10px;">Preview:</p>
+            <div style="border: 1px solid #ddd; border-radius: 3px; margin-bottom: 10px; padding: 10px;">
+              <p id="live-preview" data-preview-url="<%= preview_path %>"></p>
+            </div>
+            <%= f.input :tag_list, label: 'Tags (seperated by commas)', input_html: {value: @post.tag_list.to_s} %>
+            <%= f.button :button, "Save Page".html_safe, class: 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>&nbsp;<%= link_to "Cancel", url_for(@post), class: 'btn btn-danger' %>
           </div>
         <% end %>
       </div>
-    </div>
 
+      <div class="col-md-4">
+        <p>Page Guidelines will go here.</p>
+      </div>
+
+    </div>
   </div>
 </body>
